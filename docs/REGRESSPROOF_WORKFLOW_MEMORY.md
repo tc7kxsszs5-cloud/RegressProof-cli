@@ -91,6 +91,7 @@ That means future work should assume:
 If a future agent is unsure what to do next, it should:
 
 - consult `docs/REGRESSPROOF_INDEX.md`
+- consult `docs/REGRESSPROOF_SUPPORTED_MODES.md` before making broad product claims
 - use `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md` as the execution plan
 - record new major decisions in `docs/REGRESSPROOF_DECISION_LOG.md`
 - check the latest note in `docs/sessions/`

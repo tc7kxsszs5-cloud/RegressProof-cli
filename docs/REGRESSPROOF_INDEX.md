@@ -27,6 +27,7 @@ Core principle:
 - [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
 - [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
 - [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
+- [Supported Modes](REGRESSPROOF_SUPPORTED_MODES.md)
 - [Decision Log](REGRESSPROOF_DECISION_LOG.md)
 - [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
 - [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
@@ -195,6 +196,7 @@ The first release is successful if it can:
 - add provider-native usage adapters beyond env/file inputs
 - improve PR comment presentation for longer review threads
 - tighten release/demo guidance around the MVP verification entrypoint
+- keep `REGRESSPROOF_SUPPORTED_MODES.md` aligned with actual proven surface
 
 ## External Validation Status
 
