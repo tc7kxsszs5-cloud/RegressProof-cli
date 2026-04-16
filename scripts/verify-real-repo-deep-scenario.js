@@ -55,7 +55,11 @@ function main() {
   );
 
   const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
-  const expectedChangedFiles = resolveExpectedChangedFiles(repo, report.git.diffRange);
+  const expectedChangedFiles = resolveExpectedChangedFiles(
+    repo,
+    report.git.diffRange,
+    tempConfigPath,
+  );
   assertScenario(report, expectedChangedFiles);
 
   process.stdout.write(
@@ -151,8 +155,12 @@ function assertScenario(report, expectedChangedFiles) {
   }
 }
 
-function resolveExpectedChangedFiles(repo, diffRange) {
-  const output = execFileSync("git", ["diff", "--name-only", diffRange, "--", ".", "docs/REGRESSPROOF_INDEX.md"], {
+function resolveExpectedChangedFiles(repo, diffRange, configPath) {
+  const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+  const targetPaths = Array.isArray(config.targetPaths) && config.targetPaths.length > 0
+    ? config.targetPaths
+    : ["."];
+  const output = execFileSync("git", ["diff", "--name-only", diffRange, "--", ...targetPaths], {
     cwd: repo,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
