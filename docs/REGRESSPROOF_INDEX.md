@@ -22,15 +22,15 @@ Core principle:
 
 ## Current Document Set
 
-- [Product Brief](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_SPEC.md)
-- [Implementation Plan](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_VALIDATION_PLAN.md)
-- [Decision Log](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_DECISION_LOG.md)
-- [Workflow Memory](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Session Template](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](/Users/mac/Desktop/RegressProof/docs/sessions/README.md)
+- [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](REGRESSPROOF_SPEC.md)
+- [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](REGRESSPROOF_DECISION_LOG.md)
+- [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](sessions/README.md)
 
 ## Current Implementation Status
 
@@ -38,10 +38,10 @@ Implementation has started.
 
 Current code scaffold lives in:
 
-- [README.md](/Users/mac/Desktop/RegressProof/README.md)
-- [package.json](/Users/mac/Desktop/RegressProof/package.json)
-- [regressproof.config.json](/Users/mac/Desktop/RegressProof/regressproof.config.json)
-- [src/cli.js](/Users/mac/Desktop/RegressProof/src/cli.js)
+- [README.md](../README.md)
+- [package.json](../package.json)
+- [regressproof.config.json](../regressproof.config.json)
+- [src/cli.js](../src/cli.js)
 
 What already works:
 
@@ -77,7 +77,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](/Users/mac/Desktop/RegressProof/regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](../regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -104,8 +104,8 @@ What already works:
   - `node scripts/verify-mvp.js`
 - the GitHub Action now validates the current RegressProof MVP flow instead of the older single-fixture path
 - standalone repository boundary now includes:
-  - [AGENTS.md](/Users/mac/Desktop/RegressProof/AGENTS.md)
-  - [.gitignore](/Users/mac/Desktop/RegressProof/.gitignore)
+  - [AGENTS.md](../AGENTS.md)
+  - [.gitignore](../.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
@@ -236,12 +236,12 @@ However, the core engine now supports the mechanics needed for that next step:
 
 If future work resumes in a new session, start by reading these files in order:
 
-1. [Product Brief](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-2. [Specification](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_SPEC.md)
-3. [Implementation Plan](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-4. [MVP Task Breakdown](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-5. [Decision Log](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_DECISION_LOG.md)
-6. [Workflow Memory](/Users/mac/Desktop/RegressProof/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-7. the latest session note in [docs/sessions](/Users/mac/Desktop/RegressProof/docs/sessions/README.md)
+1. [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+2. [Specification](REGRESSPROOF_SPEC.md)
+3. [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+4. [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+5. [Decision Log](REGRESSPROOF_DECISION_LOG.md)
+6. [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
+7. the latest session note in [docs/sessions](sessions/README.md)
 
 This file should remain the top-level project memory entry point.
