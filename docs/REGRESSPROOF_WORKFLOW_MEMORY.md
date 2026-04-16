@@ -75,6 +75,17 @@ This means the project now has evidence across:
 - external documentation/configuration repositories
 - external code-plus-test repositories
 
+## Current Repository Shape
+
+RegressProof now lives as a standalone repository rooted at the top level of this project.
+
+That means future work should assume:
+
+- `scripts/`, `src/`, and `fixtures/` are top-level directories
+- the primary MVP entrypoint is `node scripts/verify-mvp.js`
+- GitHub workflow validation should use `.github/workflows/regressproof.yml`
+- project-memory docs in `docs/` are now local to the standalone repository, not references back into a parent workspace
+
 ## If A Future Agent Is Unsure
 
 If a future agent is unsure what to do next, it should:
