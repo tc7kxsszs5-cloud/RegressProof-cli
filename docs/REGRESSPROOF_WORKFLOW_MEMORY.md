@@ -66,6 +66,13 @@ It has now been exercised successfully on external public repositories in three 
      - `gateway/platforms/telegram.py`
      - `tests/gateway/test_telegram_thread_fallback.py`
    - result: `successful_change / high`
+4. TypeScript code and test repository:
+   - `pmndrs/zustand`
+   - committed range `6213fc1~1..6213fc1`
+   - changed files:
+     - `src/middleware/persist.ts`
+     - `tests/persistAsync.test.tsx`
+   - result: `successful_change / high`
 
 This means the project now has evidence across:
 
@@ -73,7 +80,8 @@ This means the project now has evidence across:
 - self-hosted real-repo trust scenarios
 - external doc/plugin repositories
 - external documentation/configuration repositories
-- external code-plus-test repositories
+- external Python code-plus-test repositories
+- external TypeScript code-plus-test repositories
 
 ## Current Repository Shape
 
