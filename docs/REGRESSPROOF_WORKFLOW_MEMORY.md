@@ -73,6 +73,13 @@ It has now been exercised successfully on external public repositories in three 
      - `src/middleware/persist.ts`
      - `tests/persistAsync.test.tsx`
    - result: `successful_change / high`
+5. second Python code and test repository:
+   - `pydantic/pydantic`
+   - committed range `b1bf194~1..b1bf194`
+   - changed files:
+     - `pydantic/main.py`
+     - `tests/test_main.py`
+   - result: `successful_change / high`
 
 This means the project now has evidence across:
 
@@ -80,7 +87,7 @@ This means the project now has evidence across:
 - self-hosted real-repo trust scenarios
 - external doc/plugin repositories
 - external documentation/configuration repositories
-- external Python code-plus-test repositories
+- repeated external Python code-plus-test repositories
 - external TypeScript code-plus-test repositories
 
 ## Current Repository Shape

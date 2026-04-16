@@ -85,6 +85,12 @@ Current evidence:
 - `NousResearch/hermes-agent`
 - changed files included runtime Python code and tests
 - result: `successful_change / high`
+- `pydantic/pydantic`
+- committed range: `b1bf194~1..b1bf194`
+- changed files:
+  - `pydantic/main.py`
+  - `tests/test_main.py`
+- result: `successful_change / high`
 - `pmndrs/zustand`
 - committed range: `6213fc1~1..6213fc1`
 - changed files:
@@ -92,7 +98,7 @@ Current evidence:
   - `tests/persistAsync.test.tsx`
 - result: `successful_change / high`
 
-This is now the strongest external proof category currently demonstrated, with evidence in both Python and TypeScript-oriented code-and-test repositories.
+This is now the strongest external proof category currently demonstrated, with repeated evidence in Python and at least one TypeScript-oriented code-and-test repository.
 
 ## Supported But Still Narrow
 
@@ -126,7 +132,7 @@ Today, the safest concise claim is:
 The next strongest evidence should come from:
 
 1. another external JS/TS code-heavy repository with a broader multi-file runtime change
-2. another external Python code-heavy repository beyond the already proven `hermes-agent` case
+2. another external Python code-heavy repository beyond the now-proven `hermes-agent` and `pydantic` cases
 3. at least one larger repository with more complex committed ranges
 
 That is a better next step than adding another major architecture layer.
