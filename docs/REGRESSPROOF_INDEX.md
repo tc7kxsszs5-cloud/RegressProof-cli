@@ -29,6 +29,7 @@ Core principle:
 - [Validation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_VALIDATION_PLAN.md)
 - [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
 - [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Release v0.1.0](/tmp/RegressProof-cli/docs/REGRESSPROOF_RELEASE_v0.1.0.md)
 - [Session Template](/tmp/RegressProof-cli/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
 - [Session Notes Directory](/tmp/RegressProof-cli/docs/sessions/README.md)
 
