@@ -7,7 +7,7 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = regressproofRoot;
+const workspaceRoot = path.resolve(regressproofRoot, "..");
 const fixturesRoot = path.join(regressproofRoot, "fixtures");
 const cliPath = path.join(regressproofRoot, "src", "cli.js");
 const materializerPath = path.join(regressproofRoot, "scripts", "materialize-fixture.js");

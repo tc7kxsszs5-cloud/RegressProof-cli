@@ -1,10 +1,10 @@
 # AGENTS.md
 
-This repository is the standalone boundary for the `RegressProof` CLI.
+This directory is the packaging boundary for the `RegressProof` CLI.
 
 ## Subproject Goal
 
-Treat this repository root as the standalone `RegressProof` project.
+Treat `regressproof/` as the closest thing to a standalone repository inside the larger workspace.
 
 When working here, prioritize:
 
@@ -18,13 +18,13 @@ When working here, prioritize:
 
 Read these documents before making major changes:
 
-1. `docs/REGRESSPROOF_INDEX.md`
-2. `docs/REGRESSPROOF_PRODUCT_BRIEF.md`
-3. `docs/REGRESSPROOF_SPEC.md`
-4. `docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md`
-5. `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
-6. `docs/REGRESSPROOF_VALIDATION_PLAN.md`
-7. `docs/REGRESSPROOF_DECISION_LOG.md`
+1. `../docs/REGRESSPROOF_INDEX.md`
+2. `../docs/REGRESSPROOF_PRODUCT_BRIEF.md`
+3. `../docs/REGRESSPROOF_SPEC.md`
+4. `../docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md`
+5. `../docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
+6. `../docs/REGRESSPROOF_VALIDATION_PLAN.md`
+7. `../docs/REGRESSPROOF_DECISION_LOG.md`
 
 ## Working Rules
 

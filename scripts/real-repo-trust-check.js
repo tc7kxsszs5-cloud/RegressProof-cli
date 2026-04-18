@@ -6,7 +6,7 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const repoRoot = process.cwd();
-const regressproofRoot = repoRoot;
+const regressproofRoot = path.join(repoRoot, "regressproof");
 const DEFAULT_PROFILE = "shallow";
 const EXPECTED_MATERIALIZATION = "tracked_scenario_pack";
 
@@ -79,12 +79,12 @@ function main() {
 
 function ensureRequiredFiles(expectedFixtures) {
   const required = [
-    "package.json",
-    "scripts/run-all-fixtures.js",
-    "scripts/materialize-fixture.js",
+    "regressproof/package.json",
+    "regressproof/scripts/run-all-fixtures.js",
+    "regressproof/scripts/materialize-fixture.js",
   ];
   for (const fixture of expectedFixtures.keys()) {
-    required.push(`fixtures/${fixture}/fixture.materializer.json`);
+    required.push(`regressproof/fixtures/${fixture}/fixture.materializer.json`);
   }
 
   for (const relativePath of required) {

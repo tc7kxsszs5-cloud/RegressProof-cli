@@ -66,20 +66,6 @@ It has now been exercised successfully on external public repositories in three 
      - `gateway/platforms/telegram.py`
      - `tests/gateway/test_telegram_thread_fallback.py`
    - result: `successful_change / high`
-4. TypeScript code and test repository:
-   - `pmndrs/zustand`
-   - committed range `6213fc1~1..6213fc1`
-   - changed files:
-     - `src/middleware/persist.ts`
-     - `tests/persistAsync.test.tsx`
-   - result: `successful_change / high`
-5. second Python code and test repository:
-   - `pydantic/pydantic`
-   - committed range `b1bf194~1..b1bf194`
-   - changed files:
-     - `pydantic/main.py`
-     - `tests/test_main.py`
-   - result: `successful_change / high`
 
 This means the project now has evidence across:
 
@@ -87,26 +73,13 @@ This means the project now has evidence across:
 - self-hosted real-repo trust scenarios
 - external doc/plugin repositories
 - external documentation/configuration repositories
-- repeated external Python code-plus-test repositories
-- external TypeScript code-plus-test repositories
-
-## Current Repository Shape
-
-RegressProof now lives as a standalone repository rooted at the top level of this project.
-
-That means future work should assume:
-
-- `scripts/`, `src/`, and `fixtures/` are top-level directories
-- the primary MVP entrypoint is `node scripts/verify-mvp.js`
-- GitHub workflow validation should use `.github/workflows/regressproof.yml`
-- project-memory docs in `docs/` are now local to the standalone repository, not references back into a parent workspace
+- external code-plus-test repositories
 
 ## If A Future Agent Is Unsure
 
 If a future agent is unsure what to do next, it should:
 
 - consult `docs/REGRESSPROOF_INDEX.md`
-- consult `docs/REGRESSPROOF_SUPPORTED_MODES.md` before making broad product claims
 - use `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md` as the execution plan
 - record new major decisions in `docs/REGRESSPROOF_DECISION_LOG.md`
 - check the latest note in `docs/sessions/`

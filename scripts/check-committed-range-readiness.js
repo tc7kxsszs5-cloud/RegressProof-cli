@@ -6,7 +6,7 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = regressproofRoot;
+const workspaceRoot = path.resolve(regressproofRoot, "..");
 
 function main() {
   const args = process.argv.slice(2);

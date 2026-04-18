@@ -29,6 +29,7 @@ Validated fixture coverage currently includes:
 - `parser-js`
 - `python-js`
 - `swift-js`
+- `swiftpm-macos`
 
 Primary fixture model:
 
@@ -43,9 +44,8 @@ Primary fixture model:
 Verify the whole MVP in one shot:
 
 ```bash
-git clone https://github.com/tc7kxsszs5-cloud/RegressProof-cli.git
-cd RegressProof-cli
-node scripts/verify-mvp.js --repo . --out-dir /tmp/regressproof-mvp
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/verify-mvp.js --repo /Users/mac/Desktop/rork-kiku --out-dir /tmp/regressproof-mvp
 ```
 
 This is the main "does the repo work?" command. It runs:
@@ -61,28 +61,28 @@ The final summary lands in:
 Run the fixture suite only:
 
 ```bash
-cd RegressProof-cli
-node scripts/run-all-fixtures.js --out-dir /tmp/regressproof-fixtures
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/run-all-fixtures.js --out-dir /tmp/regressproof-fixtures
 ```
 
 Run the main committed trust scenario:
 
 ```bash
-cd RegressProof-cli
-node scripts/verify-real-repo-trust-scenario.js --repo . --out-dir /tmp/regressproof-real-scenario
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/verify-real-repo-trust-scenario.js --repo /Users/mac/Desktop/rork-kiku --out-dir /tmp/regressproof-real-scenario
 ```
 
 Run the deeper committed trust scenario:
 
 ```bash
-cd RegressProof-cli
-node scripts/verify-real-repo-deep-scenario.js --repo . --out-dir /tmp/regressproof-real-deep-scenario
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/verify-real-repo-deep-scenario.js --repo /Users/mac/Desktop/rork-kiku --out-dir /tmp/regressproof-real-deep-scenario
 ```
 
 If `npm` is available, the same entrypoints are exposed as:
 
 ```bash
-cd RegressProof-cli
+cd /Users/mac/Desktop/rork-kiku/regressproof
 npm run verify:mvp
 ```
 
@@ -92,15 +92,15 @@ RegressProof can also validate a lightweight external repository that has docs a
 
 Example config:
 
-- [external-doc-plugin.config.json](external-doc-plugin.config.json)
+- [/Users/mac/Desktop/rork-kiku/regressproof/examples/external-doc-plugin.config.json](/Users/mac/Desktop/rork-kiku/regressproof/examples/external-doc-plugin.config.json:1)
 
 Example command against a cloned external repo:
 
 ```bash
-cd RegressProof-cli
-node scripts/run-committed-real-repo-validation.js \
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/run-committed-real-repo-validation.js \
   --repo /tmp/andrej-karpathy-skills \
-  --config external-doc-plugin.config.json \
+  --config /Users/mac/Desktop/rork-kiku/regressproof/examples/external-doc-plugin.config.json \
   --head-ref HEAD \
   --artifact-dir /tmp/regressproof-external-doc-plugin
 ```
@@ -123,14 +123,14 @@ and validates:
 Direct local run:
 
 ```bash
-cd RegressProof-cli
-node src/cli.js run --repo fixtures/simple-js --format json
+cd /Users/mac/Desktop/rork-kiku/regressproof
+node src/cli.js run --repo /Users/mac/Desktop/rork-kiku/regressproof/fixtures/simple-js --format json
 ```
 
 Build `dist/` explicitly:
 
 ```bash
-cd RegressProof-cli
+cd /Users/mac/Desktop/rork-kiku/regressproof
 node scripts/build.js
 ```
 
@@ -142,9 +142,9 @@ Preferred fixture flow:
 Example:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node scripts/materialize-fixture.js \
-  --fixture fixtures/lint-js \
+  --fixture /Users/mac/Desktop/rork-kiku/regressproof/fixtures/lint-js \
   --out-dir /tmp/regressproof-materialized-lint
 
 node src/cli.js run \
@@ -156,8 +156,8 @@ node src/cli.js run \
 Fixture materialization helper:
 
 ```bash
-cd RegressProof-cli
-npm run fixture:materialize -- --fixture fixtures/lint-js
+cd regressproof
+npm run fixture:materialize -- --fixture /Users/mac/Desktop/rork-kiku/regressproof/fixtures/lint-js
 ```
 
 Current materializer behavior:
@@ -169,8 +169,8 @@ Current materializer behavior:
 Fixture scenario-pack export helper:
 
 ```bash
-cd RegressProof-cli
-npm run fixture:export-pack -- --fixture fixtures/lint-js
+cd regressproof
+npm run fixture:export-pack -- --fixture /Users/mac/Desktop/rork-kiku/regressproof/fixtures/lint-js
 ```
 
 This exports `baseline` and `current` trees under `tracked/` and writes `fixture.materializer.json`, which makes the tracked scenario-pack path self-contained.
@@ -178,7 +178,7 @@ This exports `baseline` and `current` trees under `tracked/` and writes `fixture
 Bulk scenario-pack export:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node scripts/export-all-fixture-packs.js
 ```
 
@@ -187,8 +187,8 @@ This walks every fixture source and refreshes tracked `baseline/current` packs.
 Fixture suite runner:
 
 ```bash
-cd RegressProof-cli
-node scripts/run-all-fixtures.js
+cd /Users/mac/Desktop/rork-kiku
+node regressproof/scripts/run-all-fixtures.js
 ```
 
 This runner:
@@ -200,37 +200,37 @@ This runner:
 
 Current tracked-pack suite result:
 
-- `10/10 passed`
+- `11/11 passed`
 - summary example: `/tmp/regressproof-suite-now/fixture-suite-summary.json`
 
 Write artifacts explicitly from a materialized fixture:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node scripts/materialize-fixture.js \
-  --fixture fixtures/simple-js \
+  --fixture /Users/mac/Desktop/rork-kiku/regressproof/fixtures/simple-js \
   --out-dir /tmp/regressproof-materialized-simple
 
 node src/cli.js run \
   --repo /tmp/regressproof-materialized-simple/repo \
   --config /tmp/regressproof-materialized-simple/repo/regressproof.config.json \
   --format json \
-  --artifact-dir ./regressproof-artifacts
+  --artifact-dir /Users/mac/Desktop/rork-kiku/regressproof-artifacts
 ```
 
 Run in CI mode:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node scripts/materialize-fixture.js \
-  --fixture fixtures/simple-js \
+  --fixture /Users/mac/Desktop/rork-kiku/regressproof/fixtures/simple-js \
   --out-dir /tmp/regressproof-materialized-simple
 
 node src/cli.js run \
   --repo /tmp/regressproof-materialized-simple/repo \
   --config /tmp/regressproof-materialized-simple/repo/regressproof.config.json \
   --format json \
-  --artifact-dir ./regressproof-artifacts \
+  --artifact-dir /Users/mac/Desktop/rork-kiku/regressproof-artifacts \
   --ci
 ```
 
@@ -239,10 +239,10 @@ In CI mode, RegressProof exits non-zero only for configured verdicts such as `co
 Run against the current repository in lightweight mode:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node src/cli.js run \
-  --repo . \
-  --config regressproof.real-repo.config.json \
+  --repo /Users/mac/Desktop/rork-kiku \
+  --config regressproof/regressproof.real-repo.config.json \
   --format json
 ```
 
@@ -261,16 +261,16 @@ This keeps committed validation runnable while the main repository history is st
 Committed validation helper:
 
 ```bash
-cd RegressProof-cli
-npm run real:committed -- --repo . --artifact-dir /tmp/regressproof-committed-pass
+cd regressproof
+npm run real:committed -- --repo /Users/mac/Desktop/rork-kiku --artifact-dir /tmp/regressproof-committed-pass
 ```
 
 Optional explicit compare ref:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 npm run real:committed -- \
-  --repo . \
+  --repo /Users/mac/Desktop/rork-kiku \
   --head-ref HEAD \
   --artifact-dir /tmp/regressproof-committed-pass
 ```
@@ -280,8 +280,8 @@ The committed helper computes a baseline ref automatically, prepares a temporary
 Committed readiness helper:
 
 ```bash
-cd RegressProof-cli
-npm run real:readiness -- --repo .
+cd regressproof
+npm run real:readiness -- --repo /Users/mac/Desktop/rork-kiku
 ```
 
 Use this before committed validation when you are unsure whether the selected git range actually contains the RegressProof boundary in committed history.
@@ -289,8 +289,8 @@ Use this before committed validation when you are unsure whether the selected gi
 Committed trust-scenario helper:
 
 ```bash
-cd RegressProof-cli
-npm run real:scenario -- --repo .
+cd regressproof
+npm run real:scenario -- --repo /Users/mac/Desktop/rork-kiku
 ```
 
 This runs the current committed trust scenario end-to-end and asserts the expected invariants:
@@ -305,8 +305,8 @@ This runs the current committed trust scenario end-to-end and asserts the expect
 Committed deep trust-scenario helper:
 
 ```bash
-cd RegressProof-cli
-npm run real:scenario:deep -- --repo .
+cd regressproof
+npm run real:scenario:deep -- --repo /Users/mac/Desktop/rork-kiku
 ```
 
 This uses the `deep` trust-check profile so the committed path exercises a broader nested fixture subset:
@@ -320,18 +320,18 @@ This uses the `deep` trust-check profile so the committed path exercises a broad
 
 The repository includes a GitHub Action at:
 
-- `.github/workflows/regressproof.yml`
+- `/Users/mac/Desktop/rork-kiku/.github/workflows/regressproof.yml`
 
 That workflow now validates the RegressProof MVP directly by running:
 
-- `node scripts/verify-mvp.js`
+- `node regressproof/scripts/verify-mvp.js`
 
 and uploads the full artifact tree under `regressproof-artifacts/`.
 
 For materialized fixtures or other custom configs:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 node scripts/check-committed-range-readiness.js \
   --repo /tmp/regressproof-materialized-lint/repo \
   --config regressproof.config.json \
@@ -359,8 +359,8 @@ When the selected committed ref still does not contain the RegressProof project 
 Workspace validation helper:
 
 ```bash
-cd RegressProof-cli
-npm run real:workspace -- --repo . --artifact-dir /tmp/regressproof-workspace-pass
+cd regressproof
+npm run real:workspace -- --repo /Users/mac/Desktop/rork-kiku --artifact-dir /tmp/regressproof-workspace-pass
 ```
 
 The workspace helper compares `HEAD` to the current worktree for the RegressProof project boundary. This is useful when the project exists mostly as working-tree changes rather than committed repository history.
@@ -368,14 +368,14 @@ The workspace helper compares `HEAD` to the current worktree for the RegressProo
 Standalone export helper:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 npm run export:standalone
 ```
 
 Optional custom destination:
 
 ```bash
-cd RegressProof-cli
+cd regressproof
 npm run export:standalone -- --out-dir /tmp/regressproof-standalone
 ```
 

@@ -58,6 +58,10 @@ Validated today:
 - `swift-js`
   - green baseline to broken Swift typecheck-style check
   - uses a local Swift module cache path so the scenario reflects product behavior instead of sandbox cache-write failures
+- `swiftpm-macos`
+  - green baseline to broken SwiftPM macOS build
+  - compiles real AppKit code through `swift build`
+  - failure attribution comes from actual Swift compiler output in the changed source file
 
 Current fixture architecture:
 
@@ -75,10 +79,10 @@ Current fixture architecture:
   - richer test regressions
   - API contract failures
   - environment handling
-- Swift package or small iOS/macOS sample
-  - compile failures
-  - test failures
-  - build-system parsing beyond script-level checks
+- small iOS or macOS app sample beyond SwiftPM
+  - app bundle build failures
+  - UI-targeted test failures
+  - Xcode build-system parsing beyond package-level checks
 
 ## Controlled Scenarios
 

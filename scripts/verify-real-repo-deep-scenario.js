@@ -6,7 +6,7 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = regressproofRoot;
+const workspaceRoot = path.resolve(regressproofRoot, "..");
 function main() {
   const args = process.argv.slice(2);
   const repo = readArg(args, "--repo") || workspaceRoot;
@@ -27,8 +27,8 @@ function main() {
     ...baseConfig,
     checks: {
       ...baseConfig.checks,
-      quick: ["node scripts/real-repo-trust-check.js --profile deep >/dev/null"],
-      full: ["node scripts/real-repo-trust-check.js --profile deep >/dev/null"],
+      quick: ["node regressproof/scripts/real-repo-trust-check.js --profile deep >/dev/null"],
+      full: ["node regressproof/scripts/real-repo-trust-check.js --profile deep >/dev/null"],
     },
   };
   fs.writeFileSync(tempConfigPath, JSON.stringify(deepConfig, null, 2));
@@ -55,11 +55,7 @@ function main() {
   );
 
   const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
-  const expectedChangedFiles = resolveExpectedChangedFiles(
-    repo,
-    report.git.diffRange,
-    tempConfigPath,
-  );
+  const expectedChangedFiles = resolveExpectedChangedFiles(repo, report.git.diffRange);
   assertScenario(report, expectedChangedFiles);
 
   process.stdout.write(
@@ -155,12 +151,8 @@ function assertScenario(report, expectedChangedFiles) {
   }
 }
 
-function resolveExpectedChangedFiles(repo, diffRange, configPath) {
-  const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
-  const targetPaths = Array.isArray(config.targetPaths) && config.targetPaths.length > 0
-    ? config.targetPaths
-    : ["."];
-  const output = execFileSync("git", ["diff", "--name-only", diffRange, "--", ...targetPaths], {
+function resolveExpectedChangedFiles(repo, diffRange) {
+  const output = execFileSync("git", ["diff", "--name-only", diffRange, "--", "regressproof", "docs/REGRESSPROOF_INDEX.md"], {
     cwd: repo,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],

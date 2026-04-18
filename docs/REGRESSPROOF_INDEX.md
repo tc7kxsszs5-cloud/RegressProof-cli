@@ -22,16 +22,15 @@ Core principle:
 
 ## Current Document Set
 
-- [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](REGRESSPROOF_SPEC.md)
-- [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
-- [Supported Modes](REGRESSPROOF_SUPPORTED_MODES.md)
-- [Decision Log](REGRESSPROOF_DECISION_LOG.md)
-- [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](sessions/README.md)
+- [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
+- [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+- [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
 
 ## Current Implementation Status
 
@@ -39,10 +38,10 @@ Implementation has started.
 
 Current code scaffold lives in:
 
-- [README.md](../README.md)
-- [package.json](../package.json)
-- [regressproof.config.json](../regressproof.config.json)
-- [src/cli.js](../src/cli.js)
+- [regressproof/README.md](/Users/mac/Desktop/rork-kiku/regressproof/README.md)
+- [regressproof/package.json](/Users/mac/Desktop/rork-kiku/regressproof/package.json)
+- [regressproof/regressproof.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.config.json)
+- [regressproof/src/cli.js](/Users/mac/Desktop/rork-kiku/regressproof/src/cli.js)
 
 What already works:
 
@@ -78,7 +77,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](../regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -98,15 +97,16 @@ What already works:
   - Python typecheck regression
   - parser-targeted multi-line typecheck regression
   - Swift typecheck regression with local module-cache isolation
+  - SwiftPM macOS build regression with real AppKit compilation
 - self-hosted real-workspace trust validation now runs successfully in lightweight mode
 - a committed real-repo trust scenario can now be checked end-to-end through a single helper script
 - a deeper committed trust scenario can now be exercised through a `deep` trust-check profile
 - a single MVP verification entrypoint now exists:
-  - `node scripts/verify-mvp.js`
+  - `node regressproof/scripts/verify-mvp.js`
 - the GitHub Action now validates the current RegressProof MVP flow instead of the older single-fixture path
-- standalone repository boundary now includes:
-  - [AGENTS.md](../AGENTS.md)
-  - [.gitignore](../.gitignore)
+- subproject packaging boundary now includes:
+  - [regressproof/AGENTS.md](/Users/mac/Desktop/rork-kiku/regressproof/AGENTS.md)
+  - [regressproof/.gitignore](/Users/mac/Desktop/rork-kiku/regressproof/.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
@@ -120,6 +120,7 @@ What already works:
   - `fixture.materializer.json`
   - temporary git materialization before verification
 - all current fixtures now have tracked scenario packs, and the full suite passes in tracked-pack mode
+- a real SwiftPM macOS fixture now validates compiler-attributed failures against actual Swift build output
 
 What is next:
 
@@ -196,7 +197,6 @@ The first release is successful if it can:
 - add provider-native usage adapters beyond env/file inputs
 - improve PR comment presentation for longer review threads
 - tighten release/demo guidance around the MVP verification entrypoint
-- keep `REGRESSPROOF_SUPPORTED_MODES.md` aligned with actual proven surface
 
 ## External Validation Status
 
@@ -238,12 +238,12 @@ However, the core engine now supports the mechanics needed for that next step:
 
 If future work resumes in a new session, start by reading these files in order:
 
-1. [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
-2. [Specification](REGRESSPROOF_SPEC.md)
-3. [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-4. [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-5. [Decision Log](REGRESSPROOF_DECISION_LOG.md)
-6. [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
-7. the latest session note in [docs/sessions](sessions/README.md)
+1. [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+2. [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
+3. [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+4. [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+5. [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+6. [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+7. the latest session note in [docs/sessions](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
 
 This file should remain the top-level project memory entry point.

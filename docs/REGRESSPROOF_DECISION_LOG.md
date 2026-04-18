@@ -155,7 +155,7 @@
 
 ## Decision 26
 
-**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
+**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node regressproof/scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
 
 **Reason:** The project had already accumulated strong pieces of validation, but usability was still fragmented across many helper commands and a stale workflow. A single MVP verification entrypoint makes local checks, CI, and future handoff much clearer without changing the core proof model.
 
@@ -167,6 +167,6 @@
 
 ## Decision 28
 
-**Decision:** RegressProof should now operate as a standalone repository rooted at the repository top level rather than as a nested `regressproof/` subproject.
+**Decision:** MVP fixture validation now includes a real SwiftPM macOS package that compiles AppKit code, instead of relying only on script-simulated Swift failures.
 
-**Reason:** The parent workspace now carries unrelated branch rules, Vercel integrations, and product history that create noise around RegressProof development and publishing. A standalone repository preserves the proven MVP surface while keeping validation, documentation, and future release work isolated and low-risk.
+**Reason:** A native macOS-oriented fixture gives stronger evidence that RegressProof can parse and attribute real Swift compiler regressions in changed files, while staying lighter and more reproducible than a full Xcode app target in the current MVP.

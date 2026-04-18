@@ -5,14 +5,7 @@
     "mode": "path_snapshot"
   },
   "targetPaths": [
-    ".github/workflows/regressproof.yml",
-    "fixtures",
-    "scripts",
-    "src",
-    "README.md",
-    "AGENTS.md",
-    "package.json",
-    "regressproof.real-repo.config.json",
+    "regressproof",
     "docs/REGRESSPROOF_INDEX.md",
     "docs/REGRESSPROOF_DECISION_LOG.md",
     "docs/REGRESSPROOF_PROTOTYPE_WALKTHROUGH.md"
@@ -20,10 +13,10 @@
   "checks": {
     "commandTimeoutMs": 45000,
     "quick": [
-      "node scripts/real-repo-trust-check.js >/dev/null"
+      "node regressproof/scripts/real-repo-trust-check.js >/dev/null"
     ],
     "full": [
-      "node scripts/real-repo-trust-check.js >/dev/null"
+      "node regressproof/scripts/real-repo-trust-check.js >/dev/null"
     ]
   },
   "reports": {
