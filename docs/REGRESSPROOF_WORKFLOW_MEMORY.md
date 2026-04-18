@@ -66,6 +66,12 @@ It has now been exercised successfully on external public repositories in three 
      - `gateway/platforms/telegram.py`
      - `tests/gateway/test_telegram_thread_fallback.py`
    - result: `successful_change / high`
+4. additional code and test repository:
+   - `pmndrs/zustand`
+   - committed range `HEAD~1..HEAD`
+   - validation config:
+     - `external-zustand-persist.config.json`
+   - result: `successful_change / high`
 
 This means the project now has evidence across:
 

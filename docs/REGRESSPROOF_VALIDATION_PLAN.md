@@ -177,6 +177,29 @@ Before trusting the first release broadly:
 - this checks both introduced-failure handling and preexisting-failure handling through the tracked-pack materialization path
 - it is still lighter than full deep real-repo attribution, but materially stronger than a file-existence self-check
 
+## External Public Validation
+
+RegressProof has also been exercised against public GitHub repositories beyond its own standalone repository.
+
+Current externally validated examples include:
+
+- `forrestchang/andrej-karpathy-skills`
+  - category: doc/plugin repository
+  - result: `successful_change / high`
+- `shanraisshan/claude-code-best-practice`
+  - category: documentation/configuration repository
+  - result: `successful_change / high`
+- `NousResearch/hermes-agent`
+  - category: code-plus-test repository
+  - result: `successful_change / high`
+- `pmndrs/zustand`
+  - category: code-plus-test repository
+  - validation config: `external-zustand-persist.config.json`
+  - committed range: `HEAD~1..HEAD`
+  - result: `successful_change / high`
+
+This does not eliminate the need for broader external coverage, but it materially strengthens the MVP proof surface beyond internal fixtures and self-hosted trust checks.
+
 ## Validation Exit Rule
 
 RegressProof is validated for MVP when:

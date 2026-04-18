@@ -201,7 +201,7 @@ The first release is successful if it can:
 
 ## External Validation Status
 
-RegressProof has now been validated outside its own repository on public GitHub repositories in three increasingly strong categories:
+RegressProof has now been validated outside its own repository on public GitHub repositories in multiple increasingly strong categories:
 
 1. doc/plugin repository
    - `forrestchang/andrej-karpathy-skills`
@@ -211,6 +211,9 @@ RegressProof has now been validated outside its own repository on public GitHub 
    - result: `successful_change / high`
 3. code-plus-test repository
    - `NousResearch/hermes-agent`
+   - result: `successful_change / high`
+4. additional code-plus-test repository
+   - `pmndrs/zustand`
    - result: `successful_change / high`
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
