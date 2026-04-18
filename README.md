@@ -4,6 +4,86 @@
 
 RegressProof is a local CLI and CI validation layer for AI coding regressions. It compares a baseline snapshot against a current change, classifies what actually changed, and emits evidence-focused reports instead of intuition-only blame.
 
+## Why RegressProof
+
+RegressProof exists to answer a specific question that normal CI and vague AI evaluation layers usually do not answer cleanly:
+
+`Did this agent-driven change introduce a measurable new regression, and can we prove it?`
+
+### What RegressProof Is
+
+- a proof-based regression detection layer for agent-generated code changes
+- a baseline-vs-current verification system
+- a diff-aware attribution tool
+- a cost and internal credit accountability layer
+
+### What RegressProof Is Not
+
+- not just another test runner
+- not a generic CI wrapper
+- not a vague "AI quality score"
+- not a promise of provider token refunds
+
+### How It Differs From CI
+
+Normal CI tells you whether checks are red or green.
+
+RegressProof tries to answer the harder follow-up questions:
+
+- was the failure already there before this change?
+- is the failure newly introduced?
+- does the evidence point to code the agent actually touched?
+- is this more likely an agent fault, a preexisting problem, or an environment issue?
+
+### How It Differs From Vague AI Eval Tools
+
+Many AI coding evaluation layers produce broad quality impressions or benchmark-style scores.
+
+RegressProof is narrower and more operational:
+
+- it works against real repository history
+- it compares baseline and current verification results
+- it emits explicit verdict classes
+- it shows the evidence that supports the verdict
+
+## Two Quick Examples
+
+### Example 1: Preexisting Failure
+
+Before:
+
+- baseline test already fails
+- current change does not make it worse
+
+What plain CI shows:
+
+- red
+
+What RegressProof can show:
+
+- `preexisting_failure`
+- not evidence that the current agent caused the regression
+
+### Example 2: New Regression In Changed Code
+
+Before:
+
+- baseline typecheck passes
+
+After:
+
+- current typecheck fails
+- failure points to a changed file
+
+What plain CI shows:
+
+- red
+
+What RegressProof can show:
+
+- `confirmed_agent_fault`
+- high-confidence evidence tied to the changed file
+
 Current MVP capabilities:
 
 - local CLI execution
@@ -250,9 +330,9 @@ This mode uses the real-repo trust-check entrypoint and is intended for self-val
 
 Current real-repo behavior is best understood as:
 
-- a `self-hosted real-workspace trust validation` path
+- a `standalone self-validation plus committed real-repo trust validation` path
 
-This confirms that RegressProof can execute from inside the main workspace and complete a nested trust check that exercises tracked fixture materialization plus expected verdict handling. It does not yet replace deeper committed-change validation for real repository edits.
+This confirms that RegressProof can execute from the standalone repository root and complete trust and deep committed-validation scenarios against recent repository history. It does not yet replace broader external validation across many more public repositories.
 
 The real-repo path now uses a committed-boundary trust-check built on tracked scenario packs and the shared fixture suite runner.
 
