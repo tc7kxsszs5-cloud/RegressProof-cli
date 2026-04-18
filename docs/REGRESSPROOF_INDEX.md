@@ -215,6 +215,9 @@ RegressProof has now been validated outside its own repository on public GitHub 
 4. additional code-plus-test repository
    - `pmndrs/zustand`
    - result: `successful_change / high`
+5. additional code-plus-test repository
+   - `pydantic/pydantic`
+   - result: `successful_change / high`
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
 

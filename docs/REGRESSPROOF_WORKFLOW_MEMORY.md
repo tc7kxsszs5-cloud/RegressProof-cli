@@ -72,6 +72,12 @@ It has now been exercised successfully on external public repositories in three 
    - validation config:
      - `external-zustand-persist.config.json`
    - result: `successful_change / high`
+5. additional code and test repository:
+   - `pydantic/pydantic`
+   - committed range `HEAD~1..HEAD`
+   - validation config:
+     - `external-pydantic-extra-equality.config.json`
+   - result: `successful_change / high`
 
 This means the project now has evidence across:
 

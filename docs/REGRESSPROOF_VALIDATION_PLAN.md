@@ -197,6 +197,11 @@ Current externally validated examples include:
   - validation config: `external-zustand-persist.config.json`
   - committed range: `HEAD~1..HEAD`
   - result: `successful_change / high`
+- `pydantic/pydantic`
+  - category: code-plus-test repository
+  - validation config: `external-pydantic-extra-equality.config.json`
+  - committed range: `HEAD~1..HEAD`
+  - result: `successful_change / high`
 
 This does not eliminate the need for broader external coverage, but it materially strengthens the MVP proof surface beyond internal fixtures and self-hosted trust checks.
 
