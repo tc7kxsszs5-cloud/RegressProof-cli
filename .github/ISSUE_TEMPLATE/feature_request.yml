@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest an improvement for RegressProof-cli
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What workflow or limitation are you trying to improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the improvement you want
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Why this matters
+      description: Explain how this improves proof quality, validation coverage, or usability
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
