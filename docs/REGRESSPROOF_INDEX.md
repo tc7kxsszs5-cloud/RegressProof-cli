@@ -2,7 +2,7 @@
 
 **Project:** `RegressProof`  
 **Purpose:** Persistent project memory and navigation entry point  
-**Last updated:** 16 April 2026
+**Last updated:** 18 April 2026
 
 ## Vision
 
@@ -22,26 +22,26 @@ Core principle:
 
 ## Current Document Set
 
-- [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
-- [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
-- [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
-- [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
+- [Product Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](/tmp/RegressProof-cli/docs/REGRESSPROOF_SPEC.md)
+- [Implementation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](/tmp/RegressProof-cli/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
+- [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Session Template](/tmp/RegressProof-cli/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](/tmp/RegressProof-cli/docs/sessions/README.md)
 
 ## Current Implementation Status
 
 Implementation has started.
 
-Current code scaffold lives in:
+Current code scaffold lives at the repository root:
 
-- [regressproof/README.md](/Users/mac/Desktop/rork-kiku/regressproof/README.md)
-- [regressproof/package.json](/Users/mac/Desktop/rork-kiku/regressproof/package.json)
-- [regressproof/regressproof.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.config.json)
-- [regressproof/src/cli.js](/Users/mac/Desktop/rork-kiku/regressproof/src/cli.js)
+- [README.md](/tmp/RegressProof-cli/README.md)
+- [package.json](/tmp/RegressProof-cli/package.json)
+- [regressproof.config.json](/tmp/RegressProof-cli/regressproof.config.json)
+- [src/cli.js](/tmp/RegressProof-cli/src/cli.js)
 
 What already works:
 
@@ -77,7 +77,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](/tmp/RegressProof-cli/regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -102,11 +102,11 @@ What already works:
 - a committed real-repo trust scenario can now be checked end-to-end through a single helper script
 - a deeper committed trust scenario can now be exercised through a `deep` trust-check profile
 - a single MVP verification entrypoint now exists:
-  - `node regressproof/scripts/verify-mvp.js`
-- the GitHub Action now validates the current RegressProof MVP flow instead of the older single-fixture path
-- subproject packaging boundary now includes:
-  - [regressproof/AGENTS.md](/Users/mac/Desktop/rork-kiku/regressproof/AGENTS.md)
-  - [regressproof/.gitignore](/Users/mac/Desktop/rork-kiku/regressproof/.gitignore)
+  - `node scripts/verify-mvp.js`
+- the GitHub Action now validates the current RegressProof MVP flow directly in the standalone repository
+- the standalone repository boundary now includes:
+  - [AGENTS.md](/tmp/RegressProof-cli/AGENTS.md)
+  - [.gitignore](/tmp/RegressProof-cli/.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
@@ -218,14 +218,17 @@ This does not yet replace broader real-world validation, but it means RegressPro
 
 Current real-repository validation is best described as:
 
-- `self-hosted real-workspace trust validation`
+- `standalone self-validation plus committed real-repo trust validation`
 
-This means RegressProof can now run inside the real workspace and execute a nested RegressProof trust check successfully against a small but meaningful fixture subset, while also asserting tracked-pack materialization as part of the proof path.
+This means RegressProof can now run inside its standalone repository and execute both:
+
+- the full MVP verification flow at repository root
+- committed trust scenarios against recent standalone repository history
 
 It does **not** yet mean:
 
-- deep diff-aware attribution on committed RegressProof changes in the main repository
-- rich real-repo baseline comparison with non-empty changed-file evidence
+- broad external committed-change attribution across many public repositories
+- rich provider-native usage ingestion beyond current exact/estimated scaffolds
 
 However, the core engine now supports the mechanics needed for that next step:
 
@@ -238,12 +241,12 @@ However, the core engine now supports the mechanics needed for that next step:
 
 If future work resumes in a new session, start by reading these files in order:
 
-1. [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-2. [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
-3. [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-4. [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-5. [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
-6. [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-7. the latest session note in [docs/sessions](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
+1. [Product Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+2. [Specification](/tmp/RegressProof-cli/docs/REGRESSPROOF_SPEC.md)
+3. [Implementation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+4. [MVP Task Breakdown](/tmp/RegressProof-cli/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+5. [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
+6. [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+7. the latest session note in [docs/sessions](/tmp/RegressProof-cli/docs/sessions/README.md)
 
 This file should remain the top-level project memory entry point.

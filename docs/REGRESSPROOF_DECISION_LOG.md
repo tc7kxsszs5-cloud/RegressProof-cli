@@ -47,7 +47,7 @@
 
 ## Decision 8
 
-**Decision:** The first executable RegressProof scaffold is implemented as a plain Node.js CLI runtime inside `regressproof/`, while TypeScript scaffolding remains available for later hardening.
+**Decision:** The first executable RegressProof scaffold is implemented as a plain Node.js CLI runtime, while TypeScript scaffolding remains available for later hardening.
 
 **Reason:** This gives a reliable, runnable MVP foundation immediately and avoids blocking on toolchain issues before baseline and verification logic exist.
 
@@ -131,7 +131,7 @@
 
 ## Decision 22
 
-**Decision:** RegressProof packaging should treat `regressproof/` as the standalone project boundary and support file-based export into a near-standalone repository shape.
+**Decision:** RegressProof packaging should support a standalone repository shape and file-based export when working from a larger workspace.
 
 **Reason:** The main workspace contains substantial unrelated product code. A clear subproject boundary plus deterministic export keeps MVP development focused now and makes future repo separation low-risk.
 
@@ -155,7 +155,7 @@
 
 ## Decision 26
 
-**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node regressproof/scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
+**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
 
 **Reason:** The project had already accumulated strong pieces of validation, but usability was still fragmented across many helper commands and a stale workflow. A single MVP verification entrypoint makes local checks, CI, and future handoff much clearer without changing the core proof model.
 
@@ -170,3 +170,9 @@
 **Decision:** MVP fixture validation now includes a real SwiftPM macOS package that compiles AppKit code, instead of relying only on script-simulated Swift failures.
 
 **Reason:** A native macOS-oriented fixture gives stronger evidence that RegressProof can parse and attribute real Swift compiler regressions in changed files, while staying lighter and more reproducible than a full Xcode app target in the current MVP.
+
+## Decision 29
+
+**Decision:** The standalone `RegressProof-cli` repository is now the primary packaging and validation surface for MVP usage.
+
+**Reason:** The project has moved beyond the earlier subdirectory packaging phase. Treating the standalone repository as the primary surface keeps docs, CI, and committed-validation flows aligned with how the product is now consumed.

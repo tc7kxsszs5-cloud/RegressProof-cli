@@ -34,25 +34,25 @@ The current `RegressProof` prototype can:
 
 The prototype includes validated fixture scenario packs for multiple regression classes:
 
-- `regressproof/fixtures/simple-js`
+- `fixtures/simple-js`
   - demonstrates a newly introduced failure
-- `regressproof/fixtures/lint-js`
+- `fixtures/lint-js`
   - demonstrates a newly introduced lint regression
-- `regressproof/fixtures/preexisting-js`
+- `fixtures/preexisting-js`
   - demonstrates a failure that already existed before the current change
-- `regressproof/fixtures/mixed-js`
+- `fixtures/mixed-js`
   - demonstrates a pre-existing failure plus a newly introduced failure in changed code
-- `regressproof/fixtures/build-js`
+- `fixtures/build-js`
   - demonstrates a build regression in changed code
-- `regressproof/fixtures/test-js`
+- `fixtures/test-js`
   - demonstrates a test regression in changed code
-- `regressproof/fixtures/timeout-js`
+- `fixtures/timeout-js`
   - demonstrates an environment-style timeout case
-- `regressproof/fixtures/parser-js`
+- `fixtures/parser-js`
   - demonstrates a realistic multi-line typecheck failure and parser-oriented evidence grouping
-- `regressproof/fixtures/python-js`
+- `fixtures/python-js`
   - demonstrates a Python typecheck-style regression
-- `regressproof/fixtures/swift-js`
+- `fixtures/swift-js`
   - demonstrates a Swift typecheck-style regression using a local module-cache path to avoid sandbox-only cache failures
 
 Current fixture execution model:
@@ -113,6 +113,6 @@ Today, it does not yet prove:
 ## Quick Demo Command
 
 ```bash
-cd regressproof
+cd /path/to/RegressProof-cli
 node scripts/run-all-fixtures.js --out-dir /tmp/regressproof-fixture-suite
 ```

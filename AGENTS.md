@@ -1,10 +1,10 @@
 # AGENTS.md
 
-This directory is the packaging boundary for the `RegressProof` CLI.
+This repository is the standalone home for the `RegressProof` CLI.
 
-## Subproject Goal
+## Repository Goal
 
-Treat `regressproof/` as the closest thing to a standalone repository inside the larger workspace.
+Treat this repository itself as the canonical standalone `RegressProof-cli` project.
 
 When working here, prioritize:
 
@@ -18,13 +18,13 @@ When working here, prioritize:
 
 Read these documents before making major changes:
 
-1. `../docs/REGRESSPROOF_INDEX.md`
-2. `../docs/REGRESSPROOF_PRODUCT_BRIEF.md`
-3. `../docs/REGRESSPROOF_SPEC.md`
-4. `../docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md`
-5. `../docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
-6. `../docs/REGRESSPROOF_VALIDATION_PLAN.md`
-7. `../docs/REGRESSPROOF_DECISION_LOG.md`
+1. `docs/REGRESSPROOF_INDEX.md`
+2. `docs/REGRESSPROOF_PRODUCT_BRIEF.md`
+3. `docs/REGRESSPROOF_SPEC.md`
+4. `docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md`
+5. `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
+6. `docs/REGRESSPROOF_VALIDATION_PLAN.md`
+7. `docs/REGRESSPROOF_DECISION_LOG.md`
 
 ## Working Rules
 
@@ -33,6 +33,7 @@ Read these documents before making major changes:
 - Keep fixture coverage broad enough to prove behavior across languages and error shapes.
 - Prefer portable Node.js and file-based workflows for MVP packaging.
 - When changing packaging or export behavior, update both `README.md` and the relevant `docs/REGRESSPROOF_*.md` file.
+- Prefer standalone-root paths such as `scripts/...`, `src/...`, and `fixtures/...` in docs and validation flows.
 
 ## Packaging Direction
 

@@ -331,31 +331,30 @@ Contains:
 ## 6. Suggested Repository Structure
 
 ```text
-regressproof/
-  src/
-    cli/
-    config/
-    baseline/
-    verification/
-    parsers/
-    diff/
-    classify/
-    ledger/
-    github/
-    reports/
-    shared/
-  fixtures/
-    ts-web-pass/
-    ts-web-fail-build/
-    python-service-fail-test/
-    swift-package-fail-build/
-  test/
-    unit/
-    integration/
-    e2e/
-  .github/
-    workflows/
-  docs/
+src/
+  cli/
+  config/
+  baseline/
+  verification/
+  parsers/
+  diff/
+  classify/
+  ledger/
+  github/
+  reports/
+  shared/
+fixtures/
+  ts-web-pass/
+  ts-web-fail-build/
+  python-service-fail-test/
+  swift-package-fail-build/
+test/
+  unit/
+  integration/
+  e2e/
+.github/
+  workflows/
+docs/
 ```
 
 ## 7. Development Phases
