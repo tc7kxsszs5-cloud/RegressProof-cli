@@ -7,9 +7,14 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: regressproof-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   regressproof:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
 
