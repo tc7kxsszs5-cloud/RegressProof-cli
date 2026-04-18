@@ -8,19 +8,19 @@
     "diffMode": "head_vs_worktree",
     "excludePaths": [
       "docs/sessions/",
-      "regressproof/artifacts/",
-      "regressproof/dist/"
+      "artifacts/",
+      "dist/"
     ]
   },
   "targetPaths": [
-    "regressproof/src",
-    "regressproof/scripts",
-    "regressproof/package.json",
-    "regressproof/regressproof.config.json",
-    "regressproof/regressproof.demo.config.json",
-    "regressproof/regressproof.real-repo.config.json",
-    "regressproof/regressproof.workspace-repo.config.json",
-    "regressproof/README.md",
+    "src",
+    "scripts",
+    "package.json",
+    "regressproof.config.json",
+    "regressproof.demo.config.json",
+    "regressproof.real-repo.config.json",
+    "regressproof.workspace-repo.config.json",
+    "README.md",
     "docs/REGRESSPROOF_INDEX.md",
     "docs/REGRESSPROOF_DECISION_LOG.md",
     "docs/REGRESSPROOF_PROTOTYPE_WALKTHROUGH.md",
@@ -31,10 +31,10 @@
   "checks": {
     "commandTimeoutMs": 45000,
     "quick": [
-      "node regressproof/scripts/real-repo-trust-check.js >/dev/null"
+      "node scripts/real-repo-trust-check.js >/dev/null"
     ],
     "full": [
-      "node regressproof/scripts/real-repo-trust-check.js >/dev/null"
+      "node scripts/real-repo-trust-check.js >/dev/null"
     ]
   },
   "reports": {

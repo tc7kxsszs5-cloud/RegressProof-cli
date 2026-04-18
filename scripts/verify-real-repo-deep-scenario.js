@@ -27,8 +27,8 @@ function main() {
     ...baseConfig,
     checks: {
       ...baseConfig.checks,
-      quick: ["node regressproof/scripts/real-repo-trust-check.js --profile deep >/dev/null"],
-      full: ["node regressproof/scripts/real-repo-trust-check.js --profile deep >/dev/null"],
+      quick: ["node scripts/real-repo-trust-check.js --profile deep >/dev/null"],
+      full: ["node scripts/real-repo-trust-check.js --profile deep >/dev/null"],
     },
   };
   fs.writeFileSync(tempConfigPath, JSON.stringify(deepConfig, null, 2));
@@ -55,7 +55,7 @@ function main() {
   );
 
   const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
-  const expectedChangedFiles = resolveExpectedChangedFiles(repo, report.git.diffRange);
+  const expectedChangedFiles = readiness.changedFiles;
   assertScenario(report, expectedChangedFiles);
 
   process.stdout.write(
@@ -149,22 +149,6 @@ function assertScenario(report, expectedChangedFiles) {
   if (!currentCommand.includes("real-repo-trust-check.js --profile deep")) {
     throw new Error("Expected current verification to run the deep trust-check profile.");
   }
-}
-
-function resolveExpectedChangedFiles(repo, diffRange) {
-  const output = execFileSync("git", ["diff", "--name-only", diffRange, "--", "regressproof", "docs/REGRESSPROOF_INDEX.md"], {
-    cwd: repo,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-    maxBuffer: 1024 * 1024 * 10,
-  }).trim();
-
-  const changedFiles = output.split("\n").map((item) => item.trim()).filter(Boolean);
-  if (changedFiles.length === 0) {
-    throw new Error(`Expected committed diff ${diffRange} to include RegressProof boundary changes.`);
-  }
-
-  return changedFiles;
 }
 
 function readArg(args, name) {

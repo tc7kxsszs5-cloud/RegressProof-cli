@@ -6,7 +6,7 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const repoRoot = process.cwd();
-const regressproofRoot = path.join(repoRoot, "regressproof");
+const projectRoot = resolveProjectRoot(repoRoot);
 const DEFAULT_PROFILE = "shallow";
 const EXPECTED_MATERIALIZATION = "tracked_scenario_pack";
 
@@ -34,7 +34,7 @@ function main() {
   ensureRequiredFiles(expectedFixtures);
 
   const outDir = path.join(os.tmpdir(), `regressproof-trust-check-${Date.now()}`);
-  const runnerPath = path.join(regressproofRoot, "scripts", "run-all-fixtures.js");
+  const runnerPath = path.join(projectRoot, "scripts", "run-all-fixtures.js");
   const runnerArgs = [
     runnerPath,
     "--out-dir",
@@ -79,12 +79,12 @@ function main() {
 
 function ensureRequiredFiles(expectedFixtures) {
   const required = [
-    "regressproof/package.json",
-    "regressproof/scripts/run-all-fixtures.js",
-    "regressproof/scripts/materialize-fixture.js",
+    projectRelative("package.json"),
+    projectRelative("scripts/run-all-fixtures.js"),
+    projectRelative("scripts/materialize-fixture.js"),
   ];
   for (const fixture of expectedFixtures.keys()) {
-    required.push(`regressproof/fixtures/${fixture}/fixture.materializer.json`);
+    required.push(projectRelative(`fixtures/${fixture}/fixture.materializer.json`));
   }
 
   for (const relativePath of required) {
@@ -92,6 +92,19 @@ function ensureRequiredFiles(expectedFixtures) {
       throw new Error(`Missing required trust-check file: ${relativePath}`);
     }
   }
+}
+
+function resolveProjectRoot(rootDir) {
+  const nestedRoot = path.join(rootDir, "regressproof");
+  if (fs.existsSync(path.join(nestedRoot, "package.json"))) {
+    return nestedRoot;
+  }
+
+  return rootDir;
+}
+
+function projectRelative(relativePath) {
+  return path.relative(repoRoot, path.join(projectRoot, relativePath));
 }
 
 function readArg(args, name) {
