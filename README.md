@@ -4,6 +4,11 @@
 
 RegressProof is a local CLI and CI validation layer for AI coding regressions. It compares a baseline snapshot against a current change, classifies what actually changed, and emits evidence-focused reports instead of intuition-only blame.
 
+Public-facing companion docs:
+
+- [GitHub Vitrine](/tmp/RegressProof-cli/docs/REGRESSPROOF_GITHUB_VITRINE.md)
+- [Demo Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_DEMO_BRIEF.md)
+
 ## Why RegressProof
 
 RegressProof exists to answer a specific question that normal CI and vague AI evaluation layers usually do not answer cleanly:

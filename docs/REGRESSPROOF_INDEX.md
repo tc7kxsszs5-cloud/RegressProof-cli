@@ -30,6 +30,8 @@ Core principle:
 - [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
 - [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
 - [Release v0.1.0](/tmp/RegressProof-cli/docs/REGRESSPROOF_RELEASE_v0.1.0.md)
+- [GitHub Vitrine](/tmp/RegressProof-cli/docs/REGRESSPROOF_GITHUB_VITRINE.md)
+- [Demo Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_DEMO_BRIEF.md)
 - [Session Template](/tmp/RegressProof-cli/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
 - [Session Notes Directory](/tmp/RegressProof-cli/docs/sessions/README.md)
 
