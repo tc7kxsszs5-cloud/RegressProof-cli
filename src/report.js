@@ -4,13 +4,9 @@ function renderReport(report, format) {
   }
 
   const verdictLabel = getVerdictLabel(report.verdict.classification);
-  const changedFiles =
-    report.git.changedFiles.length > 0
-      ? report.git.changedFiles.map((file) => `  - ${file}`).join("\n")
-      : "  - none detected";
-
-  const quickChecks = report.checks.quick.map((check) => `  - ${check}`).join("\n");
-  const fullChecks = report.checks.full.map((check) => `  - ${check}`).join("\n");
+  const changedFiles = formatList(report.git.changedFiles);
+  const quickChecks = formatList(report.checks.quick);
+  const fullChecks = formatList(report.checks.full);
   const baselineResults = report.verification.baseline
     .map(
       (item) =>
@@ -33,14 +29,22 @@ function renderReport(report, format) {
     `Project: ${report.projectName}`,
     `Timestamp: ${report.timestamp}`,
     `Status: ${report.status}`,
-    `Verdict: ${verdictLabel} [${report.verdict.classification}] (${report.verdict.confidence})`,
-    `Usage Mode: ${report.usage.mode}`,
-    `Estimated Cost USD: ${report.usage.estimatedCostUsd}`,
-    `Internal Credit USD: ${report.creditLedger.internalCreditUsd}`,
-    `Evidence: ${report.verdict.summary}`,
-    `Changed File Match: ${report.verdict.changedFileEvidence ? "yes" : "no"}`,
-    `Proof Signals: changedFiles=${report.proofSignals.changedFilesCount}, targetPaths=${report.proofSignals.targetPathCount}, committedDiff=${report.proofSignals.hasCommittedDiff ? "yes" : "no"}, pathBaseline=${report.proofSignals.usesPathScopedBaseline ? "yes" : "no"}, snapshotCurrent=${report.proofSignals.usesSnapshotCurrent ? "yes" : "no"}`,
-    `Failure Counts: introduced=${report.failureSummary.metrics.introducedCount}, preexisting=${report.failureSummary.metrics.preexistingCount}, unchanged=${report.failureSummary.metrics.unchangedCount}, fixed=${report.failureSummary.metrics.fixedCount}`,
+    "",
+    "Decision:",
+    `  - verdict: ${verdictLabel} [${report.verdict.classification}]`,
+    `  - confidence: ${report.verdict.confidence}`,
+    `  - summary: ${report.verdict.summary}`,
+    `  - changed file evidence: ${report.verdict.changedFileEvidence ? "yes" : "no"}`,
+    `  - next step: ${report.nextStep}`,
+    "",
+    "Impact:",
+    `  - introduced failures: ${report.failureSummary.metrics.introducedCount}`,
+    `  - preexisting failures: ${report.failureSummary.metrics.preexistingCount}`,
+    `  - unchanged failures: ${report.failureSummary.metrics.unchangedCount}`,
+    `  - fixed failures: ${report.failureSummary.metrics.fixedCount}`,
+    `  - changed-file matched introductions: ${report.failureSummary.metrics.changedFileMatchedIntroducedCount}`,
+    `  - estimated cost usd: ${report.usage.estimatedCostUsd}`,
+    `  - internal credit usd: ${report.creditLedger.internalCreditUsd}`,
     "",
     "Git Context:",
     `  - repoRoot: ${report.git.repoRoot}`,
@@ -78,8 +82,6 @@ function renderReport(report, format) {
     "",
     "Fixed Failures:",
     fixedFailures,
-    "",
-    `Next Step: ${report.nextStep}`,
   ].join("\n");
 }
 
@@ -90,25 +92,32 @@ function formatFailureList(items) {
 
   return items
     .map((item) => {
-      const fileSuffix = item.filePath ? ` file=${item.filePath}` : "";
-      const typeSuffix = item.checkType ? ` type=${item.checkType}` : "";
-      const changedSuffix = ` changedFileMatch=${item.changedFileMatchKind || "none"}`;
+      const headline = `${item.command} [${item.status}] exit=${item.exitCode}`;
+      const details = [];
+      if (item.checkType) {
+        details.push(`type=${item.checkType}`);
+      }
+      if (item.filePath) {
+        details.push(`file=${shortenPath(item.filePath)}`);
+      }
+      details.push(`changedFileMatch=${item.changedFileMatchKind || "none"}`);
+      if (item.touchesChangedFile) {
+        details.push("touchesChangedFile=yes");
+      }
+      if (item.evidence) {
+        details.push(`evidence=${summarizeEvidence(item.evidence)}`);
+      }
       const matchedFilesSuffix =
         item.matchedChangedFiles && item.matchedChangedFiles.length > 0
           ? ` matched=${item.matchedChangedFiles.join(",")}`
           : "";
-      return `  - ${item.command} [${item.status}] exit=${item.exitCode}${typeSuffix}${fileSuffix}${changedSuffix}${matchedFilesSuffix}`;
+      return `  - ${headline}${details.length > 0 ? ` | ${details.join(" | ")}` : ""}${matchedFilesSuffix}`;
     })
     .join("\n");
 }
 
 function renderMarkdownSummary(report) {
   const verdictLabel = getVerdictLabel(report.verdict.classification);
-  const changedFiles =
-    report.git.changedFiles.length > 0
-      ? report.git.changedFiles.map((file) => `- \`${file}\``).join("\n")
-      : "- none";
-
   const introducedFailures = formatFailureListMarkdown(report.failureSummary.introducedFailures);
   const preexistingFailures = formatFailureListMarkdown(report.failureSummary.preexistingFailures);
   const unchangedFailures = formatFailureListMarkdown(report.failureSummary.unchangedFailures);
@@ -120,6 +129,24 @@ function renderMarkdownSummary(report) {
     `## ${verdictLabel}`,
     "",
     report.verdict.summary,
+    "",
+    "## Decision Card",
+    "",
+    `- Verdict: \`${report.verdict.classification}\``,
+    `- Confidence: \`${report.verdict.confidence}\``,
+    `- Changed-file evidence: \`${report.verdict.changedFileEvidence ? "yes" : "no"}\``,
+    `- Diff range: \`${report.git.diffRange}\``,
+    `- Baseline mode: \`${report.verification.baselineMode}\``,
+    `- Current mode: \`${report.verification.currentMode}\``,
+    "",
+    "## Outcome Snapshot",
+    "",
+    `- Introduced failures: \`${report.failureSummary.metrics.introducedCount}\``,
+    `- Fixed failures: \`${report.failureSummary.metrics.fixedCount}\``,
+    `- Preexisting failures: \`${report.failureSummary.metrics.preexistingCount}\``,
+    `- Changed files in diff: \`${report.proofSignals.changedFilesCount}\``,
+    `- Estimated cost USD: \`${report.usage.estimatedCostUsd}\``,
+    `- Internal credit USD: \`${report.creditLedger.internalCreditUsd}\``,
     "",
     "| Field | Value |",
     "| --- | --- |",
@@ -148,7 +175,7 @@ function renderMarkdownSummary(report) {
     "",
     "## Changed Files",
     "",
-    changedFiles,
+    formatListMarkdown(report.git.changedFiles),
     "",
     "## Introduced Failures",
     "",
@@ -185,6 +212,8 @@ function renderPullRequestSummary(report) {
     "",
     `**${verdictLabel}**`,
     "",
+    report.verdict.summary,
+    "",
     `- Verdict: \`${report.verdict.classification}\``,
     `- Confidence: \`${report.verdict.confidence}\``,
     `- Changed file match: \`${report.verdict.changedFileEvidence ? "yes" : "no"}\``,
@@ -201,53 +230,117 @@ function renderPullRequestSummary(report) {
     `- Unchanged failures: \`${unchangedFailuresCount}\``,
     `- Fixed failures: \`${fixedFailuresCount}\``,
     "",
-    report.verdict.summary,
-    "",
   ].join("\n");
 }
 
 function renderPullRequestComment(report) {
   const verdictLabel = getVerdictLabel(report.verdict.classification);
+  const changedFiles = formatListMarkdownInline(report.git.changedFiles, 8);
+  const introducedFailures = formatFailureListMarkdown(report.failureSummary.introducedFailures);
+  const fixedFailures = formatFailureListMarkdown(report.failureSummary.fixedFailures);
+  const preexistingFailures = formatFailureListMarkdown(report.failureSummary.preexistingFailures);
+
   return [
     "<!-- regressproof-comment -->",
     "## RegressProof Review",
     "",
     `**${verdictLabel}**`,
     "",
-    `**Verdict:** \`${report.verdict.classification}\``,
-    `**Confidence:** \`${report.verdict.confidence}\``,
-    `**Diff range:** \`${report.git.diffRange}\``,
-    `**Current mode:** \`${report.verification.currentMode}\``,
-    `**Changed files in diff:** \`${report.proofSignals.changedFilesCount}\``,
-    `**Path-scoped baseline:** \`${report.proofSignals.usesPathScopedBaseline ? "yes" : "no"}\``,
-    `**Snapshot current:** \`${report.proofSignals.usesSnapshotCurrent ? "yes" : "no"}\``,
-    `**Estimated cost:** \`$${report.usage.estimatedCostUsd}\``,
-    `**Internal credit:** \`$${report.creditLedger.internalCreditUsd}\``,
-    `**Introduced failures:** \`${report.failureSummary.metrics.introducedCount}\``,
-    `**Preexisting failures:** \`${report.failureSummary.metrics.preexistingCount}\``,
-    `**Unchanged failures:** \`${report.failureSummary.metrics.unchangedCount}\``,
-    `**Fixed failures:** \`${report.failureSummary.metrics.fixedCount}\``,
-    `**Changed-file matched introductions:** \`${report.failureSummary.metrics.changedFileMatchedIntroducedCount}\``,
-    "",
     report.verdict.summary,
+    "",
+    "### Decision Card",
+    "",
+    `- Verdict: \`${report.verdict.classification}\``,
+    `- Confidence: \`${report.verdict.confidence}\``,
+    `- Diff range: \`${report.git.diffRange}\``,
+    `- Baseline mode: \`${report.verification.baselineMode}\``,
+    `- Current mode: \`${report.verification.currentMode}\``,
+    `- Changed-file evidence: \`${report.verdict.changedFileEvidence ? "yes" : "no"}\``,
+    "",
+    "### What Changed",
+    "",
+    `- Changed files in diff: \`${report.proofSignals.changedFilesCount}\``,
+    changedFiles,
+    "",
+    "### Outcome Snapshot",
+    "",
+    `- Introduced failures: \`${report.failureSummary.metrics.introducedCount}\``,
+    `- Fixed failures: \`${report.failureSummary.metrics.fixedCount}\``,
+    `- Preexisting failures: \`${report.failureSummary.metrics.preexistingCount}\``,
+    `- Changed-file matched introductions: \`${report.failureSummary.metrics.changedFileMatchedIntroducedCount}\``,
+    `- Estimated cost: \`$${report.usage.estimatedCostUsd}\``,
+    `- Internal credit: \`$${report.creditLedger.internalCreditUsd}\``,
     "",
     "### Introduced Failures",
     "",
-    formatFailureListMarkdown(report.failureSummary.introducedFailures),
-    "",
-    "### Preexisting Failures",
-    "",
-    formatFailureListMarkdown(report.failureSummary.preexistingFailures),
+    introducedFailures,
     "",
     "### Fixed Failures",
     "",
-    formatFailureListMarkdown(report.failureSummary.fixedFailures),
+    fixedFailures,
+    "",
+    "### Preexisting Failures",
+    "",
+    preexistingFailures,
+    "",
+    "### Recommended Next Step",
+    "",
+    report.nextStep,
     "",
   ].join("\n");
 }
 
 function formatFailureListMarkdown(items) {
   return formatFailureList(items).replace(/^  - /gm, "- ");
+}
+
+function formatList(items) {
+  if (!items || items.length === 0) {
+    return "  - none";
+  }
+
+  return items.map((item) => `  - ${item}`).join("\n");
+}
+
+function formatListMarkdown(items) {
+  if (!items || items.length === 0) {
+    return "- none";
+  }
+
+  return items.map((item) => `- \`${item}\``).join("\n");
+}
+
+function formatListMarkdownInline(items, maxItems) {
+  if (!items || items.length === 0) {
+    return "- none";
+  }
+
+  const visible = items.slice(0, maxItems).map((item) => `- \`${item}\``);
+  if (items.length > maxItems) {
+    visible.push(`- and ${items.length - maxItems} more`);
+  }
+
+  return visible.join("\n");
+}
+
+function summarizeEvidence(evidence) {
+  return evidence
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .slice(0, 2)
+    .join(" | ")
+    .slice(0, 220);
+}
+
+function shortenPath(filePath) {
+  const normalized = String(filePath).replace(/^\/+/, "");
+  const segments = normalized.split("/");
+  if (segments.length <= 4) {
+    return normalized;
+  }
+
+  return `.../${segments.slice(-4).join("/")}`;
 }
 
 function getVerdictLabel(classification) {
