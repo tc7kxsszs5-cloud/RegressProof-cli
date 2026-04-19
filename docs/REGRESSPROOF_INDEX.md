@@ -20,20 +20,56 @@ Core principle:
 
 `proof, not guesses`
 
+## Documentation Invariants
+
+- RegressProof must be described as a proof-based regression detection and accountability layer.
+- The core product question is: did an agent-driven change introduce a measurable new regression, and can we prove it.
+- The canonical reasoning flow is `baseline vs current` -> `evidence` -> `verdict`.
+- RegressProof must not be reframed as a universal guaranteed refund system.
+- The verdict classes must stay distinct: `confirmed_agent_fault`, `possible_agent_fault`, `preexisting_failure`, `environment_failure`, `insufficient_evidence`.
+- MVP direction remains centered on CLI, GitHub Action, verification engine, diff mapping, fault classification, and internal ledgering.
+- `README.md` should remain a stable public-facing entry point, not a daily implementation log.
+
 ## Current Document Set
 
-- [Product Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](/tmp/RegressProof-cli/docs/REGRESSPROOF_SPEC.md)
-- [Implementation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](/tmp/RegressProof-cli/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_VALIDATION_PLAN.md)
-- [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
-- [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Release v0.1.0](/tmp/RegressProof-cli/docs/REGRESSPROOF_RELEASE_v0.1.0.md)
-- [GitHub Vitrine](/tmp/RegressProof-cli/docs/REGRESSPROOF_GITHUB_VITRINE.md)
-- [Demo Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_DEMO_BRIEF.md)
-- [Session Template](/tmp/RegressProof-cli/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](/tmp/RegressProof-cli/docs/sessions/README.md)
+- [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](REGRESSPROOF_SPEC.md)
+- [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](REGRESSPROOF_DECISION_LOG.md)
+- [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Release v0.1.0](REGRESSPROOF_RELEASE_v0.1.0.md)
+- [GitHub Vitrine](REGRESSPROOF_GITHUB_VITRINE.md)
+- [Demo Brief](REGRESSPROOF_DEMO_BRIEF.md)
+- [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](sessions/README.md)
+
+## Documentation Maintenance Model
+
+Use the documentation in layers so the repository does not require daily copy edits across multiple files:
+
+- `README.md`
+  - stable public-facing entry point
+  - update only when product positioning, primary entrypoints, or repository surface meaningfully changes
+- `REGRESSPROOF_INDEX.md`
+  - canonical navigation and current project memory
+  - update when document structure, implementation status, or project memory organization changes
+- `REGRESSPROOF_VALIDATION_PLAN.md`
+  - changing validation coverage, scenario status, and external validation evidence
+  - update when validation scope or results materially change
+- `REGRESSPROOF_RELEASE_*.md`
+  - release-bound claims and snapshots
+  - update on release cuts, not during routine implementation churn
+- session notes under `docs/sessions/`
+  - daily or episodic working memory
+  - prefer adding a new session note over rewriting stable docs
+
+Rule of thumb:
+
+- do not update `README.md` for routine validation-count changes
+- do not update release docs for ordinary implementation progress
+- put volatile details in validation docs or session notes first
 
 ## Current Implementation Status
 
@@ -41,10 +77,10 @@ Implementation has started.
 
 Current code scaffold lives at the repository root:
 
-- [README.md](/tmp/RegressProof-cli/README.md)
-- [package.json](/tmp/RegressProof-cli/package.json)
-- [regressproof.config.json](/tmp/RegressProof-cli/regressproof.config.json)
-- [src/cli.js](/tmp/RegressProof-cli/src/cli.js)
+- [README.md](../README.md)
+- [package.json](../package.json)
+- [regressproof.config.json](../regressproof.config.json)
+- [src/cli.js](../src/cli.js)
 
 What already works:
 
@@ -80,7 +116,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](/tmp/RegressProof-cli/regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](../regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -108,8 +144,8 @@ What already works:
   - `node scripts/verify-mvp.js`
 - the GitHub Action now validates the current RegressProof MVP flow directly in the standalone repository
 - the standalone repository boundary now includes:
-  - [AGENTS.md](/tmp/RegressProof-cli/AGENTS.md)
-  - [.gitignore](/tmp/RegressProof-cli/.gitignore)
+  - [AGENTS.md](../AGENTS.md)
+  - [.gitignore](../.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
@@ -250,12 +286,12 @@ However, the core engine now supports the mechanics needed for that next step:
 
 If future work resumes in a new session, start by reading these files in order:
 
-1. [Product Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-2. [Specification](/tmp/RegressProof-cli/docs/REGRESSPROOF_SPEC.md)
-3. [Implementation Plan](/tmp/RegressProof-cli/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-4. [MVP Task Breakdown](/tmp/RegressProof-cli/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-5. [Decision Log](/tmp/RegressProof-cli/docs/REGRESSPROOF_DECISION_LOG.md)
-6. [Workflow Memory](/tmp/RegressProof-cli/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-7. the latest session note in [docs/sessions](/tmp/RegressProof-cli/docs/sessions/README.md)
+1. [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+2. [Specification](REGRESSPROOF_SPEC.md)
+3. [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+4. [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+5. [Decision Log](REGRESSPROOF_DECISION_LOG.md)
+6. [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
+7. the latest session note in [docs/sessions](sessions/README.md)
 
 This file should remain the top-level project memory entry point.

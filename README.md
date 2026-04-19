@@ -4,10 +4,12 @@
 
 RegressProof is a local CLI and CI validation layer for AI coding regressions. It compares a baseline snapshot against a current change, classifies what actually changed, and emits evidence-focused reports instead of intuition-only blame.
 
+This repository is the current standalone, GitHub-first MVP surface for `RegressProof v0.1.0`. It is intended to be cloned and run from source. It is not yet presented as a published npm package with a separate distribution flow.
+
 Public-facing companion docs:
 
-- [GitHub Vitrine](/tmp/RegressProof-cli/docs/REGRESSPROOF_GITHUB_VITRINE.md)
-- [Demo Brief](/tmp/RegressProof-cli/docs/REGRESSPROOF_DEMO_BRIEF.md)
+- [GitHub Vitrine](docs/REGRESSPROOF_GITHUB_VITRINE.md)
+- [Demo Brief](docs/REGRESSPROOF_DEMO_BRIEF.md)
 
 ## Why RegressProof
 
@@ -50,6 +52,15 @@ RegressProof is narrower and more operational:
 - it compares baseline and current verification results
 - it emits explicit verdict classes
 - it shows the evidence that supports the verdict
+
+## Start Here
+
+Choose one of two entry paths:
+
+- use RegressProof on another repository
+- self-validate the RegressProof repository itself
+
+If you are new to the project, start with the external-repository path first.
 
 ## Two Quick Examples
 
@@ -102,38 +113,56 @@ Current MVP capabilities:
 
 The runtime is plain Node.js. In this repository, the most reliable commands are `node ...` commands first; `npm run ...` is only a convenience layer when `npm` is available in the environment.
 
-Validated fixture coverage currently includes:
+For changing details such as fixture coverage, validation status, or current release claims, use:
 
-- `simple-js`
-- `lint-js`
-- `preexisting-js`
-- `mixed-js`
-- `build-js`
-- `test-js`
-- `timeout-js`
-- `parser-js`
-- `python-js`
-- `swift-js`
-- `swiftpm-macos`
-
-Primary fixture model:
-
-- tracked scenario packs under each fixture directory
-- `tracked/baseline`
-- `tracked/current`
-- `fixture.materializer.json`
-- the tracked-pack suite now passes `11/11`
+- [Project Index](docs/REGRESSPROOF_INDEX.md)
+- [Validation Plan](docs/REGRESSPROOF_VALIDATION_PLAN.md)
+- [Release v0.1.0](docs/REGRESSPROOF_RELEASE_v0.1.0.md)
 
 ## Quick Start
 
-Verify the whole MVP in one shot:
+### Run Against Another Repository
+
+RegressProof can validate a lightweight external repository by comparing a baseline and current state through a supplied config.
+
+Example config:
+
+- [examples/external-doc-plugin.config.json](examples/external-doc-plugin.config.json)
+
+Example command against a cloned external repo:
+
+```bash
+cd /path/to/RegressProof-cli
+node scripts/run-committed-real-repo-validation.js \
+  --repo /tmp/andrej-karpathy-skills \
+  --config examples/external-doc-plugin.config.json \
+  --head-ref HEAD \
+  --artifact-dir /tmp/regressproof-external-doc-plugin
+```
+
+That config assumes the target repo has:
+
+- `README.md`
+- `CLAUDE.md`
+- `.claude-plugin/plugin.json`
+- `.claude-plugin/marketplace.json`
+
+and validates:
+
+- required file presence
+- basic plugin and marketplace JSON structure
+- README mentions the CLAUDE/plugin install flow
+
+### Repository Self-Validation
+
+Verify the current standalone MVP in one shot:
 
 ```bash
 cd /path/to/RegressProof-cli
 node scripts/verify-mvp.js --repo "$PWD" --out-dir /tmp/regressproof-mvp
 ```
 
-This is the main "does the repo work?" command. It runs:
+This is the main "does the repo work?" command for this repository. It runs:
 
 - the full tracked fixture suite
 - the committed real-repo trust scenario
@@ -171,38 +200,6 @@ cd /path/to/RegressProof-cli
 npm run verify:mvp
 ```
 
-## External Repository Example
-
-RegressProof can also validate a lightweight external repository that has docs and plugin metadata instead of a normal test suite.
-
-Example config:
-
-- [examples/external-doc-plugin.config.json](/tmp/RegressProof-cli/examples/external-doc-plugin.config.json:1)
-
-Example command against a cloned external repo:
-
-```bash
-cd /path/to/RegressProof-cli
-node scripts/run-committed-real-repo-validation.js \
-  --repo /tmp/andrej-karpathy-skills \
-  --config examples/external-doc-plugin.config.json \
-  --head-ref HEAD \
-  --artifact-dir /tmp/regressproof-external-doc-plugin
-```
-
-That config assumes the target repo has:
-
-- `README.md`
-- `CLAUDE.md`
-- `.claude-plugin/plugin.json`
-- `.claude-plugin/marketplace.json`
-
-and validates:
-
-- required file presence
-- basic plugin and marketplace JSON structure
-- README mentions the CLAUDE/plugin install flow
-
 ## CLI Usage
 
 Direct local run:
@@ -238,86 +235,10 @@ node src/cli.js run \
   --format json
 ```
 
-Fixture materialization helper:
+For the fuller helper matrix, fixture-pack workflow, committed trust helpers, and deeper engineering notes, use:
 
-```bash
-cd /path/to/RegressProof-cli
-npm run fixture:materialize -- --fixture fixtures/lint-js
-```
-
-Current materializer behavior:
-
-- tracked scenario packs are materialized into temporary git repos first
-- embedded fixture repos are treated only as import sources when exporting packs
-- baseline and current snapshots are exported alongside the temp repo
-
-Fixture scenario-pack export helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run fixture:export-pack -- --fixture fixtures/lint-js
-```
-
-This exports `baseline` and `current` trees under `tracked/` and writes `fixture.materializer.json`, which makes the tracked scenario-pack path self-contained.
-
-Bulk scenario-pack export:
-
-```bash
-cd /path/to/RegressProof-cli
-node scripts/export-all-fixture-packs.js
-```
-
-This walks every fixture source and refreshes tracked `baseline/current` packs.
-
-Fixture suite runner:
-
-```bash
-cd /path/to/RegressProof-cli
-node scripts/run-all-fixtures.js
-```
-
-This runner:
-
-- materializes each fixture
-- runs RegressProof against the materialized repo
-- continues through the whole suite without stopping on the first failure
-- writes a JSON summary plus per-fixture artifacts under a temporary output directory
-
-Current tracked-pack suite result:
-
-- `11/11 passed`
-- summary example: `/tmp/regressproof-suite-now/fixture-suite-summary.json`
-
-Write artifacts explicitly from a materialized fixture:
-
-```bash
-cd /path/to/RegressProof-cli
-node scripts/materialize-fixture.js \
-  --fixture fixtures/simple-js \
-  --out-dir /tmp/regressproof-materialized-simple
-
-node src/cli.js run \
-  --repo /tmp/regressproof-materialized-simple/repo \
-  --config /tmp/regressproof-materialized-simple/repo/regressproof.config.json \
-  --format json \
-  --artifact-dir /tmp/regressproof-artifacts
-```
-
-Run in CI mode:
-
-```bash
-cd /path/to/RegressProof-cli
-node scripts/materialize-fixture.js \
-  --fixture fixtures/simple-js \
-  --out-dir /tmp/regressproof-materialized-simple
-
-node src/cli.js run \
-  --repo /tmp/regressproof-materialized-simple/repo \
-  --config /tmp/regressproof-materialized-simple/repo/regressproof.config.json \
-  --format json \
-  --artifact-dir /tmp/regressproof-artifacts \
-  --ci
-```
+- [Project Index](docs/REGRESSPROOF_INDEX.md)
+- [Validation Plan](docs/REGRESSPROOF_VALIDATION_PLAN.md)
 
 In CI mode, RegressProof exits non-zero only for configured verdicts such as `confirmed_agent_fault`.
 
@@ -333,73 +254,10 @@ node src/cli.js run \
 
 This mode uses the real-repo trust-check entrypoint and is intended for self-validation inside the standalone repository.
 
-Current real-repo behavior is best understood as:
+For the committed validation helpers and current expected trust-scenario invariants, use the canonical validation docs instead of this README:
 
-- a `standalone self-validation plus committed real-repo trust validation` path
-
-This confirms that RegressProof can execute from the standalone repository root and complete trust and deep committed-validation scenarios against recent repository history. It does not yet replace broader external validation across many more public repositories.
-
-The real-repo path now uses a committed-boundary trust-check built on tracked scenario packs and the shared fixture suite runner.
-
-This keeps committed validation runnable while the main repository history is still being deepened.
-
-Committed validation helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:committed -- --repo "$PWD" --artifact-dir /tmp/regressproof-committed-pass
-```
-
-Optional explicit compare ref:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:committed -- \
-  --repo "$PWD" \
-  --head-ref HEAD \
-  --artifact-dir /tmp/regressproof-committed-pass
-```
-
-The committed helper computes a baseline ref automatically, prepares a temporary config, and runs the real-repo validation flow against committed history.
-
-Committed readiness helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:readiness -- --repo "$PWD"
-```
-
-Use this before committed validation when you are unsure whether the selected git range actually contains the RegressProof boundary in committed history.
-
-Committed trust-scenario helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:scenario -- --repo "$PWD"
-```
-
-This runs the current committed trust scenario end-to-end and asserts the expected invariants:
-
-- readiness is `ready`
-- `diffRange` is `HEAD~1..HEAD`
-- baseline mode is `path_snapshot`
-- current mode is `snapshot`
-- committed verdict is `successful_change`
-- confidence is `high`
-
-Committed deep trust-scenario helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:scenario:deep -- --repo "$PWD"
-```
-
-This uses the `deep` trust-check profile so the committed path exercises a broader nested fixture subset:
-
-- `lint-js`
-- `preexisting-js`
-- `parser-js`
-- `python-js`
+- [Validation Plan](docs/REGRESSPROOF_VALIDATION_PLAN.md)
+- [Project Index](docs/REGRESSPROOF_INDEX.md)
 
 ## GitHub Action
 
@@ -413,89 +271,8 @@ That workflow now validates the RegressProof MVP directly by running:
 
 and uploads the full artifact tree under `regressproof-artifacts/`.
 
-For materialized fixtures or other custom configs:
+For GitHub Action details, exact usage modes, ledger behavior, report artifacts, and export helpers, use:
 
-```bash
-cd /path/to/RegressProof-cli
-node scripts/check-committed-range-readiness.js \
-  --repo /tmp/regressproof-materialized-lint/repo \
-  --config regressproof.config.json \
-  --baseline-ref HEAD~1 \
-  --head-ref HEAD
-```
-
-Committed validation now supports:
-
-- explicit `baselineRef..compareRef` attribution
-- diff calculation against a selected committed ref
-- snapshot execution for the compared commit, so current verification is not tied to the live checkout
-- richer git context in reports:
-  - `baselineCommit`
-  - `compareRef`
-  - `compareCommit`
-  - `diffRange`
-  - `currentMode`
-
-When the selected committed ref still does not contain the RegressProof project boundary, the runner now degrades gracefully instead of crashing:
-
-- baseline path snapshots can fall back to `skip`
-- current commit execution can fall back to `worktree_fallback` when the compared ref resolves to the live `HEAD` commit but the project still exists mainly in the working tree
-
-Workspace validation helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run real:workspace -- --repo "$PWD" --artifact-dir /tmp/regressproof-workspace-pass
-```
-
-The workspace helper compares `HEAD` to the current worktree for the RegressProof project boundary. This is useful when the project exists mostly as working-tree changes rather than committed repository history.
-
-Standalone export helper:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run export:standalone
-```
-
-Optional custom destination:
-
-```bash
-cd /path/to/RegressProof-cli
-npm run export:standalone -- --out-dir /tmp/regressproof-standalone
-```
-
-This creates a near-standalone repository shape with:
-
-- the RegressProof package boundary
-- core `src/`, `scripts/`, and `fixtures/`
-- local packaging files such as `.gitignore` and `AGENTS.md`
-- copied canonical RegressProof docs under `docs/`
-
-The export intentionally excludes build artifacts so the resulting package stays clean and reproducible.
-
-Exact usage modes:
-
-- `usage.mode = "estimated"` uses config or heuristic estimation
-- `usage.mode = "exact"` supports:
-  - env ingestion via `REGRESSPROOF_PROMPT_TOKENS`, `REGRESSPROOF_COMPLETION_TOKENS`, `REGRESSPROOF_CACHED_TOKENS`, `REGRESSPROOF_COST_USD`
-  - file ingestion via `usage.exact.filePath`
-
-Persistent ledger:
-
-- by default, a JSONL ledger is written under the artifact directory in `.regressproof-ledger/runs.jsonl`
-- each run records verdict, confidence, spend estimate, internal credit, and failure counts
-
-Current report artifacts include:
-
-- `regressproof-report.json`
-- `regressproof-summary.md`
-- `regressproof-pr-summary.md`
-- `regressproof-pr-comment.md`
-- `.regressproof-ledger/runs.jsonl`
-
-Current reporting behavior includes:
-
-- human-readable verdict headlines
-- explicit counts for introduced, preexisting, unchanged, and fixed failures
-- PR-oriented compact summaries and comment bodies
-- grouped multi-line evidence for more realistic parser-targeted scenarios
+- [Project Index](docs/REGRESSPROOF_INDEX.md)
+- [Specification](docs/REGRESSPROOF_SPEC.md)
+- [Validation Plan](docs/REGRESSPROOF_VALIDATION_PLAN.md)

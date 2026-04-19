@@ -34,6 +34,11 @@ Read these first:
   - `insufficient_evidence`
 - Prefer small, reviewable pull requests.
 - Update relevant docs when behavior or scope changes.
+- Keep doc churn low:
+  - treat `README.md` as a stable public entry point
+  - put changing validation status in `docs/REGRESSPROOF_VALIDATION_PLAN.md`
+  - put release-bound claims in `docs/REGRESSPROOF_RELEASE_*.md`
+  - prefer a session note over rewriting stable top-level docs for day-to-day progress
 
 ## Local Validation
 
