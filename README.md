@@ -32,6 +32,7 @@ What is already confirmed:
   - docs/plugin repositories
   - larger docs/configuration repositories
   - code-plus-test repositories
+  - Python code-plus-test repositories
 
 Most recent external run:
 

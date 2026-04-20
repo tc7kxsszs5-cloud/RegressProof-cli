@@ -80,3 +80,29 @@ Taken together, these case studies show that RegressProof is already usable as:
 - a standalone MVP
 - an evidence-focused validation layer for public repositories
 - a system that can support repository-specific verification without abandoning conservative attribution
+
+## Case Study 5: `MemPalace/mempalace`
+
+- category: Python code-plus-test repository
+- committed range: `HEAD~1..HEAD`
+- changed files inside validation boundary:
+  - `mempalace/hooks_cli.py`
+  - `tests/test_hooks_cli.py`
+- validation style: narrow repo-specific Python slice
+- result: `successful_change / high`
+
+What was validated:
+
+- Python syntax/compile safety for `mempalace/hooks_cli.py`
+- targeted pytest slice for `tests/test_hooks_cli.py`
+
+Why it matters:
+
+- gives RegressProof a clean public Python case study, not only JS/TS-leaning examples
+- shows that committed attribution can stay tightly aligned with the files touched by the actual diff
+- demonstrates that a small, meaningful build/test slice is often the strongest external proof surface
+
+What this teaches:
+
+- external validation does not need to start with a repository's entire test suite
+- a well-chosen committed slice can produce a stronger, more honest MVP proof than a noisy broad run

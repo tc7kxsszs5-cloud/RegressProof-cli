@@ -22,6 +22,8 @@ For external repositories, the most reliable path is:
   - code-plus-test example for a TypeScript library repository
 - `external-oh-my-codex-stable-slice.config.json`
   - stable committed validation slice for `Yeachan-Heo/oh-my-codex`
+- `external-mempalace-hooks-cli.config.json`
+  - Python code-plus-test committed validation slice for `MemPalace/mempalace`
 
 ## Example Invocation
 

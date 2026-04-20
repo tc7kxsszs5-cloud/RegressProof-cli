@@ -1,0 +1,49 @@
+{
+  "projectName": "MemPalace hooks_cli committed validation",
+  "baselineRef": "HEAD~1",
+  "executionRoot": ".",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "tests",
+      "mempalace",
+      "pyproject.toml",
+      "uv.lock"
+    ]
+  },
+  "targetPaths": [
+    "mempalace/hooks_cli.py",
+    "tests/test_hooks_cli.py",
+    "tests/conftest.py",
+    "pyproject.toml",
+    "uv.lock"
+  ],
+  "checks": {
+    "commandTimeoutMs": 120000,
+    "quick": [
+      "/tmp/mempalace/.venv/bin/python -m py_compile mempalace/hooks_cli.py",
+      "/tmp/mempalace/.venv/bin/python -m pytest tests/test_hooks_cli.py -q"
+    ],
+    "full": [
+      "/tmp/mempalace/.venv/bin/python -m py_compile mempalace/hooks_cli.py",
+      "/tmp/mempalace/.venv/bin/python -m pytest tests/test_hooks_cli.py -q"
+    ]
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.04
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}
