@@ -1,0 +1,82 @@
+# RegressProof Case Studies
+
+**Purpose:** Preserve concise proof-oriented examples from real validation runs  
+**Last updated:** 20 April 2026
+
+## Why This Exists
+
+Fixtures prove that the core engine works under controlled conditions.
+
+Case studies prove something different:
+
+- RegressProof can be applied to public repositories outside its own codebase
+- verification often needs a repository-specific build/test slice
+- the system can produce both clean positive evidence and honest caveats
+
+## Case Study 1: `forrestchang/andrej-karpathy-skills`
+
+- category: docs/plugin repository
+- validation style: committed range with lightweight file-structure checks
+- result: `successful_change / high`
+
+Why it matters:
+
+- demonstrates that RegressProof works on repositories with little or no compiled code
+- shows usefulness for packaging, docs, and plugin-surface validation
+
+## Case Study 2: `shanraisshan/claude-code-best-practice`
+
+- category: larger docs/configuration repository
+- validation style: committed range with repository-appropriate config/document checks
+- result: `successful_change / high`
+
+Why it matters:
+
+- expands beyond a tiny plugin repo into broader documentation/configuration history
+- shows that RegressProof is still useful when the main product surface is not a compiled binary
+
+## Case Study 3: `NousResearch/hermes-agent`
+
+- category: code-plus-test repository
+- validation style: committed range with code-aware verification
+- result: `successful_change / high`
+
+Why it matters:
+
+- demonstrates that RegressProof can operate on a real software repository with code and tests
+- strengthens the claim that the product is not limited to toy or doc-only repositories
+
+## Case Study 4: `Yeachan-Heo/oh-my-codex`
+
+- category: workflow/code repository
+- committed range: `HEAD~1..HEAD`
+- validation style: repository-specific committed build/test slice
+- stable-slice result: `successful_change / high`
+
+What was validated:
+
+- TypeScript build on baseline and current
+- stable regression-oriented test slice around runtime and triage behavior
+
+Why it matters:
+
+- shows that RegressProof can be adapted to a larger real-world codebase with a broad diff
+- proves that repository-specific validation slices are a feature, not a weakness
+
+Important caveat from the same repository:
+
+- a broader check surfaced an environment-sensitive path assertion (`/var/...` vs `/private/var/...`)
+- this is good evidence that RegressProof should stay conservative instead of turning every failed broad check into agent blame
+
+What this teaches:
+
+- real external validation is not just about green results
+- it is also about showing where the system should return a narrower or more cautious interpretation
+
+## Product Meaning
+
+Taken together, these case studies show that RegressProof is already usable as:
+
+- a standalone MVP
+- an evidence-focused validation layer for public repositories
+- a system that can support repository-specific verification without abandoning conservative attribution

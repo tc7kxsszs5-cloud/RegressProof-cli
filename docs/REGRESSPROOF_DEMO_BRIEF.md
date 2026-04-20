@@ -2,7 +2,7 @@
 
 **Audience:** founders, investors, engineering leaders  
 **Purpose:** explain the MVP in plain language, quickly  
-**Last updated:** 18 April 2026
+**Last updated:** 20 April 2026
 
 ## The Simple Problem
 
@@ -67,7 +67,7 @@ That is much closer to an operational decision than a generic red CI badge.
 
 ## Current MVP Proof Points
 
-As of `v0.1.0`, the standalone repository has already demonstrated:
+As of the current standalone MVP state, RegressProof has already demonstrated:
 
 - full `verify-mvp` passing
 - tracked fixture suite passing `11/11`
@@ -75,8 +75,12 @@ As of `v0.1.0`, the standalone repository has already demonstrated:
 - committed deep scenario: `successful_change / high`
 - successful external validation on public GitHub repositories including:
   - `NousResearch/hermes-agent`
-  - `pmndrs/zustand`
-  - `pydantic/pydantic`
+  - `Yeachan-Heo/oh-my-codex`
+
+Important nuance:
+
+- the `oh-my-codex` run also surfaced an environment-sensitive path assertion on a broader check
+- that is useful proof that RegressProof is not only about green demos; it is also about keeping attribution conservative when the signal is noisy
 
 ## The Short Pitch
 

@@ -1,0 +1,38 @@
+{
+  "projectName": "Zustand Persist Code And Test Validation",
+  "baseline": {
+    "mode": "path_snapshot"
+  },
+  "targetPaths": [
+    "package.json",
+    "src/middleware/persist.ts",
+    "tests/persistAsync.test.tsx"
+  ],
+  "checks": {
+    "commandTimeoutMs": 45000,
+    "quick": [
+      "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !pkg.scripts['test:spec'] || !pkg.scripts['test:types']) throw new Error('missing test scripts'); if(pkg.packageManager !== 'pnpm@10.18.3') throw new Error('unexpected package manager');\"",
+      "node -e \"const fs=require('fs'); const source=fs.readFileSync('src/middleware/persist.ts','utf8'); if(!source.includes('hydrationVersion')) throw new Error('missing hydrationVersion guard'); if(!source.includes('onRehydrateStorage')) throw new Error('missing onRehydrateStorage contract');\""
+    ],
+    "full": [
+      "node -e \"const fs=require('fs'); const testFile=fs.readFileSync('tests/persistAsync.test.tsx','utf8'); if(!testFile.includes('persist middleware with async configuration')) throw new Error('missing async persist suite'); if(!testFile.includes('can persist state')) throw new Error('missing persist-state test'); if(!testFile.includes('createJSONStorage')) throw new Error('missing createJSONStorage usage');\""
+    ]
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.02
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

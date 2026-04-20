@@ -1,0 +1,38 @@
+{
+  "projectName": "Pydantic Extra Equality Code And Test Validation",
+  "baseline": {
+    "mode": "path_snapshot"
+  },
+  "targetPaths": [
+    "pyproject.toml",
+    "pydantic/main.py",
+    "tests/test_main.py"
+  ],
+  "checks": {
+    "commandTimeoutMs": 45000,
+    "quick": [
+      "grep -Fq \"[tool.pytest.ini_options]\" pyproject.toml && grep -Fq \"testpaths = 'tests'\" pyproject.toml && grep -Fq \"name = 'pydantic'\" pyproject.toml",
+      "python3 -c \"import pathlib; text=pathlib.Path('pydantic/main.py').read_text(); assert 'self_type is other_type' in text; assert '(self.__pydantic_extra__ or {}) == (other.__pydantic_extra__ or {})' in text\""
+    ],
+    "full": [
+      "grep -Fq \"def test_extra_equality_runtime_override()\" tests/test_main.py && grep -Fq \"extra='allow'\" tests/test_main.py && grep -Fq \"extra='forbid'\" tests/test_main.py"
+    ]
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.02
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

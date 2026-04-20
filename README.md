@@ -40,6 +40,11 @@ Most recent external run:
 - repo-specific result: `successful_change / high` on a stable build-plus-test slice
 - separate broader checking also exposed an environment-sensitive path assertion, which is useful evidence that RegressProof can surface environment noise instead of forcing false blame
 
+Further reading:
+
+- `docs/REGRESSPROOF_CASE_STUDIES.md`
+- `examples/README.md`
+
 Current verdict classes:
 
 - `successful_change`
@@ -235,6 +240,8 @@ node src/cli.js run \
 An example config for validating a lightweight external documentation/plugin repository lives at:
 
 - `examples/external-doc-plugin.config.json`
+- `examples/external-oh-my-codex-stable-slice.config.json`
+- `examples/README.md`
 
 Example:
 

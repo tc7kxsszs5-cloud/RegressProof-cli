@@ -28,6 +28,7 @@ Core principle:
 - [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
 - [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
 - [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+- [Case Studies](REGRESSPROOF_CASE_STUDIES.md)
 - [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
 - [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
 - [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
@@ -131,6 +132,7 @@ What already works:
 - standalone `real:scenario` passes
 - standalone `real:scenario:deep` passes
 - external public-repository validation now includes a code-plus-test repository run on `Yeachan-Heo/oh-my-codex`
+- reusable external validation examples now include a repository-specific config for `oh-my-codex`
 
 What is next:
 

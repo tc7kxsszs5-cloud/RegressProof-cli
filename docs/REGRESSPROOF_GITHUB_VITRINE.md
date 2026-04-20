@@ -1,7 +1,7 @@
 # RegressProof GitHub Vitrine
 
 **Purpose:** Ready-to-paste public-facing copy for the GitHub repository surface  
-**Last updated:** 18 April 2026
+**Last updated:** 20 April 2026
 
 ## GitHub About
 
@@ -38,4 +38,10 @@ Use this when a short repository intro is needed on GitHub, in a post, or in a p
 
 Use this when announcing the current MVP:
 
-> RegressProof v0.1.0 is the first standalone MVP release. The repository now passes full `verify-mvp`, the tracked fixture suite passes `11/11`, and committed trust scenarios validate as `successful_change / high`.
+> RegressProof is now a proven standalone MVP. The repository passes full `verify-mvp`, the tracked fixture suite passes `11/11`, committed trust scenarios validate as `successful_change / high`, and public external validation now includes real code repositories such as `Yeachan-Heo/oh-my-codex`.
+
+## Public Proof Line
+
+Use this when you need one short sentence about maturity:
+
+> RegressProof has moved beyond fixture-only proof: it now passes its full standalone MVP flow and has been exercised against public repositories with repository-specific validation slices.

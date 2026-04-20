@@ -65,3 +65,13 @@ Summary artifact:
 - standalone committed trust scenarios now work against root-level repository layout
 - canonical project docs now describe the standalone repository as the primary MVP surface
 - SwiftPM macOS fixture coverage is included in the validated fixture suite
+
+## Post-Release Validation Addendum
+
+After the initial `v0.1.0` cut, the MVP proof surface strengthened further:
+
+- public external validation now includes a larger workflow/code repository: `Yeachan-Heo/oh-my-codex`
+- that run produced `successful_change / high` on a stable repository-specific build/test slice
+- broader checking on the same repository also exposed an environment-sensitive path assertion, which reinforces the product's conservative proof-first positioning
+
+This addendum matters because it turns the release from "standalone and internally validated" into "standalone and externally exercised on real public codebases."

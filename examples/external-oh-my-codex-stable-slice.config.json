@@ -1,0 +1,62 @@
+{
+  "projectName": "oh-my-codex committed validation",
+  "baselineRef": "HEAD~1",
+  "executionRoot": ".",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "prompts",
+      "skills",
+      "templates",
+      "docs",
+      "src",
+      "tsconfig.json",
+      "tsconfig.no-unused.json",
+      "biome.json"
+    ]
+  },
+  "targetPaths": [
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "tsconfig.no-unused.json",
+    "biome.json",
+    "Cargo.toml",
+    "Cargo.lock",
+    "src",
+    "prompts",
+    "skills",
+    "templates",
+    "docs",
+    "CHANGELOG.md",
+    "RELEASE_BODY.md"
+  ],
+  "checks": {
+    "commandTimeoutMs": 120000,
+    "quick": [
+      "/Users/mac/.bun/bin/bun run build",
+      "/usr/local/bin/node dist/scripts/run-test-files.js dist/runtime/__tests__/run-outcome.test.js dist/runtime/__tests__/run-loop.test.js dist/hooks/__tests__/triage-config.test.js dist/hooks/__tests__/triage-heuristic.test.js dist/hooks/__tests__/triage-state.test.js dist/autoresearch/__tests__/skill-validation.test.js"
+    ],
+    "full": [
+      "/Users/mac/.bun/bin/bun run build",
+      "/Users/mac/.bun/bin/bun run test:node"
+    ]
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.05
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}
