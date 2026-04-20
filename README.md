@@ -18,6 +18,28 @@ Current MVP capabilities:
 - tracked fixture packs for reproducible validation
 - committed real-repo trust scenarios
 
+## Current Proof Status
+
+RegressProof is now beyond fixture-only proof.
+
+What is already confirmed:
+
+- full `verify-mvp` passes end-to-end
+- fixture suite passes `11/11`
+- committed trust scenario passes on the standalone repository
+- committed deep trust scenario passes on the standalone repository
+- external public-repository validation has been exercised on:
+  - docs/plugin repositories
+  - larger docs/configuration repositories
+  - code-plus-test repositories
+
+Most recent external run:
+
+- repository: `Yeachan-Heo/oh-my-codex`
+- range: `HEAD~1..HEAD`
+- repo-specific result: `successful_change / high` on a stable build-plus-test slice
+- separate broader checking also exposed an environment-sensitive path assertion, which is useful evidence that RegressProof can surface environment noise instead of forcing false blame
+
 Current verdict classes:
 
 - `successful_change`
@@ -161,6 +183,19 @@ The deep trust flow uses a broader nested subset:
 - `preexisting-js`
 - `parser-js`
 - `python-js`
+
+## External Validation Notes
+
+RegressProof can now be demonstrated on public repositories outside its own codebase.
+
+That does **not** mean every repository can be judged with one universal config.
+For code-heavy repositories, the most honest path is:
+
+1. choose a committed range such as `HEAD~1..HEAD`
+2. define a repository-appropriate build/test slice
+3. classify the result conservatively
+
+This is already enough to show that RegressProof works as a real validation layer, not only as an internal demo.
 
 ## Reports And Artifacts
 

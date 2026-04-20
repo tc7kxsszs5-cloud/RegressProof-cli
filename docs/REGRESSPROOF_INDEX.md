@@ -2,7 +2,7 @@
 
 **Project:** `RegressProof`  
 **Purpose:** Persistent project memory and navigation entry point  
-**Last updated:** 18 April 2026
+**Last updated:** 20 April 2026
 
 ## Vision
 
@@ -20,67 +20,28 @@ Core principle:
 
 `proof, not guesses`
 
-## Documentation Invariants
-
-- RegressProof must be described as a proof-based regression detection and accountability layer.
-- The core product question is: did an agent-driven change introduce a measurable new regression, and can we prove it.
-- The canonical reasoning flow is `baseline vs current` -> `evidence` -> `verdict`.
-- RegressProof must not be reframed as a universal guaranteed refund system.
-- The verdict classes must stay distinct: `confirmed_agent_fault`, `possible_agent_fault`, `preexisting_failure`, `environment_failure`, `insufficient_evidence`.
-- MVP direction remains centered on CLI, GitHub Action, verification engine, diff mapping, fault classification, and internal ledgering.
-- `README.md` should remain a stable public-facing entry point, not a daily implementation log.
-
 ## Current Document Set
 
-- [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](REGRESSPROOF_SPEC.md)
-- [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
-- [Decision Log](REGRESSPROOF_DECISION_LOG.md)
-- [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Release v0.1.0](REGRESSPROOF_RELEASE_v0.1.0.md)
-- [GitHub Vitrine](REGRESSPROOF_GITHUB_VITRINE.md)
-- [Demo Brief](REGRESSPROOF_DEMO_BRIEF.md)
-- [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](sessions/README.md)
-
-## Documentation Maintenance Model
-
-Use the documentation in layers so the repository does not require daily copy edits across multiple files:
-
-- `README.md`
-  - stable public-facing entry point
-  - update only when product positioning, primary entrypoints, or repository surface meaningfully changes
-- `REGRESSPROOF_INDEX.md`
-  - canonical navigation and current project memory
-  - update when document structure, implementation status, or project memory organization changes
-- `REGRESSPROOF_VALIDATION_PLAN.md`
-  - changing validation coverage, scenario status, and external validation evidence
-  - update when validation scope or results materially change
-- `REGRESSPROOF_RELEASE_*.md`
-  - release-bound claims and snapshots
-  - update on release cuts, not during routine implementation churn
-- session notes under `docs/sessions/`
-  - daily or episodic working memory
-  - prefer adding a new session note over rewriting stable docs
-
-Rule of thumb:
-
-- do not update `README.md` for routine validation-count changes
-- do not update release docs for ordinary implementation progress
-- put volatile details in validation docs or session notes first
+- [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
+- [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+- [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
 
 ## Current Implementation Status
 
-Implementation has started.
+Implementation has progressed to a proven standalone MVP.
 
-Current code scaffold lives at the repository root:
+Current code scaffold lives in:
 
-- [README.md](../README.md)
-- [package.json](../package.json)
-- [regressproof.config.json](../regressproof.config.json)
-- [src/cli.js](../src/cli.js)
+- [regressproof/README.md](/Users/mac/Desktop/rork-kiku/regressproof/README.md)
+- [regressproof/package.json](/Users/mac/Desktop/rork-kiku/regressproof/package.json)
+- [regressproof/regressproof.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.config.json)
+- [regressproof/src/cli.js](/Users/mac/Desktop/rork-kiku/regressproof/src/cli.js)
 
 What already works:
 
@@ -116,7 +77,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](../regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -140,12 +101,18 @@ What already works:
 - self-hosted real-workspace trust validation now runs successfully in lightweight mode
 - a committed real-repo trust scenario can now be checked end-to-end through a single helper script
 - a deeper committed trust scenario can now be exercised through a `deep` trust-check profile
+- committed trust validation now resolves the correct real-repo config automatically for:
+  - standalone repository layout
+  - embedded workspace layout
+- command execution roots are now explicit, so the same verification flow can run from:
+  - standalone repo root
+  - embedded `regressproof/` project root inside a larger workspace
 - a single MVP verification entrypoint now exists:
-  - `node scripts/verify-mvp.js`
-- the GitHub Action now validates the current RegressProof MVP flow directly in the standalone repository
-- the standalone repository boundary now includes:
-  - [AGENTS.md](../AGENTS.md)
-  - [.gitignore](../.gitignore)
+  - `node regressproof/scripts/verify-mvp.js`
+- the GitHub Action now validates the current RegressProof MVP flow instead of the older single-fixture path
+- subproject packaging boundary now includes:
+  - [regressproof/AGENTS.md](/Users/mac/Desktop/rork-kiku/regressproof/AGENTS.md)
+  - [regressproof/.gitignore](/Users/mac/Desktop/rork-kiku/regressproof/.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
@@ -160,6 +127,10 @@ What already works:
   - temporary git materialization before verification
 - all current fixtures now have tracked scenario packs, and the full suite passes in tracked-pack mode
 - a real SwiftPM macOS fixture now validates compiler-attributed failures against actual Swift build output
+- standalone `verify-mvp` now passes end-to-end
+- standalone `real:scenario` passes
+- standalone `real:scenario:deep` passes
+- external public-repository validation now includes a code-plus-test repository run on `Yeachan-Heo/oh-my-codex`
 
 What is next:
 
@@ -167,6 +138,7 @@ What is next:
 - provider-native usage adapters beyond env/file ingestion
 - richer PR presentation and review thread behavior
 - cleaner standalone packaging and eventual repo separation
+- broader external validation after standalone repo separation
 
 ## Current Product Positioning
 
@@ -236,10 +208,11 @@ The first release is successful if it can:
 - add provider-native usage adapters beyond env/file inputs
 - improve PR comment presentation for longer review threads
 - tighten release/demo guidance around the MVP verification entrypoint
+- turn the current validation evidence into clearer public demo/case-study material
 
 ## External Validation Status
 
-RegressProof has now been validated outside its own repository on public GitHub repositories in multiple increasingly strong categories:
+RegressProof has now been validated outside its own repository on public GitHub repositories in three increasingly strong categories:
 
 1. doc/plugin repository
    - `forrestchang/andrej-karpathy-skills`
@@ -250,30 +223,33 @@ RegressProof has now been validated outside its own repository on public GitHub 
 3. code-plus-test repository
    - `NousResearch/hermes-agent`
    - result: `successful_change / high`
-4. additional code-plus-test repository
-   - `pmndrs/zustand`
-   - result: `successful_change / high`
-5. additional code-plus-test repository
-   - `pydantic/pydantic`
-   - result: `successful_change / high`
+4. larger workflow/code repository with repo-specific validation slicing
+   - `Yeachan-Heo/oh-my-codex`
+   - result: `successful_change / high` on a stable committed build/test slice
+   - additional note: broader checking also exposed an environment-sensitive path assertion, which reinforces RegressProof's need for conservative repository-specific validation
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
+
+## MVP Status
+
+RegressProof should now be described internally as:
+
+- a proven standalone MVP
+- evidence-backed on fixtures, self-hosted trust flows, and public external repositories
+- still conservative about blame when repository checks are asymmetric or environment-sensitive
 
 ## Current Real-Repo Validation Level
 
 Current real-repository validation is best described as:
 
-- `standalone self-validation plus committed real-repo trust validation`
+- `self-hosted real-workspace trust validation`
 
-This means RegressProof can now run inside its standalone repository and execute both:
-
-- the full MVP verification flow at repository root
-- committed trust scenarios against recent standalone repository history
+This means RegressProof can now run inside the real workspace and execute a nested RegressProof trust check successfully against a small but meaningful fixture subset, while also asserting tracked-pack materialization as part of the proof path.
 
 It does **not** yet mean:
 
-- broad external committed-change attribution across many public repositories
-- rich provider-native usage ingestion beyond current exact/estimated scaffolds
+- deep diff-aware attribution on committed RegressProof changes in the main repository
+- rich real-repo baseline comparison with non-empty changed-file evidence
 
 However, the core engine now supports the mechanics needed for that next step:
 
@@ -286,12 +262,12 @@ However, the core engine now supports the mechanics needed for that next step:
 
 If future work resumes in a new session, start by reading these files in order:
 
-1. [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
-2. [Specification](REGRESSPROOF_SPEC.md)
-3. [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-4. [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-5. [Decision Log](REGRESSPROOF_DECISION_LOG.md)
-6. [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
-7. the latest session note in [docs/sessions](sessions/README.md)
+1. [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
+2. [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
+3. [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+4. [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+5. [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+6. [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
+7. the latest session note in [docs/sessions](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
 
 This file should remain the top-level project memory entry point.

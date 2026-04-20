@@ -47,7 +47,7 @@
 
 ## Decision 8
 
-**Decision:** The first executable RegressProof scaffold is implemented as a plain Node.js CLI runtime, while TypeScript scaffolding remains available for later hardening.
+**Decision:** The first executable RegressProof scaffold is implemented as a plain Node.js CLI runtime inside `regressproof/`, while TypeScript scaffolding remains available for later hardening.
 
 **Reason:** This gives a reliable, runnable MVP foundation immediately and avoids blocking on toolchain issues before baseline and verification logic exist.
 
@@ -131,7 +131,7 @@
 
 ## Decision 22
 
-**Decision:** RegressProof packaging should support a standalone repository shape and file-based export when working from a larger workspace.
+**Decision:** RegressProof packaging should treat `regressproof/` as the standalone project boundary and support file-based export into a near-standalone repository shape.
 
 **Reason:** The main workspace contains substantial unrelated product code. A clear subproject boundary plus deterministic export keeps MVP development focused now and makes future repo separation low-risk.
 
@@ -155,7 +155,7 @@
 
 ## Decision 26
 
-**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
+**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node regressproof/scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
 
 **Reason:** The project had already accumulated strong pieces of validation, but usability was still fragmented across many helper commands and a stale workflow. A single MVP verification entrypoint makes local checks, CI, and future handoff much clearer without changing the core proof model.
 
@@ -173,6 +173,36 @@
 
 ## Decision 29
 
-**Decision:** The standalone `RegressProof-cli` repository is now the primary packaging and validation surface for MVP usage.
+**Decision:** RegressProof runtime packaging should be standalone-first, with explicit workspace fallback only when the repository is embedded inside a larger parent workspace.
 
-**Reason:** The project has moved beyond the earlier subdirectory packaging phase. Treating the standalone repository as the primary surface keeps docs, CI, and committed-validation flows aligned with how the product is now consumed.
+**Reason:** The product is being packaged as `RegressProof-cli`, so default scripts and configs must work from the standalone repository root. Workspace-aware config resolution preserves local development inside the larger monorepo without making the standalone path second-class.
+
+## Decision 30
+
+**Decision:** Committed real-repo validation should automatically normalize repository mode by selecting the appropriate real-repo config, forcing committed diff mode, and executing checks from an explicit `executionRoot`.
+
+**Reason:** The trust flow needs to behave the same way across standalone and embedded layouts. Auto-selecting the right config and forcing committed diff semantics removes packaging-specific drift and keeps `HEAD~1..HEAD` trust validation reproducible.
+
+## Decision 31
+
+**Decision:** RegressProof MVP should now be described as a proven standalone MVP, with external-validation evidence explicitly included in product documentation.
+
+**Reason:** The project now has all of the core closure signals together:
+
+- standalone `verify-mvp` passes end-to-end
+- standalone committed trust scenario passes
+- standalone committed deep trust scenario passes
+- external public-repository validation has been exercised on real repositories, including a code-plus-test repository
+
+At this point, continuing to describe the system as only an internal prototype would understate the actual evidence.
+
+## Decision 32
+
+**Decision:** External validation should be documented with repository-specific verification slices and explicit caveats when a broader check reveals environment-sensitive or non-symmetric failures.
+
+**Reason:** The `oh-my-codex` run demonstrated two useful truths at once:
+
+- RegressProof can produce a clean `successful_change / high` result on a stable committed build/test slice in a real outside repository.
+- Broader validation can still surface environment-sensitive failures, such as macOS path-shape assertions, that should not be overclaimed as agent-caused regressions.
+
+Documenting both the success and the caveat reinforces the product's proof-first positioning and keeps future claims honest.

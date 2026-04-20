@@ -176,34 +176,49 @@ Before trusting the first release broadly:
 - the current real-repo validation path now runs a small trusted fixture subset from within the main workspace
 - this checks both introduced-failure handling and preexisting-failure handling through the tracked-pack materialization path
 - it is still lighter than full deep real-repo attribution, but materially stronger than a file-existence self-check
+- the committed trust flow now supports both:
+  - standalone repository layout
+  - embedded workspace layout through workspace-aware config resolution
+- a temporary standalone-style git repo assembled from the current RegressProof files now passes both:
+  - committed trust scenario
+  - committed deep trust scenario
 
-## External Public Validation
+## Current MVP Closure Evidence
 
-RegressProof has also been exercised against public GitHub repositories beyond its own standalone repository.
+The current MVP is now backed by all of the following:
 
-Current externally validated examples include:
+- full fixture suite passes in tracked-pack mode
+- standalone committed trust scenario passes
+- standalone committed deep trust scenario passes
+- full `verify-mvp` passes end-to-end and writes one summary artifact
 
-- `forrestchang/andrej-karpathy-skills`
-  - category: doc/plugin repository
-  - result: `successful_change / high`
-- `shanraisshan/claude-code-best-practice`
-  - category: documentation/configuration repository
-  - result: `successful_change / high`
-- `NousResearch/hermes-agent`
-  - category: code-plus-test repository
-  - result: `successful_change / high`
-- `pmndrs/zustand`
-  - category: code-plus-test repository
-  - validation config: `external-zustand-persist.config.json`
-  - committed range: `HEAD~1..HEAD`
-  - result: `successful_change / high`
-- `pydantic/pydantic`
-  - category: code-plus-test repository
-  - validation config: `external-pydantic-extra-equality.config.json`
-  - committed range: `HEAD~1..HEAD`
-  - result: `successful_change / high`
+This means the MVP is no longer only "assembled from working parts"; it now has one repository-level proof command that completes successfully.
 
-This does not eliminate the need for broader external coverage, but it materially strengthens the MVP proof surface beyond internal fixtures and self-hosted trust checks.
+## Current External Validation Layer
+
+External validation has now been exercised in increasingly strong public-repository categories:
+
+1. docs/plugin repositories
+2. larger docs/configuration repositories
+3. code-plus-test repositories
+
+Latest external code-plus-test run:
+
+- repository: `Yeachan-Heo/oh-my-codex`
+- committed range: `HEAD~1..HEAD`
+- result on a stable repo-specific build/test slice: `successful_change / high`
+
+Important nuance from that run:
+
+- a broader symmetric check also exposed an environment-sensitive macOS path assertion (`/var/...` vs `/private/var/...`)
+- this is useful validation evidence in itself, because it shows RegressProof needs repository-specific verification slices and must preserve `environment_failure` / insufficient-evidence discipline instead of over-claiming blame
+
+So the current evidence now covers:
+
+- controlled fixtures
+- self-hosted trust validation
+- standalone end-to-end MVP execution
+- external public-repository validation on real code
 
 ## Validation Exit Rule
 
@@ -215,3 +230,5 @@ RegressProof is validated for MVP when:
 - its reports are judged trustworthy by human reviewers
 - it demonstrates credible validation coverage beyond one language/runtime
 - the full fixture suite runs reproducibly through the materialization layer
+- the standalone `verify-mvp` flow passes end-to-end
+- at least one external code repository has been validated through a repository-specific committed range
