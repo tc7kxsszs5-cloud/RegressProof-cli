@@ -10,6 +10,7 @@ async function executeVerificationFlow(config, gitContext) {
   const baselineWorktreePath = await mkdtemp(path.join(os.tmpdir(), "regressproof-baseline-"));
   const currentSnapshotPath = await mkdtemp(path.join(os.tmpdir(), "regressproof-current-"));
   const timeoutMs = config.checks.commandTimeoutMs || 300000;
+  const executionRoot = config.executionRoot || ".";
   let baselineMode = config.baseline?.mode || "full_snapshot";
   const requestedCurrentMode = resolveCurrentMode(config, gitContext);
   let currentMode = requestedCurrentMode;
@@ -27,7 +28,11 @@ async function executeVerificationFlow(config, gitContext) {
           config.baseline?.supportPaths || [],
         );
         await mirrorDependencies(gitContext.repoRoot, baselineWorktreePath);
-        baseline = await runCheckList(config.checks.quick, baselineWorktreePath, timeoutMs);
+        baseline = await runCheckList(
+          config.checks.quick,
+          resolveExecutionCwd(baselineWorktreePath, executionRoot),
+          timeoutMs,
+        );
       } catch (error) {
         if (baselineMode === "path_snapshot" && isMissingPathspecError(error)) {
           baselineMode = "skip";
@@ -38,7 +43,7 @@ async function executeVerificationFlow(config, gitContext) {
       }
     }
 
-    let currentCwd = gitContext.repoRoot;
+    let currentCwd = resolveExecutionCwd(gitContext.repoRoot, executionRoot);
     if (currentMode === "snapshot") {
       try {
         await createSnapshot(
@@ -50,11 +55,11 @@ async function executeVerificationFlow(config, gitContext) {
           config.baseline?.supportPaths || [],
         );
         await mirrorDependencies(gitContext.repoRoot, currentSnapshotPath);
-        currentCwd = currentSnapshotPath;
+        currentCwd = resolveExecutionCwd(currentSnapshotPath, executionRoot);
       } catch (error) {
         if (canFallbackCurrentSnapshotToWorktree(error, gitContext)) {
           currentMode = "worktree_fallback";
-          currentCwd = gitContext.repoRoot;
+          currentCwd = resolveExecutionCwd(gitContext.repoRoot, executionRoot);
         } else {
           throw error;
         }
@@ -204,6 +209,10 @@ function canFallbackCurrentSnapshotToWorktree(error, gitContext) {
 
 async function mirrorDependencies(repoRoot, snapshotRoot) {
   await maybeLink(repoRoot, snapshotRoot, "node_modules");
+}
+
+function resolveExecutionCwd(baseDir, executionRoot) {
+  return path.resolve(baseDir, executionRoot || ".");
 }
 
 async function maybeLink(repoRoot, snapshotRoot, relativePath) {

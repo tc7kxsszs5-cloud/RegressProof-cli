@@ -34,6 +34,13 @@ function validateConfig(config) {
   }
 
   if (
+    config.executionRoot !== undefined &&
+    (typeof config.executionRoot !== "string" || !config.executionRoot.trim())
+  ) {
+    throw new Error("Config field `executionRoot` must be a non-empty string when provided.");
+  }
+
+  if (
     config.git?.compareRef !== undefined &&
     (typeof config.git.compareRef !== "string" || !config.git.compareRef.trim())
   ) {

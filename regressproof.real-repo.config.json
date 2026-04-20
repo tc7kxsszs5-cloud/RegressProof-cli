@@ -1,19 +1,20 @@
 {
   "projectName": "RegressProof Real Repo Validation",
   "baselineRef": "HEAD~1",
+  "executionRoot": ".",
   "baseline": {
-    "mode": "path_snapshot"
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "fixtures"
+    ]
   },
   "targetPaths": [
     "src",
     "scripts",
-    "fixtures",
-    "examples",
     "package.json",
     "regressproof.config.json",
     "regressproof.demo.config.json",
     "regressproof.real-repo.config.json",
-    "regressproof.workspace-repo.config.json",
     "README.md",
     "docs/REGRESSPROOF_INDEX.md",
     "docs/REGRESSPROOF_DECISION_LOG.md",

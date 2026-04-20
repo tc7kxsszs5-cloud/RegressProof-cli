@@ -6,11 +6,10 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = path.resolve(regressproofRoot, "..");
 
 function main() {
   const args = process.argv.slice(2);
-  const repo = readArg(args, "--repo") || workspaceRoot;
+  const repo = readArg(args, "--repo") || regressproofRoot;
   const baseBranch = readArg(args, "--base-branch") || process.env.REGRESSPROOF_BASE_BRANCH || "main";
   const compareRef = readArg(args, "--head-ref") || "HEAD";
   const baselineOverride = readArg(args, "--baseline-ref");
@@ -19,7 +18,7 @@ function main() {
 
   const baseConfigPath = configOverride
     ? path.resolve(repo, configOverride)
-    : path.join(regressproofRoot, "regressproof.real-repo.config.json");
+    : resolveDefaultRealRepoConfigPath(repo);
   const baseConfig = JSON.parse(fs.readFileSync(baseConfigPath, "utf8"));
   const compareCommit = git(repo, ["rev-parse", compareRef]);
   const baselineRef = baselineOverride || resolveBaselineRef(repo, baseBranch, compareRef, compareCommit);
@@ -65,6 +64,14 @@ function main() {
   }
 
   process.stdout.write(renderText(report));
+}
+
+function resolveDefaultRealRepoConfigPath(repo) {
+  if (exists(path.join(repo, "regressproof", "package.json"))) {
+    return path.join(regressproofRoot, "regressproof.workspace-repo.config.json");
+  }
+
+  return path.join(regressproofRoot, "regressproof.real-repo.config.json");
 }
 
 function summarize(readiness, baselineRef, compareRef, changedCount) {
@@ -151,6 +158,15 @@ function gitOptional(repo, args) {
     return git(repo, args);
   } catch {
     return "";
+  }
+}
+
+function exists(targetPath) {
+  try {
+    fs.accessSync(targetPath);
+    return true;
+  } catch {
+    return false;
   }
 }
 

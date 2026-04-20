@@ -1,28 +1,30 @@
 {
   "projectName": "RegressProof Workspace Validation",
   "baselineRef": "HEAD",
+  "executionRoot": "regressproof",
   "baseline": {
-    "mode": "skip"
+    "mode": "skip",
+    "supportPaths": [
+      "regressproof/fixtures"
+    ]
   },
   "git": {
     "diffMode": "head_vs_worktree",
     "excludePaths": [
       "docs/sessions/",
-      "artifacts/",
-      "dist/"
+      "regressproof/artifacts/",
+      "regressproof/dist/"
     ]
   },
   "targetPaths": [
-    "src",
-    "scripts",
-    "fixtures",
-    "examples",
-    "package.json",
-    "regressproof.config.json",
-    "regressproof.demo.config.json",
-    "regressproof.real-repo.config.json",
-    "regressproof.workspace-repo.config.json",
-    "README.md",
+    "regressproof/src",
+    "regressproof/scripts",
+    "regressproof/package.json",
+    "regressproof/regressproof.config.json",
+    "regressproof/regressproof.demo.config.json",
+    "regressproof/regressproof.real-repo.config.json",
+    "regressproof/regressproof.workspace-repo.config.json",
+    "regressproof/README.md",
     "docs/REGRESSPROOF_INDEX.md",
     "docs/REGRESSPROOF_DECISION_LOG.md",
     "docs/REGRESSPROOF_PROTOTYPE_WALKTHROUGH.md",
