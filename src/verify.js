@@ -1,4 +1,4 @@
-const { execFile } = require("node:child_process");
+const { execFile, spawn } = require("node:child_process");
 const { lstat, mkdir, mkdtemp, rm, symlink } = require("node:fs/promises");
 const os = require("node:os");
 const path = require("node:path");
@@ -137,8 +137,7 @@ async function createSnapshot(
   targetPaths,
   supportPaths = [],
 ) {
-  const archivePath = path.join(outputDir, "snapshot.tar");
-  const args = ["archive", "--format=tar", "-o", archivePath, ref];
+  const args = ["archive", "--format=tar", ref];
   if (snapshotMode === "path_snapshot" && Array.isArray(targetPaths) && targetPaths.length > 0) {
     const allPaths = [...new Set([...targetPaths, ...supportPaths])];
     const existingPaths = await resolveExistingPaths(repoRoot, ref, allPaths);
@@ -148,17 +147,79 @@ async function createSnapshot(
     args.push("--", ...existingPaths);
   }
 
-  await execFileAsync("git", args, {
-    cwd: repoRoot,
-    maxBuffer: 1024 * 1024 * 10,
-  });
+  await extractGitArchive(repoRoot, args, outputDir);
+}
 
-  await execFileAsync("tar", ["-xf", archivePath, "-C", outputDir], {
-    cwd: repoRoot,
-    maxBuffer: 1024 * 1024 * 10,
-  });
+async function extractGitArchive(repoRoot, gitArgs, outputDir) {
+  await new Promise((resolve, reject) => {
+    const gitProcess = spawn("git", gitArgs, {
+      cwd: repoRoot,
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    const tarProcess = spawn("tar", ["-xf", "-", "-C", outputDir], {
+      cwd: repoRoot,
+      stdio: ["pipe", "ignore", "pipe"],
+    });
 
-  await rm(archivePath, { force: true });
+    let gitStderr = "";
+    let tarStderr = "";
+    let gitClosed = false;
+    let tarClosed = false;
+    let gitCode = null;
+    let tarCode = null;
+
+    const maybeFinish = () => {
+      if (!gitClosed || !tarClosed) {
+        return;
+      }
+
+      if (gitCode === 0 && tarCode === 0) {
+        resolve();
+        return;
+      }
+
+      const error = new Error(
+        `Snapshot extraction failed (git=${gitCode}, tar=${tarCode})`,
+      );
+      error.stderr = [gitStderr.trim(), tarStderr.trim()].filter(Boolean).join("\n");
+      reject(error);
+    };
+
+    const fail = (error) => {
+      if (!gitClosed) {
+        gitProcess.kill("SIGTERM");
+      }
+      if (!tarClosed) {
+        tarProcess.kill("SIGTERM");
+      }
+      reject(error);
+    };
+
+    gitProcess.stderr.on("data", (chunk) => {
+      gitStderr += chunk.toString();
+    });
+
+    tarProcess.stderr.on("data", (chunk) => {
+      tarStderr += chunk.toString();
+    });
+
+    gitProcess.on("error", fail);
+    tarProcess.on("error", fail);
+
+    gitProcess.stdout.pipe(tarProcess.stdin);
+
+    gitProcess.on("close", (code) => {
+      gitClosed = true;
+      gitCode = code;
+      maybeFinish();
+    });
+
+    tarProcess.on("close", (code) => {
+      tarClosed = true;
+      tarCode = code;
+      maybeFinish();
+    });
+  });
 }
 
 async function resolveExistingPaths(repoRoot, baselineRef, requestedPaths) {
