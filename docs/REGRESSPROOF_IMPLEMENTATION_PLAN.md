@@ -476,6 +476,8 @@ The project must validate itself before claiming usefulness.
 - run full RegressProof flow on materialized fixture scenarios
 - emit expected verdict and confidence
 - verify credit rules trigger only in high-confidence cases
+- run sparse public-repository validation against at least one large external codebase
+- preserve artifact evidence for external repository runs
 
 ## 9. Confidence Rules For MVP
 
