@@ -2,7 +2,7 @@
 
 `Proof, not guesses, for agent-caused regressions.`
 
-RegressProof is a standalone CLI for detecting measurable AI coding regressions.
+RegressProof is a standalone CLI and GitHub Action utility for detecting measurable AI coding regressions.
 It compares a baseline against a changed state, runs verification commands, maps failures to diffs, and produces evidence-focused reports instead of intuition-only blame.
 
 ## MVP Scope
@@ -10,6 +10,7 @@ It compares a baseline against a changed state, runs verification commands, maps
 Current MVP capabilities:
 
 - local CLI execution
+- GitHub Action execution
 - baseline vs current quick-check verification
 - diff-aware changed-file mapping
 - conservative verdict classes
@@ -17,6 +18,7 @@ Current MVP capabilities:
 - append-only internal ledger output
 - tracked fixture packs for reproducible validation
 - committed real-repo trust scenarios
+- curated public-repository validation catalog
 
 ## Current Proof Status
 
@@ -33,13 +35,14 @@ What is already confirmed:
   - larger docs/configuration repositories
   - code-plus-test repositories
   - Python code-plus-test repositories
+  - larger code repositories with provider-oriented tests
 
 Most recent external run:
 
-- repository: `Yeachan-Heo/oh-my-codex`
-- range: `HEAD~1..HEAD`
-- repo-specific result: `successful_change / high` on a stable build-plus-test slice
-- separate broader checking also exposed an environment-sensitive path assertion, which is useful evidence that RegressProof can surface environment noise instead of forcing false blame
+- repository: `openclaw/openclaw`
+- pinned range: `97534372f858b5f67a98619a3fed8790edb00cc7~1..97534372f858b5f67a98619a3fed8790edb00cc7`
+- repo-specific result: `successful_change / high` on a provider-code slice
+- changed-file evidence includes `extensions/openai/openai-codex-provider.ts` and its provider test
 
 Further reading:
 
@@ -103,6 +106,18 @@ Run committed validation directly:
 
 ```bash
 npm run real:committed -- --repo .
+```
+
+List curated public-repository validation evidence:
+
+```bash
+npm run external:runs
+```
+
+Validate the external-run catalog schema:
+
+```bash
+npm run external:check
 ```
 
 Check whether a committed range is ready for trust validation:
@@ -238,9 +253,10 @@ node src/cli.js run \
 
 ## External Repository Example
 
-An example config for validating a lightweight external documentation/plugin repository lives at:
+Example configs for validating external repositories live at:
 
 - `examples/external-doc-plugin.config.json`
+- `examples/external-openclaw-code.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`
 - `examples/README.md`
 
@@ -252,6 +268,16 @@ node scripts/run-committed-real-repo-validation.js \
   --config ./examples/external-doc-plugin.config.json \
   --head-ref HEAD \
   --artifact-dir /tmp/regressproof-external-doc-plugin
+```
+
+For public GitHub repositories that should be cloned into a temporary workspace first, use:
+
+```bash
+npm run real:public -- \
+  --url https://github.com/openclaw/openclaw.git \
+  --config ./examples/external-openclaw-code.config.json \
+  --head-ref 97534372f858b5f67a98619a3fed8790edb00cc7 \
+  --artifact-dir /tmp/regressproof-openclaw-pinned-artifacts
 ```
 
 ## Embedded Workspace Mode

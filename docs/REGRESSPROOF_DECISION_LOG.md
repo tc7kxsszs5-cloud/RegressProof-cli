@@ -206,3 +206,27 @@ At this point, continuing to describe the system as only an internal prototype w
 - Broader validation can still surface environment-sensitive failures, such as macOS path-shape assertions, that should not be overclaimed as agent-caused regressions.
 
 Documenting both the success and the caveat reinforces the product's proof-first positioning and keeps future claims honest.
+
+## Decision 33
+
+**Decision:** RegressProof should be positioned externally as a CLI and GitHub Action utility before any broader platform or dashboard framing.
+
+**Reason:** The strongest current value is local and CI-based proof generation: baseline comparison, verification evidence, diff mapping, conservative verdicts, and ledger output. Utility-first positioning is clearer and avoids overclaiming provider-native refund or governance capabilities before the MVP workflow is broadly validated.
+
+## Decision 34
+
+**Decision:** Public-repository hardening should use a reusable runner, `scripts/run-public-repo-validation.js`, for safe temporary clones and repository-specific configs.
+
+**Reason:** External validation needs reproducible setup without mixing third-party repository state into the RegressProof working tree. A dedicated runner keeps clone location, sparse checkout, pinned head refs, config selection, and artifact paths explicit.
+
+## Decision 35
+
+**Decision:** External validation evidence should prefer pinned `headRef` commits over floating `HEAD`, with floating runs treated only as smoke checks.
+
+**Reason:** A pinned public-repository run can be repeated and audited. Floating `HEAD` can change under us, so it is useful for runner health but should not be treated as durable proof unless it is later converted into a pinned run.
+
+## Decision 36
+
+**Decision:** Curated external validation state should be tracked in `examples/external-runs.json` and checked by `npm run external:check`.
+
+**Reason:** Public validation needs memory that separates completed evidence from candidate repositories. Schema checks prevent ambiguous records, missing changed-file evidence, unsupported verdicts, and accidental promotion of candidate repos into proof claims.

@@ -3,12 +3,12 @@
 **Status:** Discovery / Specification  
 **Date:** 13 April 2026  
 **Product name:** `RegressProof`  
-**Category:** AI coding regression detection and credit accountability system  
+**Category:** AI coding regression detection utility and credit accountability system
 **Tagline:** `Proof, not guesses, for agent-caused regressions.`
 
 ## 1. What This Is
 
-This project is a validation and accounting layer for AI coding agents.
+This project is a CLI and GitHub Action utility that provides a validation and accounting layer for AI coding agents.
 
 It does **not** directly control billing inside OpenAI, Anthropic, Codex, Claude Code, or other providers. Instead, it sits around agent runs and answers four practical questions:
 

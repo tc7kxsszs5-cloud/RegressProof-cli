@@ -201,6 +201,7 @@ External validation has now been exercised in increasingly strong public-reposit
 1. docs/plugin repositories
 2. larger docs/configuration repositories
 3. code-plus-test repositories
+4. larger code repositories with provider-oriented tests
 
 Latest external code-plus-test run:
 
@@ -219,6 +220,20 @@ So the current evidence now covers:
 - self-hosted trust validation
 - standalone end-to-end MVP execution
 - external public-repository validation on real code
+
+Current public-runner evidence is tracked in `examples/external-runs.json`.
+That catalog records completed external runs separately from candidate repositories so future agents can continue validation without treating unverified candidates as proof.
+
+OpenClaw public-repository evidence currently includes:
+
+- pinned provider-code run on `openclaw/openclaw`
+- baseline commit `dc6ecd571afd03efcda27fddeafaa26973066453`
+- head commit `97534372f858b5f67a98619a3fed8790edb00cc7`
+- verdict `successful_change / high`
+- changed files in `extensions/openai/openai-codex-provider.ts` and `extensions/openai/openai-codex-provider.test.ts`
+
+The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
+Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 
 ## Validation Exit Rule
 

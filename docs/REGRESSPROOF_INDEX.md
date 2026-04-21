@@ -6,7 +6,7 @@
 
 ## Vision
 
-RegressProof is a validation and accountability layer for AI coding agents.
+RegressProof is a CLI and GitHub Action utility that provides a validation and accountability layer for AI coding agents.
 
 It is designed to:
 
@@ -133,6 +133,12 @@ What already works:
 - standalone `real:scenario:deep` passes
 - external public-repository validation now includes a code-plus-test repository run on `Yeachan-Heo/oh-my-codex`
 - reusable external validation examples now include a repository-specific config for `oh-my-codex`
+- public-repository validation now includes an OpenClaw provider-code slice with pinned commit evidence
+- reusable external validation tooling now includes:
+  - `npm run real:public`
+  - `npm run external:runs`
+  - `npm run external:check`
+- curated external-run records now live in `examples/external-runs.json`
 
 What is next:
 
@@ -148,6 +154,7 @@ RegressProof is **not** framed as a universal provider token refund tool.
 
 RegressProof **is** framed as:
 
+- CLI and GitHub Action utility
 - agent regression detection
 - fault attribution with evidence
 - cost accountability
@@ -229,6 +236,10 @@ RegressProof has now been validated outside its own repository on public GitHub 
    - `Yeachan-Heo/oh-my-codex`
    - result: `successful_change / high` on a stable committed build/test slice
    - additional note: broader checking also exposed an environment-sensitive path assertion, which reinforces RegressProof's need for conservative repository-specific validation
+5. larger code repository with provider-oriented tests
+   - `openclaw/openclaw`
+   - result: `successful_change / high` on a pinned provider-code slice
+   - changed-file evidence includes OpenAI Codex provider source and test files
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
 

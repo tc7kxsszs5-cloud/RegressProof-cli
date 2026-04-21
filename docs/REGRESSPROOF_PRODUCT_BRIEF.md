@@ -7,7 +7,7 @@
 
 ## Summary
 
-RegressProof is a validation and accountability layer for AI coding agents.
+RegressProof is a CLI and GitHub Action utility that provides a validation and accountability layer for AI coding agents.
 
 It checks whether an agent-introduced code change caused a measurable regression, links that regression to real verification evidence, and records the associated spend or estimated spend. It does not rely on intuition or vague judgment. It relies on baseline comparison, test results, build results, and confidence-scored classification.
 
@@ -29,7 +29,7 @@ Existing tools often measure usage and cost, but they do not reliably answer:
 
 ## The Product
 
-RegressProof observes AI-generated code changes and verifies them using measurable signals:
+RegressProof is installed as a developer utility around AI-generated code changes and verifies them using measurable signals:
 
 - git diff
 - lint
@@ -53,9 +53,9 @@ It is not:
 
 It is:
 
-- a regression proof system
-- a fault attribution layer
-- a cost accountability mechanism
+- a CLI and GitHub Action utility for regression proof
+- a fault attribution layer with evidence artifacts
+- a cost accountability mechanism for internal review
 - an internal credit and reliability ledger for agent runs
 
 ## Target Users
