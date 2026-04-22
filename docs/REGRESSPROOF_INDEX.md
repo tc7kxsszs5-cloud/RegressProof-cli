@@ -135,6 +135,7 @@ What already works:
 - reusable external validation examples now include a repository-specific config for `oh-my-codex`
 - public-repository validation now includes an OpenClaw provider-code slice with pinned commit evidence
 - external corpus validation now includes a pinned `sindresorhus/ky` hook-regression run
+- external corpus validation now includes a pinned `unjs/ofetch` timeout-signal run
 - reusable external validation tooling now includes:
   - `npm run real:public`
   - `npm run external:runs`
@@ -245,6 +246,10 @@ RegressProof has now been validated outside its own repository on public GitHub 
    - `sindresorhus/ky`
    - result: `successful_change / high` on a pinned tuple `searchParams` hook regression fix
    - changed-file evidence includes `source/core/Ky.ts` and `test/hooks.ts`
+7. compact TypeScript fetch utility with timeout-signal coverage
+   - `unjs/ofetch`
+   - result: `successful_change / high` on a pinned custom `AbortSignal` with timeout fix
+   - changed-file evidence includes `.gitignore`, `src/fetch.ts`, and `test/index.test.ts`
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
 

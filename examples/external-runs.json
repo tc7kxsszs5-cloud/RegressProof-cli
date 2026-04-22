@@ -21,9 +21,14 @@
       "repo": "unjs/ofetch",
       "url": "https://github.com/unjs/ofetch.git",
       "language": "typescript",
-      "status": "candidate",
+      "status": "validated",
       "rationale": "Small TypeScript fetch utility that appears suitable for the public-repo runner model.",
-      "firstPass": "Target a recent non-doc source/test commit and avoid dependency-heavy checks until setup cost is known."
+      "firstPass": "Target a recent non-doc source/test commit and avoid dependency-heavy checks until setup cost is known.",
+      "execution": {
+        "configPath": "examples/external-ofetch-timeout-signal.config.json",
+        "headRef": "3cf498be16a84453c7463232f9ad0909a564c7d7",
+        "artifactDir": "/tmp/regressproof-ofetch-timeout-signal-artifacts"
+      }
     },
     {
       "id": "nanostores-candidate",
@@ -54,6 +59,27 @@
     }
   ],
   "runs": [
+    {
+      "id": "ofetch-timeout-signal-2026-04-22",
+      "repo": "unjs/ofetch",
+      "url": "https://github.com/unjs/ofetch.git",
+      "category": "typescript-fetch-timeout-signal",
+      "configPath": "examples/external-ofetch-timeout-signal.config.json",
+      "validatedAt": "2026-04-22T06:45:11.766Z",
+      "baselineCommit": "abc5a8ffeaae0c35f6c306c9bb23879d91da78a9",
+      "headCommit": "3cf498be16a84453c7463232f9ad0909a564c7d7",
+      "diffRange": "3cf498be16a84453c7463232f9ad0909a564c7d7~1..3cf498be16a84453c7463232f9ad0909a564c7d7",
+      "headRef": "3cf498be16a84453c7463232f9ad0909a564c7d7",
+      "changedFiles": [
+        ".gitignore",
+        "src/fetch.ts",
+        "test/index.test.ts"
+      ],
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-ofetch-timeout-signal-artifacts/regressproof-report.json",
+      "notes": "Pinned ofetch timeout signal fix showing AbortSignal.any and AbortSignal.timeout evidence in source plus test."
+    },
     {
       "id": "ky-hooks-searchparams-2026-04-22",
       "repo": "sindresorhus/ky",

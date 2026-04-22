@@ -1,0 +1,48 @@
+{
+  "projectName": "ofetch external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "package.json"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    ".gitignore",
+    "src/fetch.ts",
+    "test/index.test.ts"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "node -e \"const fs=require('fs'); for (const file of ['.gitignore','src/fetch.ts','test/index.test.ts','package.json']) { if (!fs.existsSync(file)) throw new Error('Missing expected validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); for (const file of ['src/fetch.ts','test/index.test.ts']) { const text=fs.readFileSync(file,'utf8'); if (/<<<<<<<|=======|>>>>>>>/.test(text)) throw new Error('Conflict marker found in '+file); if (!text.trim()) throw new Error('Empty validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if (pkg.name !== 'ofetch') throw new Error('Unexpected package name: '+pkg.name); const source=fs.readFileSync('src/fetch.ts','utf8'); const test=fs.readFileSync('test/index.test.ts','utf8'); if (!source.includes('AbortSignal.any')) throw new Error('AbortSignal.any timeout merge missing'); if (!source.includes('AbortSignal.timeout(context.options.timeout)')) throw new Error('AbortSignal.timeout usage missing'); if (!test.includes('signal: expect.any(AbortSignal)')) throw new Error('Timeout AbortSignal regression assertion missing');\""
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

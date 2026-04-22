@@ -242,6 +242,15 @@ Ky public-repository evidence currently includes:
 - changed files in `source/core/Ky.ts` and `test/hooks.ts`
 - artifact `/tmp/regressproof-ky-hooks-artifacts/regressproof-report.json`
 
+Ofetch public-repository evidence currently includes:
+
+- pinned timeout-signal run on `unjs/ofetch`
+- baseline commit `abc5a8ffeaae0c35f6c306c9bb23879d91da78a9`
+- head commit `3cf498be16a84453c7463232f9ad0909a564c7d7`
+- verdict `successful_change / high`
+- changed files in `.gitignore`, `src/fetch.ts`, and `test/index.test.ts`
+- artifact `/tmp/regressproof-ofetch-timeout-signal-artifacts/regressproof-report.json`
+
 The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
 Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 

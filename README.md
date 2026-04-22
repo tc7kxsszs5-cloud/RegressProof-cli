@@ -39,10 +39,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `sindresorhus/ky`
-- pinned range: `346f8986f98b3b6769034e28d5095922670a7ed6~1..346f8986f98b3b6769034e28d5095922670a7ed6`
-- repo-specific result: `successful_change / high` on a hook regression slice
-- changed-file evidence includes `source/core/Ky.ts` and `test/hooks.ts`
+- repository: `unjs/ofetch`
+- pinned range: `3cf498be16a84453c7463232f9ad0909a564c7d7~1..3cf498be16a84453c7463232f9ad0909a564c7d7`
+- repo-specific result: `successful_change / high` on a timeout signal slice
+- changed-file evidence includes `src/fetch.ts` and `test/index.test.ts`
 
 Further reading:
 
@@ -266,6 +266,7 @@ Example configs for validating external repositories live at:
 
 - `examples/external-doc-plugin.config.json`
 - `examples/external-ky-hooks.config.json`
+- `examples/external-ofetch-timeout-signal.config.json`
 - `examples/external-openclaw-code.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`
 - `examples/README.md`

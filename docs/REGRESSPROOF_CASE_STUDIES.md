@@ -128,3 +128,26 @@ Why it matters:
 - gives the external corpus a compact TypeScript library case with source-plus-test evidence
 - demonstrates that the corpus runner can promote a candidate into a pinned reproducible run
 - shows RegressProof can recognize a fix path, not only newly introduced failures
+
+## Case Study 7: `unjs/ofetch`
+
+- category: TypeScript fetch utility timeout-signal repository
+- committed range: `3cf498be16a84453c7463232f9ad0909a564c7d7~1..3cf498be16a84453c7463232f9ad0909a564c7d7`
+- changed files inside validation boundary:
+  - `.gitignore`
+  - `src/fetch.ts`
+  - `test/index.test.ts`
+- validation style: sparse public-repository clone with a pinned timeout-signal slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot was missing `AbortSignal.any` timeout merging and targeted signal assertion
+- current snapshot contained the timeout signal implementation and regression assertion
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- adds a second compact TypeScript corpus proof after `ky`
+- covers fetch/timeout behavior rather than hook mutation behavior
+- demonstrates that candidate promotion can be repeated without weakening pinned evidence rules
