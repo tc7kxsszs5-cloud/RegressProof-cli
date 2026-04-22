@@ -75,3 +75,30 @@ After the initial `v0.1.0` cut, the MVP proof surface strengthened further:
 - broader checking on the same repository also exposed an environment-sensitive path assertion, which reinforces the product's conservative proof-first positioning
 
 This addendum matters because it turns the release from "standalone and internally validated" into "standalone and externally exercised on real public codebases."
+
+## Current Proof Addendum
+
+As of 22 April 2026, the external proof surface has expanded to:
+
+- `6` curated external validation runs
+- `5` public repositories
+- compact TypeScript proof slices:
+  - `sindresorhus/ky`
+  - `unjs/ofetch`
+  - `nanostores/nanostores`
+- Python proof slice:
+  - `pytest-dev/pluggy`
+- provider-code proof slice:
+  - `openclaw/openclaw`
+
+The catalog is stored in:
+
+```text
+examples/external-runs.json
+```
+
+The one-page proof summary is stored in:
+
+```text
+docs/REGRESSPROOF_PROOF_LEDGER.md
+```

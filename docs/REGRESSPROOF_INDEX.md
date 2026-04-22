@@ -29,6 +29,7 @@ Core principle:
 - [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
 - [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
 - [Case Studies](REGRESSPROOF_CASE_STUDIES.md)
+- [Proof Ledger](REGRESSPROOF_PROOF_LEDGER.md)
 - [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
 - [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
 - [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)

@@ -2,8 +2,32 @@
 
 `Proof, not guesses, for agent-caused regressions.`
 
+[![RegressProof](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml/badge.svg)](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml)
+![External runs](https://img.shields.io/badge/external_runs-6-success)
+![Public repos](https://img.shields.io/badge/public_repos-5-blue)
+![Fixtures](https://img.shields.io/badge/fixtures-11%2F11-success)
+![License](https://img.shields.io/badge/license-proprietary_source_available-lightgrey)
+
 RegressProof is a standalone CLI and GitHub Action utility for detecting measurable AI coding regressions.
 It compares a baseline against a changed state, runs verification commands, maps failures to diffs, and produces evidence-focused reports instead of intuition-only blame.
+
+## Proof Snapshot
+
+Current verified surface:
+
+- `6` curated external validation runs across `5` public repositories
+- `11/11` tracked fixtures passing
+- standalone committed trust scenario: `successful_change / high`
+- standalone deep trust scenario: `successful_change / high`
+- external corpus includes TypeScript and Python repositories
+- first-class conservative classifications for preexisting and environment failures
+
+Proof artifacts:
+
+- external run catalog: `examples/external-runs.json`
+- case studies: `docs/REGRESSPROOF_CASE_STUDIES.md`
+- proof ledger: `docs/REGRESSPROOF_PROOF_LEDGER.md`
+- validation plan: `docs/REGRESSPROOF_VALIDATION_PLAN.md`
 
 ## Legal Status
 

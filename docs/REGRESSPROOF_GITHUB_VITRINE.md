@@ -1,7 +1,7 @@
 # RegressProof GitHub Vitrine
 
 **Purpose:** Ready-to-paste public-facing copy for the GitHub repository surface  
-**Last updated:** 20 April 2026
+**Last updated:** 22 April 2026
 
 ## GitHub About
 
@@ -23,6 +23,8 @@ Longer description:
 - `code-review`
 - `validation`
 - `nodejs`
+- `regression-proof`
+- `ai-code-review`
 
 ## Repository Introduction
 
@@ -38,10 +40,26 @@ Use this when a short repository intro is needed on GitHub, in a post, or in a p
 
 Use this when announcing the current MVP:
 
-> RegressProof is now a proven standalone MVP. The repository passes full `verify-mvp`, the tracked fixture suite passes `11/11`, committed trust scenarios validate as `successful_change / high`, and public external validation now includes real code repositories such as `Yeachan-Heo/oh-my-codex`.
+> RegressProof is now a proven standalone MVP. The repository passes full `verify-mvp`, the tracked fixture suite passes `11/11`, committed trust scenarios validate as `successful_change / high`, and the curated external corpus includes 6 pinned runs across 5 public repositories including `pytest-dev/pluggy`, `nanostores/nanostores`, `unjs/ofetch`, `sindresorhus/ky`, and `openclaw/openclaw`.
 
 ## Public Proof Line
 
 Use this when you need one short sentence about maturity:
 
 > RegressProof has moved beyond fixture-only proof: it now passes its full standalone MVP flow and has been exercised against public repositories with repository-specific validation slices.
+
+## Metrics Line
+
+Use this near the top of README, release notes, or repository social copy:
+
+> Current proof surface: 6 external runs, 5 public repositories, 11/11 tracked fixtures, standalone trust scenarios passing, and conservative verdict handling for environment/preexisting failures.
+
+## Suggested Repository Header
+
+```text
+RegressProof: proof, not guesses, for agent-caused regressions.
+
+CLI + GitHub Action utility that compares baseline vs current verification,
+maps failures to changed files, and emits evidence-focused verdicts.
+Current proof: 6 external runs / 5 public repos / 11 tracked fixtures.
+```
