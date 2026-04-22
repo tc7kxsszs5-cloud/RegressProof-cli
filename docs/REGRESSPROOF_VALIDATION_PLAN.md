@@ -251,6 +251,15 @@ Ofetch public-repository evidence currently includes:
 - changed files in `.gitignore`, `src/fetch.ts`, and `test/index.test.ts`
 - artifact `/tmp/regressproof-ofetch-timeout-signal-artifacts/regressproof-report.json`
 
+Nanostores public-repository evidence currently includes:
+
+- pinned shared-epoch run on `nanostores/nanostores`
+- baseline commit `8ad031dcde958413cf722b0fe46ceb65b547c747`
+- head commit `3206678515f9dd1985a7770d9c2a340a8f65a443`
+- verdict `successful_change / high`
+- changed files in `atom/index.js`, `computed/index.js`, and `package.json`
+- artifact `/tmp/regressproof-nanostores-global-epoch-artifacts/regressproof-report.json`
+
 The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
 Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 

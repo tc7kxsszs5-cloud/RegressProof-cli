@@ -39,10 +39,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `unjs/ofetch`
-- pinned range: `3cf498be16a84453c7463232f9ad0909a564c7d7~1..3cf498be16a84453c7463232f9ad0909a564c7d7`
-- repo-specific result: `successful_change / high` on a timeout signal slice
-- changed-file evidence includes `src/fetch.ts` and `test/index.test.ts`
+- repository: `nanostores/nanostores`
+- pinned range: `3206678515f9dd1985a7770d9c2a340a8f65a443~1..3206678515f9dd1985a7770d9c2a340a8f65a443`
+- repo-specific result: `successful_change / high` on a shared epoch slice
+- changed-file evidence includes `atom/index.js`, `computed/index.js`, and `package.json`
 
 Further reading:
 
@@ -266,6 +266,7 @@ Example configs for validating external repositories live at:
 
 - `examples/external-doc-plugin.config.json`
 - `examples/external-ky-hooks.config.json`
+- `examples/external-nanostores-global-epoch.config.json`
 - `examples/external-ofetch-timeout-signal.config.json`
 - `examples/external-openclaw-code.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`

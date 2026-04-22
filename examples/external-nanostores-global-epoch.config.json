@@ -1,0 +1,48 @@
+{
+  "projectName": "nanostores external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "package.json"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    "atom/index.js",
+    "computed/index.js",
+    "package.json"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "node -e \"const fs=require('fs'); for (const file of ['atom/index.js','computed/index.js','package.json']) { if (!fs.existsSync(file)) throw new Error('Missing expected validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); for (const file of ['atom/index.js','computed/index.js']) { const text=fs.readFileSync(file,'utf8'); if (/<<<<<<<|=======|>>>>>>>/.test(text)) throw new Error('Conflict marker found in '+file); if (!text.trim()) throw new Error('Empty validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if (pkg.name !== 'nanostores') throw new Error('Unexpected package name: '+pkg.name); const atom=fs.readFileSync('atom/index.js','utf8'); const computed=fs.readFileSync('computed/index.js','utf8'); if (!atom.includes('globalThis.nanostoresEpoch')) throw new Error('Global epoch storage missing'); if (!atom.includes('export const NANOSTORES_EPOCH')) throw new Error('Shared epoch export missing'); if (!computed.includes('NANOSTORES_EPOCH.epoch')) throw new Error('Computed store shared epoch usage missing');\""
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

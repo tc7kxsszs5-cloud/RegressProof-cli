@@ -151,3 +151,26 @@ Why it matters:
 - adds a second compact TypeScript corpus proof after `ky`
 - covers fetch/timeout behavior rather than hook mutation behavior
 - demonstrates that candidate promotion can be repeated without weakening pinned evidence rules
+
+## Case Study 8: `nanostores/nanostores`
+
+- category: TypeScript state library shared-epoch repository
+- committed range: `3206678515f9dd1985a7770d9c2a340a8f65a443~1..3206678515f9dd1985a7770d9c2a340a8f65a443`
+- changed files inside validation boundary:
+  - `atom/index.js`
+  - `computed/index.js`
+  - `package.json`
+- validation style: sparse public-repository clone with a pinned shared-epoch slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot was missing `globalThis.nanostoresEpoch` and the shared epoch export
+- current snapshot contained the shared epoch implementation and computed-store usage
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- adds a third compact TypeScript corpus proof after `ky` and `ofetch`
+- covers state synchronization behavior rather than HTTP or hook-specific behavior
+- demonstrates that public corpus expansion can keep using lightweight, reproducible slices

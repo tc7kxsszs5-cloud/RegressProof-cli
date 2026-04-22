@@ -35,9 +35,14 @@
       "repo": "nanostores/nanostores",
       "url": "https://github.com/nanostores/nanostores.git",
       "language": "typescript",
-      "status": "candidate",
+      "status": "validated",
       "rationale": "Focused TypeScript state-management package with tests and type-oriented behavior changes.",
-      "firstPass": "Pin a compact source/test diff and capture changed files before attempting install-backed checks."
+      "firstPass": "Pin a compact source/test diff and capture changed files before attempting install-backed checks.",
+      "execution": {
+        "configPath": "examples/external-nanostores-global-epoch.config.json",
+        "headRef": "3206678515f9dd1985a7770d9c2a340a8f65a443",
+        "artifactDir": "/tmp/regressproof-nanostores-global-epoch-artifacts"
+      }
     },
     {
       "id": "click-candidate",
@@ -59,6 +64,27 @@
     }
   ],
   "runs": [
+    {
+      "id": "nanostores-global-epoch-2026-04-22",
+      "repo": "nanostores/nanostores",
+      "url": "https://github.com/nanostores/nanostores.git",
+      "category": "typescript-state-shared-epoch",
+      "configPath": "examples/external-nanostores-global-epoch.config.json",
+      "validatedAt": "2026-04-22T07:24:15.001Z",
+      "baselineCommit": "8ad031dcde958413cf722b0fe46ceb65b547c747",
+      "headCommit": "3206678515f9dd1985a7770d9c2a340a8f65a443",
+      "diffRange": "3206678515f9dd1985a7770d9c2a340a8f65a443~1..3206678515f9dd1985a7770d9c2a340a8f65a443",
+      "headRef": "3206678515f9dd1985a7770d9c2a340a8f65a443",
+      "changedFiles": [
+        "atom/index.js",
+        "computed/index.js",
+        "package.json"
+      ],
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-nanostores-global-epoch-artifacts/regressproof-report.json",
+      "notes": "Pinned nanostores shared epoch fix using globalThis.nanostoresEpoch across atom and computed modules."
+    },
     {
       "id": "ofetch-timeout-signal-2026-04-22",
       "repo": "unjs/ofetch",
