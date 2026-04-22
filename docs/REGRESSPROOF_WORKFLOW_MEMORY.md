@@ -9,13 +9,15 @@ When continuing work on `RegressProof`:
 1. Read `AGENTS.md`
 2. Read `docs/REGRESSPROOF_INDEX.md`
 3. Read `docs/REGRESSPROOF_DECISION_LOG.md`
-4. Decide whether the task is:
+4. Confirm the repository root is the standalone `RegressProof-cli` tree.
+5. Do not resume project work from old embedded `rork-kiku/regressproof` copies, temporary clones, or the inactive `RegressProof.git` remote.
+6. Decide whether the task is:
    - product clarification
    - architecture refinement
    - implementation planning
    - actual code implementation
    - validation or testing
-5. If implementation starts, align the work to `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
+7. If implementation starts, align the work to `docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md`
 
 ## Core Product Boundaries
 
@@ -47,7 +49,24 @@ The best execution order for the project is:
 
 RegressProof is no longer validated only against internal fixtures and self-hosted trust scenarios.
 
-It has now been exercised successfully on external public repositories in three modes:
+The current external-run catalog lives in `examples/external-runs.json`.
+Use these commands from the standalone repository root:
+
+```bash
+npm run external:runs
+npm run external:check
+npm run external:run-corpus
+```
+
+As of 22 April 2026, the catalog contains six completed runs across five public repositories:
+
+- `openclaw/openclaw`
+- `sindresorhus/ky`
+- `unjs/ofetch`
+- `nanostores/nanostores`
+- `pytest-dev/pluggy`
+
+It has also been exercised successfully on earlier external public repositories in these modes:
 
 1. doc/plugin repository:
    - `forrestchang/andrej-karpathy-skills`
@@ -86,6 +105,18 @@ This means the project now has evidence across:
 - external doc/plugin repositories
 - external documentation/configuration repositories
 - external code-plus-test repositories
+- pinned TypeScript corpus slices
+- pinned Python corpus slices
+
+## Repository Memory Rule
+
+Store durable project memory inside this repository tree.
+
+- Session notes belong in `docs/sessions/`.
+- External validation configs belong in `examples/`.
+- External validation run records belong in `examples/external-runs.json`.
+- Major product, legal, architecture, or validation decisions belong in `docs/REGRESSPROOF_DECISION_LOG.md`.
+- Do not rely on transient chat history, `/tmp` clones, or old host workspace notes as the source of truth.
 
 ## If A Future Agent Is Unsure
 
