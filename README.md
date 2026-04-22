@@ -120,6 +120,15 @@ Validate the external-run catalog schema:
 npm run external:check
 ```
 
+Plan the next external corpus pass:
+
+```bash
+npm run external:run-corpus
+```
+
+The corpus runner intentionally treats queue entries as candidates until they are promoted with pinned execution metadata.
+Use `--execute --id <candidate-id>` only after adding a repository-specific config, pinned `headRef`, and artifact directory.
+
 Check whether a committed range is ready for trust validation:
 
 ```bash

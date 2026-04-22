@@ -230,3 +230,9 @@ Documenting both the success and the caveat reinforces the product's proof-first
 **Decision:** Curated external validation state should be tracked in `examples/external-runs.json` and checked by `npm run external:check`.
 
 **Reason:** Public validation needs memory that separates completed evidence from candidate repositories. Schema checks prevent ambiguous records, missing changed-file evidence, unsupported verdicts, and accidental promotion of candidate repos into proof claims.
+
+## Decision 37
+
+**Decision:** External corpus scaling should begin with a planning-first runner, `npm run external:run-corpus`, that refuses to execute candidates until they have pinned execution metadata.
+
+**Reason:** Scaling public validation is useful only if it preserves reproducibility. A planning-first runner lets agents inspect candidate readiness, promote one repository at a time, and avoid turning unpinned or environment-unclear checks into product evidence.

@@ -17,6 +17,7 @@
     "print:bootstrap-scope": "node scripts/print-bootstrap-commit-scope.js",
     "external:runs": "node scripts/list-external-runs.js",
     "external:check": "node scripts/list-external-runs.js --format json",
+    "external:run-corpus": "node scripts/run-external-corpus.js",
     "real:committed": "node scripts/run-committed-real-repo-validation.js",
     "real:public": "node scripts/run-public-repo-validation.js",
     "real:readiness": "node scripts/check-committed-range-readiness.js",
