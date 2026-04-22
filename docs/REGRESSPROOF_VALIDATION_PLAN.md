@@ -233,6 +233,15 @@ OpenClaw public-repository evidence currently includes:
 - verdict `successful_change / high`
 - changed files in `extensions/openai/openai-codex-provider.ts` and `extensions/openai/openai-codex-provider.test.ts`
 
+Ky public-repository evidence currently includes:
+
+- pinned hook-regression run on `sindresorhus/ky`
+- baseline commit `e9eeb35770bdf6d894998c6c9f9a3fb090c8b5d2`
+- head commit `346f8986f98b3b6769034e28d5095922670a7ed6`
+- verdict `successful_change / high`
+- changed files in `source/core/Ky.ts` and `test/hooks.ts`
+- artifact `/tmp/regressproof-ky-hooks-artifacts/regressproof-report.json`
+
 The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
 Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 

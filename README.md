@@ -39,10 +39,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `openclaw/openclaw`
-- pinned range: `97534372f858b5f67a98619a3fed8790edb00cc7~1..97534372f858b5f67a98619a3fed8790edb00cc7`
-- repo-specific result: `successful_change / high` on a provider-code slice
-- changed-file evidence includes `extensions/openai/openai-codex-provider.ts` and its provider test
+- repository: `sindresorhus/ky`
+- pinned range: `346f8986f98b3b6769034e28d5095922670a7ed6~1..346f8986f98b3b6769034e28d5095922670a7ed6`
+- repo-specific result: `successful_change / high` on a hook regression slice
+- changed-file evidence includes `source/core/Ky.ts` and `test/hooks.ts`
 
 Further reading:
 
@@ -265,6 +265,7 @@ node src/cli.js run \
 Example configs for validating external repositories live at:
 
 - `examples/external-doc-plugin.config.json`
+- `examples/external-ky-hooks.config.json`
 - `examples/external-openclaw-code.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`
 - `examples/README.md`

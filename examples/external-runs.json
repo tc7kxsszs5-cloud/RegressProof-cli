@@ -7,9 +7,14 @@
       "repo": "sindresorhus/ky",
       "url": "https://github.com/sindresorhus/ky.git",
       "language": "typescript",
-      "status": "candidate",
+      "status": "validated",
       "rationale": "Compact TypeScript HTTP client with source and test changes that may produce clear diff-to-check evidence.",
-      "firstPass": "Use sparse shallow checkout, inspect recent source/test commits, then pin a small code commit before any lightweight validation."
+      "firstPass": "Use sparse shallow checkout, inspect recent source/test commits, then pin a small code commit before any lightweight validation.",
+      "execution": {
+        "configPath": "examples/external-ky-hooks.config.json",
+        "headRef": "346f8986f98b3b6769034e28d5095922670a7ed6",
+        "artifactDir": "/tmp/regressproof-ky-hooks-artifacts"
+      }
     },
     {
       "id": "ofetch-candidate",
@@ -49,6 +54,26 @@
     }
   ],
   "runs": [
+    {
+      "id": "ky-hooks-searchparams-2026-04-22",
+      "repo": "sindresorhus/ky",
+      "url": "https://github.com/sindresorhus/ky.git",
+      "category": "typescript-library-hook-regression",
+      "configPath": "examples/external-ky-hooks.config.json",
+      "validatedAt": "2026-04-22T06:41:05.259Z",
+      "baselineCommit": "e9eeb35770bdf6d894998c6c9f9a3fb090c8b5d2",
+      "headCommit": "346f8986f98b3b6769034e28d5095922670a7ed6",
+      "diffRange": "346f8986f98b3b6769034e28d5095922670a7ed6~1..346f8986f98b3b6769034e28d5095922670a7ed6",
+      "headRef": "346f8986f98b3b6769034e28d5095922670a7ed6",
+      "changedFiles": [
+        "source/core/Ky.ts",
+        "test/hooks.ts"
+      ],
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-ky-hooks-artifacts/regressproof-report.json",
+      "notes": "Pinned ky hook regression fix for tuple searchParams mutation isolation across init-hook requests."
+    },
     {
       "id": "openclaw-provider-code-2026-04-21",
       "repo": "openclaw/openclaw",

@@ -106,3 +106,25 @@ What this teaches:
 
 - external validation does not need to start with a repository's entire test suite
 - a well-chosen committed slice can produce a stronger, more honest MVP proof than a noisy broad run
+
+## Case Study 6: `sindresorhus/ky`
+
+- category: TypeScript library hook-regression repository
+- committed range: `346f8986f98b3b6769034e28d5095922670a7ed6~1..346f8986f98b3b6769034e28d5095922670a7ed6`
+- changed files inside validation boundary:
+  - `source/core/Ky.ts`
+  - `test/hooks.ts`
+- validation style: sparse public-repository clone with a pinned hook regression slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot was missing the tuple `searchParams` clone helper and targeted regression test
+- current snapshot contained the fix and the corresponding hook regression test
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- gives the external corpus a compact TypeScript library case with source-plus-test evidence
+- demonstrates that the corpus runner can promote a candidate into a pinned reproducible run
+- shows RegressProof can recognize a fix path, not only newly introduced failures

@@ -1,0 +1,47 @@
+{
+  "projectName": "ky external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "package.json"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    "source/core/Ky.ts",
+    "test/hooks.ts"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "node -e \"const fs=require('fs'); for (const file of ['source/core/Ky.ts','test/hooks.ts','package.json']) { if (!fs.existsSync(file)) throw new Error('Missing expected validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); for (const file of ['source/core/Ky.ts','test/hooks.ts']) { const text=fs.readFileSync(file,'utf8'); if (/<<<<<<<|=======|>>>>>>>/.test(text)) throw new Error('Conflict marker found in '+file); if (!text.trim()) throw new Error('Empty validation file: '+file); }\"",
+      "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if (pkg.name !== 'ky') throw new Error('Unexpected package name: '+pkg.name); const source=fs.readFileSync('source/core/Ky.ts','utf8'); const test=fs.readFileSync('test/hooks.ts','utf8'); if (!source.includes('cloneSearchParametersForInitHook')) throw new Error('Tuple searchParams clone helper missing'); if (!test.includes('init hook tuple searchParams mutations do not leak across requests')) throw new Error('Tuple searchParams regression test missing');\""
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}
