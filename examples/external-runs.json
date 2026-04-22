@@ -58,12 +58,39 @@
       "repo": "pytest-dev/pluggy",
       "url": "https://github.com/pytest-dev/pluggy.git",
       "language": "python",
-      "status": "candidate",
+      "status": "validated",
       "rationale": "Smaller Python plugin-system library suitable for exercising Python attribution without a large app stack.",
-      "firstPass": "Pin a recent code commit with changed tests or source, then decide whether lightweight local checks are feasible."
+      "firstPass": "Pin a recent code commit with changed tests or source, then decide whether lightweight local checks are feasible.",
+      "execution": {
+        "configPath": "examples/external-pluggy-pluginmanager.config.json",
+        "headRef": "20d8143f127a4d7526dbbea441857b4b80ec8bdd",
+        "artifactDir": "/tmp/regressproof-pluggy-pluginmanager-artifacts"
+      }
     }
   ],
   "runs": [
+    {
+      "id": "pluggy-pluginmanager-2026-04-22",
+      "repo": "pytest-dev/pluggy",
+      "url": "https://github.com/pytest-dev/pluggy.git",
+      "category": "python-plugin-manager-deduplication",
+      "configPath": "examples/external-pluggy-pluginmanager.config.json",
+      "validatedAt": "2026-04-22T07:44:04.358Z",
+      "baselineCommit": "6e1d0f13a259776bbf137f90bd7ab8b4474f68e7",
+      "headCommit": "20d8143f127a4d7526dbbea441857b4b80ec8bdd",
+      "diffRange": "20d8143f127a4d7526dbbea441857b4b80ec8bdd~1..20d8143f127a4d7526dbbea441857b4b80ec8bdd",
+      "headRef": "20d8143f127a4d7526dbbea441857b4b80ec8bdd",
+      "changedFiles": [
+        "changelog/431.bugfix.rst",
+        "src/pluggy/_hooks.py",
+        "src/pluggy/_manager.py",
+        "testing/test_pluginmanager.py"
+      ],
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-pluggy-pluginmanager-artifacts/regressproof-report.json",
+      "notes": "Pinned pluggy plugin manager fix for removing all hook implementations and deduplicating hook callers."
+    },
     {
       "id": "nanostores-global-epoch-2026-04-22",
       "repo": "nanostores/nanostores",

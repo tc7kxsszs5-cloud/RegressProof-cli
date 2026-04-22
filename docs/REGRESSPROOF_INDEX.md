@@ -137,6 +137,7 @@ What already works:
 - external corpus validation now includes a pinned `sindresorhus/ky` hook-regression run
 - external corpus validation now includes a pinned `unjs/ofetch` timeout-signal run
 - external corpus validation now includes a pinned `nanostores/nanostores` shared-epoch run
+- external corpus validation now includes a pinned `pytest-dev/pluggy` Python plugin-manager run
 - reusable external validation tooling now includes:
   - `npm run real:public`
   - `npm run external:runs`
@@ -255,6 +256,10 @@ RegressProof has now been validated outside its own repository on public GitHub 
    - `nanostores/nanostores`
    - result: `successful_change / high` on a pinned global epoch fix
    - changed-file evidence includes `atom/index.js`, `computed/index.js`, and `package.json`
+9. compact Python plugin-system library with manager deduplication coverage
+   - `pytest-dev/pluggy`
+   - result: `successful_change / high` on a pinned hook implementation removal and hookcaller deduplication fix
+   - changed-file evidence includes `src/pluggy/_hooks.py`, `src/pluggy/_manager.py`, and `testing/test_pluginmanager.py`
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
 

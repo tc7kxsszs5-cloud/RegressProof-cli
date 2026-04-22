@@ -1,0 +1,49 @@
+{
+  "projectName": "pluggy external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "pyproject.toml"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    "changelog/431.bugfix.rst",
+    "src/pluggy/_hooks.py",
+    "src/pluggy/_manager.py",
+    "testing/test_pluginmanager.py"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "python3 -m py_compile src/pluggy/_hooks.py src/pluggy/_manager.py",
+      "python3 - <<'PY'\nfrom pathlib import Path\nfor file in ['changelog/431.bugfix.rst','src/pluggy/_hooks.py','src/pluggy/_manager.py','testing/test_pluginmanager.py','pyproject.toml']:\n    path = Path(file)\n    if not path.exists():\n        raise SystemExit(f'Missing expected validation file: {file}')\n    if file.endswith('.py') and not path.read_text().strip():\n        raise SystemExit(f'Empty validation file: {file}')\nPY",
+      "python3 - <<'PY'\nfrom pathlib import Path\nhooks = Path('src/pluggy/_hooks.py').read_text()\nmanager = Path('src/pluggy/_manager.py').read_text()\ntests = Path('testing/test_pluginmanager.py').read_text()\nchangelog = Path('changelog/431.bugfix.rst').read_text()\nif 'Remove all hook implementations registered by the given plugin' not in hooks:\n    raise SystemExit('HookCaller multi-implementation removal evidence missing')\nif 'any(impl.plugin is plugin for impl in hookcaller.get_hookimpls())' not in manager:\n    raise SystemExit('get_hookcallers dedupe evidence missing')\nif 'test_unregister_plugin_with_multi_hookimpls' not in tests:\n    raise SystemExit('multi hookimpl unregister regression test missing')\nif 'test_get_hookcallers_no_duplicates' not in tests:\n    raise SystemExit('hookcaller dedupe regression test missing')\nif 'not return duplicate' not in changelog:\n    raise SystemExit('bugfix changelog evidence missing')\nPY"
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

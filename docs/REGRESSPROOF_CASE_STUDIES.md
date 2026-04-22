@@ -174,3 +174,33 @@ Why it matters:
 - adds a third compact TypeScript corpus proof after `ky` and `ofetch`
 - covers state synchronization behavior rather than HTTP or hook-specific behavior
 - demonstrates that public corpus expansion can keep using lightweight, reproducible slices
+
+## Case Study 9: `pytest-dev/pluggy`
+
+- category: Python plugin-system manager repository
+- committed range: `20d8143f127a4d7526dbbea441857b4b80ec8bdd~1..20d8143f127a4d7526dbbea441857b4b80ec8bdd`
+- changed files inside validation boundary:
+  - `changelog/431.bugfix.rst`
+  - `src/pluggy/_hooks.py`
+  - `src/pluggy/_manager.py`
+  - `testing/test_pluginmanager.py`
+- validation style: sparse public-repository clone with a pinned plugin-manager bugfix slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot was missing the changelog entry and targeted regression evidence
+- current snapshot removed all hook implementations for a plugin and deduplicated hook callers
+- current snapshot included targeted tests for multi-implementation unregister and duplicate hookcaller behavior
+- RegressProof classified the run as a successful change with high confidence
+
+Important environment note:
+
+- an initial config using `python` produced `preexisting_failure / low` because the shell did not provide `python`
+- updating the config to `python3` produced the successful pinned run
+
+Why it matters:
+
+- adds a Python plugin-system proof case after the TypeScript corpus expansion
+- demonstrates conservative environment handling before accepting the successful evidence run
+- strengthens the corpus with source, tests, changelog, and an agent-coauthored upstream commit message

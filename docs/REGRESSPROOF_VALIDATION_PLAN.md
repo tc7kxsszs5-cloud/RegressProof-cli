@@ -260,6 +260,16 @@ Nanostores public-repository evidence currently includes:
 - changed files in `atom/index.js`, `computed/index.js`, and `package.json`
 - artifact `/tmp/regressproof-nanostores-global-epoch-artifacts/regressproof-report.json`
 
+Pluggy public-repository evidence currently includes:
+
+- pinned plugin-manager run on `pytest-dev/pluggy`
+- baseline commit `6e1d0f13a259776bbf137f90bd7ab8b4474f68e7`
+- head commit `20d8143f127a4d7526dbbea441857b4b80ec8bdd`
+- verdict `successful_change / high`
+- changed files in `changelog/431.bugfix.rst`, `src/pluggy/_hooks.py`, `src/pluggy/_manager.py`, and `testing/test_pluginmanager.py`
+- artifact `/tmp/regressproof-pluggy-pluginmanager-artifacts/regressproof-report.json`
+- environment note: an initial `python` command check produced `preexisting_failure / low`; switching the config to `python3` produced the successful pinned evidence run
+
 The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
 Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 

@@ -44,10 +44,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `nanostores/nanostores`
-- pinned range: `3206678515f9dd1985a7770d9c2a340a8f65a443~1..3206678515f9dd1985a7770d9c2a340a8f65a443`
-- repo-specific result: `successful_change / high` on a shared epoch slice
-- changed-file evidence includes `atom/index.js`, `computed/index.js`, and `package.json`
+- repository: `pytest-dev/pluggy`
+- pinned range: `20d8143f127a4d7526dbbea441857b4b80ec8bdd~1..20d8143f127a4d7526dbbea441857b4b80ec8bdd`
+- repo-specific result: `successful_change / high` on a plugin manager deduplication slice
+- changed-file evidence includes `src/pluggy/_hooks.py`, `src/pluggy/_manager.py`, and `testing/test_pluginmanager.py`
 
 Further reading:
 
@@ -274,6 +274,7 @@ Example configs for validating external repositories live at:
 - `examples/external-nanostores-global-epoch.config.json`
 - `examples/external-ofetch-timeout-signal.config.json`
 - `examples/external-openclaw-code.config.json`
+- `examples/external-pluggy-pluginmanager.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`
 - `examples/README.md`
 
