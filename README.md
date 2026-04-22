@@ -5,6 +5,11 @@
 RegressProof is a standalone CLI and GitHub Action utility for detecting measurable AI coding regressions.
 It compares a baseline against a changed state, runs verification commands, maps failures to diffs, and produces evidence-focused reports instead of intuition-only blame.
 
+## Legal Status
+
+RegressProof is proprietary source-available software unless a separate written agreement says otherwise.
+See `LICENSE` and `NOTICE.md`.
+
 ## MVP Scope
 
 Current MVP capabilities:

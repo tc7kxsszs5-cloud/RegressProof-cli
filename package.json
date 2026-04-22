@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Proof, not guesses, for agent-caused regressions.",
+  "license": "SEE LICENSE IN LICENSE",
   "bin": {
     "regressproof": "./dist/cli.js"
   },

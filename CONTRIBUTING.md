@@ -17,6 +17,8 @@ Contributions are most helpful when they improve:
 Read these first:
 
 - `README.md`
+- `LICENSE`
+- `NOTICE.md`
 - `docs/REGRESSPROOF_INDEX.md`
 - `docs/REGRESSPROOF_SPEC.md`
 - `docs/REGRESSPROOF_VALIDATION_PLAN.md`
@@ -66,3 +68,14 @@ Please include:
 - any docs updated as part of the change
 
 If your change affects user-facing behavior, CI behavior, fixture expectations, or validation policy, update the relevant `docs/REGRESSPROOF_*.md` file in the same PR.
+
+## Intellectual Property Boundaries
+
+By contributing, you confirm that you have the right to submit the contribution
+and that it does not include proprietary third-party code or materials without
+permission.
+
+Do not submit changes that copy another project's proprietary implementation,
+branding, validation corpus, or documentation structure. RegressProof should
+grow from original implementation work and public, properly attributed
+validation evidence.

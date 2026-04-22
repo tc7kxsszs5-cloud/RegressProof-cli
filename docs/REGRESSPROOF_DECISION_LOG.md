@@ -236,3 +236,9 @@ Documenting both the success and the caveat reinforces the product's proof-first
 **Decision:** External corpus scaling should begin with a planning-first runner, `npm run external:run-corpus`, that refuses to execute candidates until they have pinned execution metadata.
 
 **Reason:** Scaling public validation is useful only if it preserves reproducibility. A planning-first runner lets agents inspect candidate readiness, promote one repository at a time, and avoid turning unpinned or environment-unclear checks into product evidence.
+
+## Decision 38
+
+**Decision:** RegressProof should use a proprietary source-available license posture while the proof corpus, classifier behavior, and product positioning are still being hardened.
+
+**Reason:** The project has moved from idea documentation into working CLI, public validation corpus, and evidence artifacts. A proprietary posture better preserves the project owner's control over copying, redistribution, derivative products, and brand use while the product direction matures.
