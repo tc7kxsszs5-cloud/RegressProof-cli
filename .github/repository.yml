@@ -1,0 +1,20 @@
+# Desired GitHub repository metadata for RegressProof-cli.
+#
+# This file is intentionally committed as project memory. GitHub does not apply
+# it automatically unless a repository-settings automation/app is installed.
+
+repository:
+  name: RegressProof-cli
+  description: Proof, not guesses, for agent-caused regressions.
+  homepage: ""
+  topics:
+    - ai-coding
+    - ai-agents
+    - regression-detection
+    - developer-tools
+    - github-actions
+    - code-review
+    - validation
+    - regression-proof
+    - ai-code-review
+    - nodejs
