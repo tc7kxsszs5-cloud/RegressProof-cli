@@ -58,13 +58,14 @@ npm run external:check
 npm run external:run-corpus
 ```
 
-As of 22 April 2026, the catalog contains six completed runs across five public repositories:
+As of 23 April 2026, the catalog contains seven completed runs across six public repositories:
 
 - `openclaw/openclaw`
 - `sindresorhus/ky`
 - `unjs/ofetch`
 - `nanostores/nanostores`
 - `pytest-dev/pluggy`
+- `pallets/click`
 
 It has also been exercised successfully on earlier external public repositories in these modes:
 

@@ -1,12 +1,12 @@
 # RegressProof Proof Ledger
 
 **Purpose:** One-page public proof summary for the repository surface
-**Last updated:** 22 April 2026
+**Last updated:** 23 April 2026
 
 ## Current Metrics
 
-- external validation runs: `6`
-- public repositories in catalog: `5`
+- external validation runs: `7`
+- public repositories in catalog: `6`
 - tracked fixtures: `11/11`
 - standalone trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -16,6 +16,7 @@
 
 | Repository | Category | Range | Verdict | Evidence |
 | --- | --- | --- | --- | --- |
+| `pallets/click` | Python CLI flag behavior | `7f7bbe4..91de59c` | `successful_change / high` | changelog, source, tests |
 | `pytest-dev/pluggy` | Python plugin manager | `6e1d0f1..20d8143` | `successful_change / high` | source, tests, changelog |
 | `nanostores/nanostores` | TypeScript state library | `8ad031d..3206678` | `successful_change / high` | runtime source, package limits |
 | `unjs/ofetch` | TypeScript fetch utility | `abc5a8f..3cf498b` | `successful_change / high` | source, tests, config |

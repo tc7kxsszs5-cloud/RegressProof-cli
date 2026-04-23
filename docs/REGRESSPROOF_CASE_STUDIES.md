@@ -204,3 +204,27 @@ Why it matters:
 - adds a Python plugin-system proof case after the TypeScript corpus expansion
 - demonstrates conservative environment handling before accepting the successful evidence run
 - strengthens the corpus with source, tests, changelog, and an agent-coauthored upstream commit message
+
+## Case Study 10: `pallets/click`
+
+- category: Python CLI flag behavior repository
+- committed range: `91de59c6c8abc8251e7af551cd4546cc964288af~1..91de59c6c8abc8251e7af551cd4546cc964288af`
+- changed files inside validation boundary:
+  - `CHANGES.rst`
+  - `src/click/core.py`
+  - `tests/test_options.py`
+- validation style: sparse public-repository clone with a pinned `flag_value` optional-behavior fix
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot compiled but lacked the changelog, implementation, and tests for the optional flag-value behavior
+- current snapshot added the `flag_value is not UNSET or self.default is UNSET` implementation path
+- current snapshot added targeted tests for optional behavior and type conversion
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- adds a second Python proof case, this time in a widely used CLI framework
+- exercises behavior evidence that spans changelog, source, and tests
+- shows that RegressProof can validate a compact language-specific fix without requiring a full dependency install

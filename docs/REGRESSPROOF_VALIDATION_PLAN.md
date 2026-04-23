@@ -270,6 +270,16 @@ Pluggy public-repository evidence currently includes:
 - artifact `/tmp/regressproof-pluggy-pluginmanager-artifacts/regressproof-report.json`
 - environment note: an initial `python` command check produced `preexisting_failure / low`; switching the config to `python3` produced the successful pinned evidence run
 
+Click public-repository evidence currently includes:
+
+- pinned CLI flag-value run on `pallets/click`
+- baseline commit `7f7bbe4569ea68e8dabee232eade069ef3310aea`
+- head commit `91de59c6c8abc8251e7af551cd4546cc964288af`
+- verdict `successful_change / high`
+- changed files in `CHANGES.rst`, `src/click/core.py`, and `tests/test_options.py`
+- artifact `/tmp/regressproof-click-flag-value-artifacts/regressproof-report.json`
+- baseline evidence check failed because the changelog/source/test markers did not exist yet; current snapshot passed the same checks after the pinned fix
+
 The candidate queue currently includes compact TypeScript and Python repositories for the next validation pass.
 Candidates are not evidence until they have a pinned run, changed-file evidence, artifact path, verdict, and confidence value.
 

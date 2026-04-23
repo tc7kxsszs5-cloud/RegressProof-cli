@@ -49,9 +49,14 @@
       "repo": "pallets/click",
       "url": "https://github.com/pallets/click.git",
       "language": "python",
-      "status": "candidate",
+      "status": "validated",
       "rationale": "Mature Python CLI framework that can broaden validation beyond TypeScript once a small commit is pinned.",
-      "firstPass": "Select a small Python source/test commit and begin with metadata plus path-snapshot evidence before any pytest run."
+      "firstPass": "Select a small Python source/test commit and begin with metadata plus path-snapshot evidence before any pytest run.",
+      "execution": {
+        "configPath": "examples/external-click-flag-value.config.json",
+        "headRef": "91de59c6c8abc8251e7af551cd4546cc964288af",
+        "artifactDir": "/tmp/regressproof-click-flag-value-artifacts"
+      }
     },
     {
       "id": "pluggy-candidate",
@@ -69,6 +74,27 @@
     }
   ],
   "runs": [
+    {
+      "id": "click-flag-value-2026-04-23",
+      "repo": "pallets/click",
+      "url": "https://github.com/pallets/click.git",
+      "category": "python-cli-flag-value",
+      "configPath": "examples/external-click-flag-value.config.json",
+      "validatedAt": "2026-04-23T07:04:58.135Z",
+      "baselineCommit": "7f7bbe4569ea68e8dabee232eade069ef3310aea",
+      "headCommit": "91de59c6c8abc8251e7af551cd4546cc964288af",
+      "diffRange": "91de59c6c8abc8251e7af551cd4546cc964288af~1..91de59c6c8abc8251e7af551cd4546cc964288af",
+      "headRef": "91de59c6c8abc8251e7af551cd4546cc964288af",
+      "changedFiles": [
+        "CHANGES.rst",
+        "src/click/core.py",
+        "tests/test_options.py"
+      ],
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-click-flag-value-artifacts/regressproof-report.json",
+      "notes": "Pinned Click flag_value optional behavior fix with changelog, implementation, and test evidence."
+    },
     {
       "id": "pluggy-pluginmanager-2026-04-22",
       "repo": "pytest-dev/pluggy",

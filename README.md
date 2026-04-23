@@ -3,8 +3,8 @@
 `Proof, not guesses, for agent-caused regressions.`
 
 [![RegressProof](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml/badge.svg)](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml)
-![External runs](https://img.shields.io/badge/external_runs-6-success)
-![Public repos](https://img.shields.io/badge/public_repos-5-blue)
+![External runs](https://img.shields.io/badge/external_runs-7-success)
+![Public repos](https://img.shields.io/badge/public_repos-6-blue)
 ![Fixtures](https://img.shields.io/badge/fixtures-11%2F11-success)
 ![License](https://img.shields.io/badge/license-proprietary_source_available-lightgrey)
 
@@ -15,7 +15,7 @@ It compares a baseline against a changed state, runs verification commands, maps
 
 Current verified surface:
 
-- `6` curated external validation runs across `5` public repositories
+- `7` curated external validation runs across `6` public repositories
 - `11/11` tracked fixtures passing
 - standalone committed trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -68,10 +68,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `pytest-dev/pluggy`
-- pinned range: `20d8143f127a4d7526dbbea441857b4b80ec8bdd~1..20d8143f127a4d7526dbbea441857b4b80ec8bdd`
-- repo-specific result: `successful_change / high` on a plugin manager deduplication slice
-- changed-file evidence includes `src/pluggy/_hooks.py`, `src/pluggy/_manager.py`, and `testing/test_pluginmanager.py`
+- repository: `pallets/click`
+- pinned range: `91de59c6c8abc8251e7af551cd4546cc964288af~1..91de59c6c8abc8251e7af551cd4546cc964288af`
+- repo-specific result: `successful_change / high` on a Python CLI `flag_value` optional-behavior slice
+- changed-file evidence includes `CHANGES.rst`, `src/click/core.py`, and `tests/test_options.py`
 
 Further reading:
 
@@ -294,6 +294,7 @@ node src/cli.js run \
 Example configs for validating external repositories live at:
 
 - `examples/external-doc-plugin.config.json`
+- `examples/external-click-flag-value.config.json`
 - `examples/external-ky-hooks.config.json`
 - `examples/external-nanostores-global-epoch.config.json`
 - `examples/external-ofetch-timeout-signal.config.json`

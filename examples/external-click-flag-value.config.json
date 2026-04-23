@@ -1,0 +1,48 @@
+{
+  "projectName": "click external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "pyproject.toml"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    "CHANGES.rst",
+    "src/click/core.py",
+    "tests/test_options.py"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "python3 -m py_compile src/click/core.py",
+      "python3 - <<'PY'\nfrom pathlib import Path\nfor file in ['CHANGES.rst','src/click/core.py','tests/test_options.py','pyproject.toml']:\n    path = Path(file)\n    if not path.exists():\n        raise SystemExit(f'Missing expected validation file: {file}')\n    if file.endswith('.py') and not path.read_text().strip():\n        raise SystemExit(f'Empty validation file: {file}')\nPY",
+      "python3 - <<'PY'\nfrom pathlib import Path\nchanges = Path('CHANGES.rst').read_text()\ncore = Path('src/click/core.py').read_text()\ntests = Path('tests/test_options.py').read_text()\nif 'flag_value`` is set or no default is provided' not in changes:\n    raise SystemExit('flag_value changelog evidence missing')\nif 'flag_value is not UNSET or self.default is UNSET' not in core:\n    raise SystemExit('flag_value optional behavior implementation missing')\nif 'test_flag_value_optional_behavior' not in tests:\n    raise SystemExit('flag_value optional behavior test missing')\nif 'test_flag_value_with_type_conversion' not in tests:\n    raise SystemExit('flag_value type conversion test missing')\nPY"
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

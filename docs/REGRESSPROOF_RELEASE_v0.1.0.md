@@ -78,15 +78,16 @@ This addendum matters because it turns the release from "standalone and internal
 
 ## Current Proof Addendum
 
-As of 22 April 2026, the external proof surface has expanded to:
+As of 23 April 2026, the external proof surface has expanded to:
 
-- `6` curated external validation runs
-- `5` public repositories
+- `7` curated external validation runs
+- `6` public repositories
 - compact TypeScript proof slices:
   - `sindresorhus/ky`
   - `unjs/ofetch`
   - `nanostores/nanostores`
 - Python proof slice:
+  - `pallets/click`
   - `pytest-dev/pluggy`
 - provider-code proof slice:
   - `openclaw/openclaw`

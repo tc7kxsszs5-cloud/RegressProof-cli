@@ -2,7 +2,7 @@
 
 **Project:** `RegressProof`  
 **Purpose:** Persistent project memory and navigation entry point  
-**Last updated:** 20 April 2026
+**Last updated:** 23 April 2026
 
 ## Vision
 
@@ -22,29 +22,29 @@ Core principle:
 
 ## Current Document Set
 
-- [Product Brief](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_PRODUCT_BRIEF.md)
-- [Specification](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SPEC.md)
-- [Implementation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_IMPLEMENTATION_PLAN.md)
-- [MVP Task Breakdown](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
-- [Validation Plan](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_VALIDATION_PLAN.md)
-- [Decision Log](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_DECISION_LOG.md)
+- [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Specification](REGRESSPROOF_SPEC.md)
+- [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
+- [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
+- [Decision Log](REGRESSPROOF_DECISION_LOG.md)
 - [Case Studies](REGRESSPROOF_CASE_STUDIES.md)
 - [Proof Ledger](REGRESSPROOF_PROOF_LEDGER.md)
 - [GitHub Repository Settings](REGRESSPROOF_GITHUB_SETTINGS.md)
-- [Workflow Memory](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_WORKFLOW_MEMORY.md)
-- [Session Template](/Users/mac/Desktop/rork-kiku/docs/REGRESSPROOF_SESSION_TEMPLATE.md)
-- [Session Notes Directory](/Users/mac/Desktop/rork-kiku/docs/sessions/README.md)
+- [Workflow Memory](REGRESSPROOF_WORKFLOW_MEMORY.md)
+- [Session Template](REGRESSPROOF_SESSION_TEMPLATE.md)
+- [Session Notes Directory](sessions/README.md)
 
 ## Current Implementation Status
 
 Implementation has progressed to a proven standalone MVP.
 
-Current code scaffold lives in:
+Current code scaffold lives at the standalone repository root:
 
-- [regressproof/README.md](/Users/mac/Desktop/rork-kiku/regressproof/README.md)
-- [regressproof/package.json](/Users/mac/Desktop/rork-kiku/regressproof/package.json)
-- [regressproof/regressproof.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.config.json)
-- [regressproof/src/cli.js](/Users/mac/Desktop/rork-kiku/regressproof/src/cli.js)
+- [README.md](../README.md)
+- [package.json](../package.json)
+- [regressproof.config.json](../regressproof.config.json)
+- [src/cli.js](../src/cli.js)
 
 What already works:
 
@@ -80,7 +80,7 @@ What already works:
 - usage/cost scaffold with `estimated` and `exact` modes
 - exact usage mode now supports environment-driven activation without config edits
 - lightweight real-repo validation config:
-  - [regressproof.real-repo.config.json](/Users/mac/Desktop/rork-kiku/regressproof/regressproof.real-repo.config.json)
+  - [regressproof.real-repo.config.json](../regressproof.real-repo.config.json)
 - lightweight large-repo mode with:
   - `baseline.mode = skip`
   - `targetPaths`
@@ -140,6 +140,7 @@ What already works:
 - external corpus validation now includes a pinned `unjs/ofetch` timeout-signal run
 - external corpus validation now includes a pinned `nanostores/nanostores` shared-epoch run
 - external corpus validation now includes a pinned `pytest-dev/pluggy` Python plugin-manager run
+- external corpus validation now includes a pinned `pallets/click` Python CLI flag-value run
 - reusable external validation tooling now includes:
   - `npm run real:public`
   - `npm run external:runs`
@@ -262,6 +263,10 @@ RegressProof has now been validated outside its own repository on public GitHub 
    - `pytest-dev/pluggy`
    - result: `successful_change / high` on a pinned hook implementation removal and hookcaller deduplication fix
    - changed-file evidence includes `src/pluggy/_hooks.py`, `src/pluggy/_manager.py`, and `testing/test_pluginmanager.py`
+10. compact Python CLI framework with flag-value behavior coverage
+   - `pallets/click`
+   - result: `successful_change / high` on a pinned optional `flag_value` behavior fix
+   - changed-file evidence includes `CHANGES.rst`, `src/click/core.py`, and `tests/test_options.py`
 
 This does not yet replace broader real-world validation, but it means RegressProof is no longer proven only on fixtures and self-hosted scenarios.
 

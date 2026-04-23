@@ -40,7 +40,7 @@ Use this when a short repository intro is needed on GitHub, in a post, or in a p
 
 Use this when announcing the current MVP:
 
-> RegressProof is now a proven standalone MVP. The repository passes full `verify-mvp`, the tracked fixture suite passes `11/11`, committed trust scenarios validate as `successful_change / high`, and the curated external corpus includes 6 pinned runs across 5 public repositories including `pytest-dev/pluggy`, `nanostores/nanostores`, `unjs/ofetch`, `sindresorhus/ky`, and `openclaw/openclaw`.
+> RegressProof is now a proven standalone MVP. The repository passes full `verify-mvp`, the tracked fixture suite passes `11/11`, committed trust scenarios validate as `successful_change / high`, and the curated external corpus includes 7 pinned runs across 6 public repositories including `pallets/click`, `pytest-dev/pluggy`, `nanostores/nanostores`, `unjs/ofetch`, `sindresorhus/ky`, and `openclaw/openclaw`.
 
 ## Public Proof Line
 
@@ -52,7 +52,7 @@ Use this when you need one short sentence about maturity:
 
 Use this near the top of README, release notes, or repository social copy:
 
-> Current proof surface: 6 external runs, 5 public repositories, 11/11 tracked fixtures, standalone trust scenarios passing, and conservative verdict handling for environment/preexisting failures.
+> Current proof surface: 7 external runs, 6 public repositories, 11/11 tracked fixtures, standalone trust scenarios passing, and conservative verdict handling for environment/preexisting failures.
 
 ## Suggested Repository Header
 
@@ -61,5 +61,5 @@ RegressProof: proof, not guesses, for agent-caused regressions.
 
 CLI + GitHub Action utility that compares baseline vs current verification,
 maps failures to changed files, and emits evidence-focused verdicts.
-Current proof: 6 external runs / 5 public repos / 11 tracked fixtures.
+Current proof: 7 external runs / 6 public repos / 11 tracked fixtures.
 ```
