@@ -143,6 +143,7 @@ What already works:
 - external corpus validation now includes a pinned `nanostores/nanostores` shared-epoch run
 - external corpus validation now includes a pinned `pytest-dev/pluggy` Python plugin-manager run
 - external corpus validation now includes a pinned `pallets/click` Python CLI flag-value run
+- external corpus validation now includes a pinned `pmndrs/zustand` persist rehydration run
 - reusable external validation tooling now includes:
   - `npm run real:public`
   - `npm run external:runs`

@@ -3,8 +3,8 @@
 `Proof, not guesses, for agent-caused regressions.`
 
 [![RegressProof](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml/badge.svg)](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml)
-![External runs](https://img.shields.io/badge/external_runs-7-success)
-![Public repos](https://img.shields.io/badge/public_repos-6-blue)
+![External runs](https://img.shields.io/badge/external_runs-8-success)
+![Public repos](https://img.shields.io/badge/public_repos-7-blue)
 ![Fixtures](https://img.shields.io/badge/fixtures-11%2F11-success)
 ![License](https://img.shields.io/badge/license-proprietary_source_available-lightgrey)
 
@@ -15,7 +15,7 @@ It compares a baseline against a changed state, runs verification commands, maps
 
 Current verified surface:
 
-- `7` curated external validation runs across `6` public repositories
+- `8` curated external validation runs across `7` public repositories
 - `11/11` tracked fixtures passing
 - standalone committed trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -88,10 +88,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `pallets/click`
-- pinned range: `91de59c6c8abc8251e7af551cd4546cc964288af~1..91de59c6c8abc8251e7af551cd4546cc964288af`
-- repo-specific result: `successful_change / high` on a Python CLI `flag_value` optional-behavior slice
-- changed-file evidence includes `CHANGES.rst`, `src/click/core.py`, and `tests/test_options.py`
+- repository: `pmndrs/zustand`
+- pinned range: `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
+- repo-specific result: `successful_change / high` on a persist rehydration latest-state callback slice
+- changed-file evidence includes `src/middleware/persist.ts` and `tests/persistAsync.test.tsx`
 
 Further reading:
 

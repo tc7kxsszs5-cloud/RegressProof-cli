@@ -1,7 +1,7 @@
 # RegressProof Case Studies
 
 **Purpose:** Preserve concise proof-oriented examples from real validation runs  
-**Last updated:** 20 April 2026
+**Last updated:** 1 May 2026
 
 ## Why This Exists
 
@@ -228,3 +228,25 @@ Why it matters:
 - adds a second Python proof case, this time in a widely used CLI framework
 - exercises behavior evidence that spans changelog, source, and tests
 - shows that RegressProof can validate a compact language-specific fix without requiring a full dependency install
+
+## Case Study 11: `pmndrs/zustand`
+
+- category: TypeScript persist/rehydration state-management repository
+- committed range: `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
+- changed files inside validation boundary:
+  - `src/middleware/persist.ts`
+  - `tests/persistAsync.test.tsx`
+- validation style: sparse public-repository clone with a pinned persist middleware slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot preserved the package and test-script surface while still lacking the new rehydration latest-state behavior
+- current snapshot kept the same quick checks green and carried the persist middleware fix plus targeted async test evidence
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- adds a new pinned TypeScript code-and-test repository centered on state hydration behavior rather than hooks or fetch
+- strengthens the standalone corpus with another narrow but meaningful source-plus-test slice
+- shows RegressProof can promote a prepared external config into a fresh canonical run record instead of relying on old workspace notes

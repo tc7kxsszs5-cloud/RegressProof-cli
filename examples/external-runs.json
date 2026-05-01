@@ -81,6 +81,29 @@
   ],
   "runs": [
     {
+      "id": "zustand-persist-2026-05-01",
+      "repo": "pmndrs/zustand",
+      "url": "https://github.com/pmndrs/zustand.git",
+      "category": "typescript-persist-rehydration",
+      "configPath": "examples/external-zustand-persist.config.json",
+      "validatedAt": "2026-05-01T13:01:58.320Z",
+      "baselineCommit": "a3869ca4eb1d397d8bf2a6f350661115fff18a5a",
+      "headCommit": "6213fc11bdf096301a82ae5c236b5a666a4ee3ca",
+      "diffRange": "6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca",
+      "headRef": "6213fc11bdf096301a82ae5c236b5a666a4ee3ca",
+      "changedFiles": [
+        "src/middleware/persist.ts",
+        "tests/persistAsync.test.tsx"
+      ],
+      "status": "completed_pinned_run",
+      "countsTowardCompletedCorpus": true,
+      "reproducibility": "pinned_head_commit",
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-zustand-persist-artifacts/regressproof-report.json",
+      "notes": "Pinned Zustand persist rehydration fix proving latest-state post-rehydration callback handling with targeted source and async test evidence."
+    },
+    {
       "id": "click-flag-value-2026-04-23",
       "repo": "pallets/click",
       "url": "https://github.com/pallets/click.git",

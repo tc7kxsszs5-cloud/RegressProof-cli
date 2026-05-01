@@ -58,7 +58,7 @@ npm run external:check
 npm run external:run-corpus
 ```
 
-As of 23 April 2026, the catalog contains seven completed runs across six public repositories:
+As of 1 May 2026, the catalog contains eight completed runs across seven public repositories:
 
 - `openclaw/openclaw`
 - `sindresorhus/ky`
@@ -66,6 +66,7 @@ As of 23 April 2026, the catalog contains seven completed runs across six public
 - `nanostores/nanostores`
 - `pytest-dev/pluggy`
 - `pallets/click`
+- `pmndrs/zustand`
 
 It has also been exercised successfully on earlier external public repositories in these modes:
 
@@ -88,7 +89,10 @@ It has also been exercised successfully on earlier external public repositories 
    - result: `successful_change / high`
 4. additional code and test repository:
    - `pmndrs/zustand`
-   - committed range `HEAD~1..HEAD`
+   - committed range `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
+   - changed files:
+     - `src/middleware/persist.ts`
+     - `tests/persistAsync.test.tsx`
    - validation config:
      - `external-zustand-persist.config.json`
    - result: `successful_change / high`
