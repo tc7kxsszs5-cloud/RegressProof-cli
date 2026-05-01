@@ -6,11 +6,10 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = path.resolve(regressproofRoot, "..");
 
 function main() {
   const args = process.argv.slice(2);
-  const repo = readArg(args, "--repo") || workspaceRoot;
+  const repo = readArg(args, "--repo") || regressproofRoot;
   const outDir =
     readArg(args, "--out-dir") || path.join(os.tmpdir(), `regressproof-mvp-${Date.now()}`);
 
@@ -61,7 +60,7 @@ function main() {
 
 function runJsonScript(scriptPath, scriptArgs) {
   const output = execFileSync("node", [scriptPath, ...scriptArgs], {
-    cwd: workspaceRoot,
+    cwd: regressproofRoot,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
     maxBuffer: 1024 * 1024 * 20,

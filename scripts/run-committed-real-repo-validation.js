@@ -6,11 +6,10 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = path.resolve(regressproofRoot, "..");
 
 function main() {
   const args = process.argv.slice(2);
-  const repo = readArg(args, "--repo") || workspaceRoot;
+  const repo = readArg(args, "--repo") || regressproofRoot;
   const baseBranch = readArg(args, "--base-branch") || process.env.REGRESSPROOF_BASE_BRANCH || "main";
   const compareRef = readArg(args, "--head-ref") || "HEAD";
   const baselineOverride = readArg(args, "--baseline-ref");

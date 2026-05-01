@@ -2,7 +2,7 @@
 
 **Project:** `RegressProof`  
 **Purpose:** Persistent project memory and navigation entry point  
-**Last updated:** 23 April 2026
+**Last updated:** 1 May 2026
 
 ## Vision
 
@@ -23,9 +23,11 @@ Core principle:
 ## Current Document Set
 
 - [Product Brief](REGRESSPROOF_PRODUCT_BRIEF.md)
+- [Positioning](REGRESSPROOF_POSITIONING.md)
 - [Specification](REGRESSPROOF_SPEC.md)
 - [Implementation Plan](REGRESSPROOF_IMPLEMENTATION_PLAN.md)
 - [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
+- [Standalone Plan](REGRESSPROOF_STANDALONE_PLAN.md)
 - [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
 - [Decision Log](REGRESSPROOF_DECISION_LOG.md)
 - [Case Studies](REGRESSPROOF_CASE_STUDIES.md)
@@ -37,7 +39,7 @@ Core principle:
 
 ## Current Implementation Status
 
-Implementation has progressed to a proven standalone MVP.
+Implementation has progressed to a proven standalone MVP with an active canonical repository boundary in `RegressProof-cli`.
 
 Current code scaffold lives at the standalone repository root:
 
@@ -152,8 +154,8 @@ What is next:
 - wider real-repository validation on non-self-hosted repos
 - provider-native usage adapters beyond env/file ingestion
 - richer PR presentation and review thread behavior
-- cleaner standalone packaging and eventual repo separation
-- broader external validation after standalone repo separation
+- stronger public case studies and release material
+- broader external validation without diluting proof discipline
 
 ## Current Product Positioning
 
@@ -297,6 +299,12 @@ However, the core engine now supports the mechanics needed for that next step:
 - snapshot execution for the compared committed ref
 - reports that expose baseline commit, compare commit, and execution mode
 - graceful fallback when committed refs do not yet contain the RegressProof project boundary
+
+## Canonical Repository Rule
+
+Treat `RegressProof-cli` as the canonical standalone home for the active product.
+
+Older repository copies, embedded worktrees, and historical export directories may still contain useful implementation history, but they should not compete with this repository as a source of truth.
 
 ## Memory Rule
 

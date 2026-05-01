@@ -242,3 +242,15 @@ Documenting both the success and the caveat reinforces the product's proof-first
 **Decision:** RegressProof should use a proprietary source-available license posture while the proof corpus, classifier behavior, and product positioning are still being hardened.
 
 **Reason:** The project has moved from idea documentation into working CLI, public validation corpus, and evidence artifacts. A proprietary posture better preserves the project owner's control over copying, redistribution, derivative products, and brand use while the product direction matures.
+
+## Decision 39
+
+**Decision:** `RegressProof-cli` is the canonical standalone repository for the active product.
+
+**Reason:** Splitting the code, docs, and proof claims across multiple repository trees weakens trust and makes the product harder to understand. One canonical repository keeps runtime, validation evidence, and public positioning aligned.
+
+## Decision 40
+
+**Decision:** The public proof surface should distinguish durable pinned external evidence from runner smoke checks and historical notes.
+
+**Reason:** External validation is one of the strongest trust signals for RegressProof, but only if the catalog stays honest about what is reproducible, what is provisional, and what should not be overclaimed.

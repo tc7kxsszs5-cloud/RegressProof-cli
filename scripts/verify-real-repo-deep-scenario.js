@@ -6,10 +6,9 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 
 const regressproofRoot = path.resolve(__dirname, "..");
-const workspaceRoot = path.resolve(regressproofRoot, "..");
 function main() {
   const args = process.argv.slice(2);
-  const repo = readArg(args, "--repo") || workspaceRoot;
+  const repo = readArg(args, "--repo") || regressproofRoot;
   const compareRef = readArg(args, "--head-ref") || "HEAD";
   const outDir =
     readArg(args, "--out-dir") || path.join(os.tmpdir(), `regressproof-real-deep-scenario-${Date.now()}`);
@@ -48,7 +47,7 @@ function main() {
       outDir,
     ],
     {
-      cwd: workspaceRoot,
+      cwd: regressproofRoot,
       stdio: ["ignore", "ignore", "pipe"],
       maxBuffer: 1024 * 1024 * 20,
     },
@@ -91,7 +90,7 @@ function runReadiness(repo, compareRef) {
       "json",
     ],
     {
-      cwd: workspaceRoot,
+      cwd: regressproofRoot,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
       maxBuffer: 1024 * 1024 * 10,

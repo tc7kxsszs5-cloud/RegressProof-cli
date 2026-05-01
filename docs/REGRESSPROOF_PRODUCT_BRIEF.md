@@ -11,6 +11,8 @@ RegressProof is a CLI and GitHub Action utility that provides a validation and a
 
 It checks whether an agent-introduced code change caused a measurable regression, links that regression to real verification evidence, and records the associated spend or estimated spend. It does not rely on intuition or vague judgment. It relies on baseline comparison, test results, build results, and confidence-scored classification.
 
+The current strongest product form is a standalone utility repository with a clear CLI entrypoint, reproducible fixture validation, committed trust scenarios, and a growing external proof catalog.
+
 ## The Problem
 
 AI coding agents can:
@@ -65,6 +67,18 @@ It is:
 - engineering teams that want to reduce wasted spend from bad AI patches
 - platform builders creating multi-agent coding environments
 
+## Why Now
+
+AI-assisted coding is accelerating, but trust still breaks down at the review boundary.
+
+Teams increasingly need help answering:
+
+- did this patch really introduce the regression?
+- was the failure already present?
+- do we have enough evidence to blame the new change?
+
+That is the gap RegressProof is trying to close.
+
 ## First Release Scope
 
 The first release should focus on:
@@ -75,6 +89,8 @@ The first release should focus on:
 - high-confidence fault detection only
 - internal credit ledger
 - markdown and JSON reports
+
+The first release should be packaged and explained as a practical utility first, not as a broad governance platform.
 
 ## What It Will Prove
 
@@ -94,6 +110,15 @@ The first version will not promise:
 - perfect attribution in all ambiguous cases
 - refunds of real provider tokens
 - detection of every business-logic mistake without supporting tests
+
+## Adoption Strategy
+
+The most credible path is:
+
+1. prove the CLI on fixtures and committed trust scenarios
+2. prove the external runner on pinned public repositories
+3. make reports easy to inspect in GitHub workflows
+4. expand only after the evidence surface stays honest
 
 ## Why The Idea Matters
 
@@ -117,6 +142,15 @@ RegressProof is successful if a team can run it against a real repository and tr
 - connect them to specific patches or PRs
 - quantify the cost of those failures
 - give a fair, evidence-backed assessment of agent-caused faults
+
+## Current Public Shape
+
+Today the project should be presented as:
+
+- a standalone CLI repository
+- a GitHub Action-friendly validation utility
+- a proof-first regression checker
+- a conservative accountability layer for AI coding workflows
 
 ## Recommended Next Documents
 

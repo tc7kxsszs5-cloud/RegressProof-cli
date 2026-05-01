@@ -4,11 +4,34 @@
   "private": true,
   "description": "Proof, not guesses, for agent-caused regressions.",
   "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "cli",
+    "ci",
+    "github-action",
+    "github-actions",
+    "regression-detection",
+    "verification",
+    "ai-agents",
+    "ai-coding",
+    "ai-code-review",
+    "code-review",
+    "developer-tools",
+    "nodejs"
+  ],
   "bin": {
     "regressproof": "./dist/cli.js"
   },
   "scripts": {
     "build": "node scripts/build.js",
+    "verify": "npm run verify:mvp",
+    "check": "npm run verify:mvp",
+    "trust": "npm run real:scenario",
+    "trust:deep": "npm run real:scenario:deep",
+    "readiness": "npm run real:readiness -- --repo .",
+    "standalone:export": "node scripts/export-standalone.js",
     "run": "node dist/cli.js run",
     "dev": "node src/cli.js run",
     "fixtures:export-all-packs": "node scripts/export-all-fixture-packs.js",

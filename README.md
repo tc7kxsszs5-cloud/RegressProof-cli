@@ -29,6 +29,12 @@ Proof artifacts:
 - proof ledger: `docs/REGRESSPROOF_PROOF_LEDGER.md`
 - validation plan: `docs/REGRESSPROOF_VALIDATION_PLAN.md`
 
+Repository planning and positioning:
+
+- positioning: `docs/REGRESSPROOF_POSITIONING.md`
+- product brief: `docs/REGRESSPROOF_PRODUCT_BRIEF.md`
+- standalone plan: `docs/REGRESSPROOF_STANDALONE_PLAN.md`
+
 ## Legal Status
 
 RegressProof is proprietary source-available software unless a separate written agreement says otherwise.
@@ -48,6 +54,20 @@ Current MVP capabilities:
 - tracked fixture packs for reproducible validation
 - committed real-repo trust scenarios
 - curated public-repository validation catalog
+
+## Stable Commands
+
+Preferred top-level commands:
+
+```bash
+npm run verify
+npm run trust
+npm run trust:deep
+npm run readiness
+npm run standalone:export
+```
+
+These aliases keep the public workflow easier to remember while preserving the lower-level scripts used by the validation harness.
 
 ## Current Proof Status
 
