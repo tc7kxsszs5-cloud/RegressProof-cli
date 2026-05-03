@@ -77,6 +77,20 @@
         "headRef": "20d8143f127a4d7526dbbea441857b4b80ec8bdd",
         "artifactDir": "/tmp/regressproof-pluggy-pluginmanager-artifacts"
       }
+    },
+    {
+      "id": "pydantic-candidate",
+      "repo": "pydantic/pydantic",
+      "url": "https://github.com/pydantic/pydantic.git",
+      "language": "python",
+      "status": "prepared_needs_revalidation",
+      "rationale": "Strong prepared Python code-plus-test candidate centered on a compact runtime equality change with matching tests.",
+      "firstPass": "Recover the exact pinned commit from the historical b1bf194 note, then rerun the prepared config from the standalone repository before promoting it into completed proof.",
+      "execution": {
+        "configPath": "examples/external-pydantic-extra-equality.config.json",
+        "headRef": "b1bf194",
+        "artifactDir": "/tmp/regressproof-pydantic-extra-equality-artifacts"
+      }
     }
   ],
   "runs": [

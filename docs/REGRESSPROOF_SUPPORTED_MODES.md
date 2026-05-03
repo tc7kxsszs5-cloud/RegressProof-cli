@@ -78,18 +78,12 @@ This mode is useful when the latest change is mostly tutorial, documentation, or
 
 ### 5. External Code-and-Test Repositories
 
-RegressProof is proven on at least one external repository where the latest committed range includes both code and tests.
+RegressProof is proven on external repositories where the committed range includes both code and tests, but only the runs recorded in the canonical catalog should be treated as durable proof.
 
 Current evidence:
 
 - `NousResearch/hermes-agent`
 - changed files included runtime Python code and tests
-- result: `successful_change / high`
-- `pydantic/pydantic`
-- committed range: `b1bf194~1..b1bf194`
-- changed files:
-  - `pydantic/main.py`
-  - `tests/test_main.py`
 - result: `successful_change / high`
 - `pmndrs/zustand`
 - committed range: `6213fc1~1..6213fc1`
@@ -98,7 +92,14 @@ Current evidence:
   - `tests/persistAsync.test.tsx`
 - result: `successful_change / high`
 
-This is now the strongest external proof category currently demonstrated, with repeated evidence in Python and at least one TypeScript-oriented code-and-test repository.
+Prepared but not yet canonical:
+
+- `pydantic/pydantic`
+  - prepared config: `examples/external-pydantic-extra-equality.config.json`
+  - historical notes mention a successful run, but the standalone pinned record is not yet present in `examples/external-runs.json`
+  - treat this as the next promotion candidate, not as completed proof
+
+This remains the strongest external proof category currently demonstrated, with repeated evidence in Python and TypeScript-oriented code-and-test repositories, but claims should stay anchored to the cataloged runs.
 
 ## Supported But Still Narrow
 
@@ -132,7 +133,7 @@ Today, the safest concise claim is:
 The next strongest evidence should come from:
 
 1. another external JS/TS code-heavy repository with a broader multi-file runtime change
-2. another external Python code-heavy repository beyond the now-proven `hermes-agent` and `pydantic` cases
+2. another external Python code-heavy repository beyond the currently cataloged Python corpus, with `pydantic/pydantic` as the strongest prepared next candidate
 3. at least one larger repository with more complex committed ranges
 
 That is a better next step than adding another major architecture layer.

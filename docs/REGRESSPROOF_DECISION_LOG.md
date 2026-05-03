@@ -254,3 +254,9 @@ Documenting both the success and the caveat reinforces the product's proof-first
 **Decision:** The public proof surface should distinguish durable pinned external evidence from runner smoke checks and historical notes.
 
 **Reason:** External validation is one of the strongest trust signals for RegressProof, but only if the catalog stays honest about what is reproducible, what is provisional, and what should not be overclaimed.
+
+## Decision 41
+
+**Decision:** Prepared external proof paths and negative-proof examples must be tracked explicitly, but they do not count as canonical corpus evidence until the standalone-side run record is preserved in the catalog.
+
+**Reason:** Historical session memory can be directionally useful, but it is not enough for proof claims. Recording prepared candidates separately keeps the next validation step reproducible, while a runbook for `preexisting_failure`, `environment_failure`, and `insufficient_evidence` examples strengthens trust without inflating the completed proof surface.

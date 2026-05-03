@@ -58,7 +58,7 @@ npm run external:check
 npm run external:run-corpus
 ```
 
-As of 1 May 2026, the catalog contains eight completed runs across seven public repositories:
+As of 3 May 2026, the catalog contains eight run records across seven public repositories:
 
 - `openclaw/openclaw`
 - `sindresorhus/ky`
@@ -67,6 +67,13 @@ As of 1 May 2026, the catalog contains eight completed runs across seven public 
 - `pytest-dev/pluggy`
 - `pallets/click`
 - `pmndrs/zustand`
+
+Those eight records currently mean:
+
+- seven pinned completed proof runs
+- one public-runner smoke run
+
+Prepared candidates belong in `candidateQueue[]`; they are not durable proof until promoted into `runs[]`.
 
 It has also been exercised successfully on earlier external public repositories in these modes:
 
@@ -96,12 +103,15 @@ It has also been exercised successfully on earlier external public repositories 
    - validation config:
      - `external-zustand-persist.config.json`
    - result: `successful_change / high`
-5. additional code and test repository:
-   - `pydantic/pydantic`
-   - committed range `HEAD~1..HEAD`
-   - validation config:
-     - `external-pydantic-extra-equality.config.json`
-   - result: `successful_change / high`
+
+Prepared next candidate:
+
+- `pydantic/pydantic`
+  - validation config:
+    - `external-pydantic-extra-equality.config.json`
+  - historical notes mention `b1bf194~1..b1bf194`
+  - not yet canonical because the pinned completed run is still missing from `examples/external-runs.json`
+  - use `docs/REGRESSPROOF_EXTERNAL_CORPUS_RUNBOOK.md` before promoting it
 
 This means the project now has evidence across:
 
@@ -112,6 +122,7 @@ This means the project now has evidence across:
 - external code-plus-test repositories
 - pinned TypeScript corpus slices
 - pinned Python corpus slices
+- prepared next-step Python corpus work that is separated from completed proof
 
 ## Repository Memory Rule
 

@@ -11,6 +11,17 @@
 RegressProof is a standalone CLI and GitHub Action utility for detecting measurable AI coding regressions.
 It compares a baseline against a changed state, runs verification commands, maps failures to diffs, and produces evidence-focused reports instead of intuition-only blame.
 
+## Start Here
+
+If you are new to the repository, use this order:
+
+1. `npm install && npm run build`
+2. `npm run verify`
+3. inspect `/tmp/regressproof-mvp-*/regressproof-mvp-summary.json`
+4. inspect `examples/external-runs.json` and `docs/REGRESSPROOF_CASE_STUDIES.md`
+
+That path shows the current self-proof surface first, then the pinned outside-repository evidence.
+
 ## Proof Snapshot
 
 Current verified surface:
@@ -34,6 +45,58 @@ Repository planning and positioning:
 - positioning: `docs/REGRESSPROOF_POSITIONING.md`
 - product brief: `docs/REGRESSPROOF_PRODUCT_BRIEF.md`
 - standalone plan: `docs/REGRESSPROOF_STANDALONE_PLAN.md`
+
+## Canonical Demo Surface
+
+For an external reviewer, the strongest compact demo today is:
+
+1. run `npm run verify`
+2. open the generated MVP summary in `/tmp/regressproof-mvp-*/regressproof-mvp-summary.json`
+3. confirm that fixtures, trust scenario, and deep trust scenario all complete
+4. open `examples/external-runs.json`
+5. inspect one pinned public-repository run and its changed-file evidence
+
+One current reviewer-facing example:
+
+- catalog record: `examples/external-runs.json` -> `zustand-persist-2026-05-01`
+- repository: `pmndrs/zustand`
+- committed range: `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
+- verdict: `successful_change / high`
+- changed files:
+  - `src/middleware/persist.ts`
+  - `tests/persistAsync.test.tsx`
+- artifact path recorded in catalog:
+  - `/tmp/regressproof-zustand-persist-artifacts/regressproof-report.json`
+
+This is the proof surface to optimize for: a reviewer can see the diff range, the touched files, the verdict, and where the full artifact lives.
+
+## What A Reviewer Actually Gets
+
+RegressProof is most useful when the output answers review questions quickly:
+
+| Reviewer question | RegressProof surface |
+| --- | --- |
+| Did a new failure appear, or was it already there? | `introducedFailures` vs `preexistingFailures` |
+| Does the failure map back to the diff? | changed files, `matchedChangedFiles`, changed-file match fields |
+| Is the tool making a strong claim or a cautious one? | `verdict` plus `confidence` |
+| What should CI do? | configurable CI exit policy driven by verdict class |
+| Where is the raw evidence? | JSON report, Markdown summary, PR summary, PR comment body, JSONL ledger |
+
+## Why Not Just CI Or Tests?
+
+Normal CI is necessary, but it usually answers only:
+
+- did a check fail?
+- is the branch red or green?
+
+RegressProof is trying to answer the next layer:
+
+- was the failure newly introduced relative to a baseline?
+- does the failure point back to files changed in the patch?
+- is this better classified as `confirmed_agent_fault`, `preexisting_failure`, `environment_failure`, or `insufficient_evidence`?
+
+So the value is not "tests, but again."
+The value is baseline-aware interpretation, diff-aware evidence, and conservative fault classification around the tests you already trust.
 
 ## Legal Status
 
@@ -130,6 +193,66 @@ This runs:
 The final summary is written to:
 
 - `/tmp/regressproof-mvp-*/regressproof-mvp-summary.json`
+
+## Try It On Your Repository
+
+The most honest first run is a narrow, stable verification slice on a real committed diff.
+
+Recommended first pass:
+
+1. start from this repository's `regressproof.config.json` shape
+2. keep the first check set small and meaningful
+3. use checks that already pass reliably on both `HEAD~1` and `HEAD`
+4. inspect the artifacts before widening scope
+
+Build RegressProof once:
+
+```bash
+npm install
+npm run build
+```
+
+Run a local report against your repository:
+
+```bash
+node dist/cli.js run \
+  --repo /path/to/your-repo \
+  --config /path/to/your-repo/regressproof.config.json \
+  --artifact-dir /tmp/regressproof-your-repo \
+  --format json
+```
+
+Check whether the current committed range is ready for diff-aware validation:
+
+```bash
+npm run real:readiness -- --repo /path/to/your-repo
+```
+
+Run the committed validation flow on your repository:
+
+```bash
+node scripts/run-committed-real-repo-validation.js \
+  --repo /path/to/your-repo \
+  --config /path/to/your-repo/regressproof.config.json \
+  --head-ref HEAD \
+  --artifact-dir /tmp/regressproof-your-repo-committed
+```
+
+If you want a public-repository-style temporary clone flow instead, adapt one of the configs in `examples/` and use:
+
+```bash
+npm run real:public -- \
+  --url https://github.com/owner/repo.git \
+  --config ./examples/external-doc-plugin.config.json \
+  --head-ref HEAD \
+  --artifact-dir /tmp/regressproof-public-demo
+```
+
+Good first targets are:
+
+- one fast build command
+- one targeted test command
+- changed files that stay inside that verification boundary
 
 ## Core Commands
 

@@ -224,6 +224,7 @@ So the current evidence now covers:
 Current public-runner evidence is tracked in `examples/external-runs.json`.
 That catalog records completed external runs separately from candidate repositories so future agents can continue validation without treating unverified candidates as proof.
 The next corpus pass is planned through `npm run external:run-corpus`, which lists candidate readiness and only executes candidates that have been promoted with pinned execution metadata.
+Promotion rules for positive corpus runs and conservative negative-proof examples now live in `docs/REGRESSPROOF_EXTERNAL_CORPUS_RUNBOOK.md`.
 
 OpenClaw public-repository evidence currently includes:
 

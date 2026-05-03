@@ -1,12 +1,13 @@
 # RegressProof Proof Ledger
 
 **Purpose:** One-page public proof summary for the repository surface
-**Last updated:** 23 April 2026
+**Last updated:** 3 May 2026
 
 ## Current Metrics
 
-- external validation runs: `7`
-- public repositories in catalog: `6`
+- external validation run records: `8`
+- pinned completed proof runs: `7`
+- public repositories in catalog: `7`
 - tracked fixtures: `11/11`
 - standalone trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -21,6 +22,7 @@
 | `nanostores/nanostores` | TypeScript state library | `8ad031d..3206678` | `successful_change / high` | runtime source, package limits |
 | `unjs/ofetch` | TypeScript fetch utility | `abc5a8f..3cf498b` | `successful_change / high` | source, tests, config |
 | `sindresorhus/ky` | TypeScript HTTP client | `e9eeb35..346f898` | `successful_change / high` | source, tests |
+| `pmndrs/zustand` | TypeScript persist rehydration | `a3869ca..6213fc1` | `successful_change / high` | middleware source, async test |
 | `openclaw/openclaw` | provider-code repository | `dc6ecd5..9753437` | `successful_change / high` | provider source, provider tests |
 | `openclaw/openclaw` | public-runner smoke | `fcc86f0..f1df354` | `successful_change / high` | runner smoke |
 
@@ -33,6 +35,10 @@ Examples:
 
 - `pytest-dev/pluggy`: an initial `python` command produced `preexisting_failure / low` because the shell lacked `python`; after switching to `python3`, the pinned run produced `successful_change / high`.
 - `Yeachan-Heo/oh-my-codex`: a broader check surfaced environment-sensitive path behavior, reinforcing the need for repository-specific verification slices.
+
+Prepared next proof path:
+
+- `pydantic/pydantic`: a repository-specific config exists, but it remains a prepared candidate until a fresh standalone-side pinned run is recorded in `examples/external-runs.json`.
 
 ## What This Proves
 

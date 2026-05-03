@@ -48,6 +48,8 @@
     "real:scenario": "node scripts/verify-real-repo-trust-scenario.js",
     "real:scenario:deep": "node scripts/verify-real-repo-deep-scenario.js",
     "verify:mvp": "node scripts/verify-mvp.js",
+    "demo:canonical-faults": "node scripts/run-canonical-fault-demo.js",
+    "validate:faults": "node scripts/run-canonical-fault-demo.js",
     "real:workspace": "node scripts/run-workspace-real-repo-validation.js",
     "export:standalone": "node scripts/export-standalone.js"
   }

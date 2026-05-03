@@ -29,6 +29,7 @@ Core principle:
 - [MVP Task Breakdown](REGRESSPROOF_MVP_TASK_BREAKDOWN.md)
 - [Standalone Plan](REGRESSPROOF_STANDALONE_PLAN.md)
 - [Validation Plan](REGRESSPROOF_VALIDATION_PLAN.md)
+- [External Corpus Runbook](REGRESSPROOF_EXTERNAL_CORPUS_RUNBOOK.md)
 - [Decision Log](REGRESSPROOF_DECISION_LOG.md)
 - [Case Studies](REGRESSPROOF_CASE_STUDIES.md)
 - [Proof Ledger](REGRESSPROOF_PROOF_LEDGER.md)
