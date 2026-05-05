@@ -77,23 +77,58 @@
         "headRef": "20d8143f127a4d7526dbbea441857b4b80ec8bdd",
         "artifactDir": "/tmp/regressproof-pluggy-pluginmanager-artifacts"
       }
-    },
-    {
-      "id": "pydantic-candidate",
-      "repo": "pydantic/pydantic",
-      "url": "https://github.com/pydantic/pydantic.git",
-      "language": "python",
-      "status": "prepared_needs_revalidation",
-      "rationale": "Strong prepared Python code-plus-test candidate centered on a compact runtime equality change with matching tests.",
-      "firstPass": "Recover the exact pinned commit from the historical b1bf194 note, then rerun the prepared config from the standalone repository before promoting it into completed proof.",
-      "execution": {
-        "configPath": "examples/external-pydantic-extra-equality.config.json",
-        "headRef": "b1bf194",
-        "artifactDir": "/tmp/regressproof-pydantic-extra-equality-artifacts"
-      }
     }
   ],
   "runs": [
+    {
+      "id": "sindresorhus-is-type-guards-2026-05-05",
+      "repo": "sindresorhus/is",
+      "url": "https://github.com/sindresorhus/is.git",
+      "category": "typescript-type-guard-narrowing",
+      "configPath": "examples/external-sindresorhus-is-type-guards.config.json",
+      "validatedAt": "2026-05-05T07:32:00.590Z",
+      "baselineCommit": "cb4ee0e92cd3bff8353bb6738bd1f54db87dc293",
+      "headCommit": "13febb6b01e24863ced3847a7ee112a48c154e0e",
+      "diffRange": "13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e",
+      "headRef": "13febb6b01e24863ced3847a7ee112a48c154e0e",
+      "changedFiles": [
+        "package.json",
+        "source/index.ts",
+        "source/types.ts",
+        "test/test.ts",
+        "test/type-tests.ts"
+      ],
+      "status": "completed_pinned_run",
+      "countsTowardCompletedCorpus": true,
+      "reproducibility": "pinned_head_commit",
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-sindresorhus-is-type-guards-artifacts/regressproof-report.json",
+      "notes": "Pinned sindresorhus/is type guard fix showing a baseline-side source assertion failure resolved by current numeric guard, boxed primitive, and type-test evidence."
+    },
+    {
+      "id": "pydantic-extra-equality-2026-05-05",
+      "repo": "pydantic/pydantic",
+      "url": "https://github.com/pydantic/pydantic.git",
+      "category": "python-runtime-extra-equality",
+      "configPath": "examples/external-pydantic-extra-equality.config.json",
+      "validatedAt": "2026-05-05T07:23:51.686Z",
+      "baselineCommit": "17a35e371bdff348c0690651d324c91fc7c9ff9e",
+      "headCommit": "b1bf19445d8ac144a7a0e82674d2d87eebab6c18",
+      "diffRange": "b1bf19445d8ac144a7a0e82674d2d87eebab6c18~1..b1bf19445d8ac144a7a0e82674d2d87eebab6c18",
+      "headRef": "b1bf19445d8ac144a7a0e82674d2d87eebab6c18",
+      "changedFiles": [
+        "pydantic/main.py",
+        "tests/test_main.py"
+      ],
+      "status": "completed_pinned_run",
+      "countsTowardCompletedCorpus": true,
+      "reproducibility": "pinned_head_commit",
+      "verdict": "successful_change",
+      "confidence": "high",
+      "artifactPath": "/tmp/regressproof-pydantic-extra-equality-artifacts/regressproof-report.json",
+      "notes": "Pinned Pydantic runtime extra equality fix showing a baseline-side assertion failure resolved by the current source and test change."
+    },
     {
       "id": "zustand-persist-2026-05-01",
       "repo": "pmndrs/zustand",

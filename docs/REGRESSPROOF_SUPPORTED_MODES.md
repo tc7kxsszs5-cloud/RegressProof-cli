@@ -92,12 +92,21 @@ Current evidence:
   - `tests/persistAsync.test.tsx`
 - result: `successful_change / high`
 
-Prepared but not yet canonical:
+Most recent canonical Python promotion:
 
 - `pydantic/pydantic`
-  - prepared config: `examples/external-pydantic-extra-equality.config.json`
-  - historical notes mention a successful run, but the standalone pinned record is not yet present in `examples/external-runs.json`
-  - treat this as the next promotion candidate, not as completed proof
+  - config: `examples/external-pydantic-extra-equality.config.json`
+  - range: `b1bf19445d8ac144a7a0e82674d2d87eebab6c18~1..b1bf19445d8ac144a7a0e82674d2d87eebab6c18`
+  - changed files: `pydantic/main.py`, `tests/test_main.py`
+  - result: `successful_change / high`
+
+Most recent canonical TypeScript promotion:
+
+- `sindresorhus/is`
+  - config: `examples/external-sindresorhus-is-type-guards.config.json`
+  - range: `13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e`
+  - changed files: `source/index.ts`, `source/types.ts`, `test/test.ts`, `test/type-tests.ts`
+  - result: `successful_change / high`
 
 This remains the strongest external proof category currently demonstrated, with repeated evidence in Python and TypeScript-oriented code-and-test repositories, but claims should stay anchored to the cataloged runs.
 
@@ -132,8 +141,8 @@ Today, the safest concise claim is:
 
 The next strongest evidence should come from:
 
-1. another external JS/TS code-heavy repository with a broader multi-file runtime change
-2. another external Python code-heavy repository beyond the currently cataloged Python corpus, with `pydantic/pydantic` as the strongest prepared next candidate
+1. another external JS/TS code-heavy repository with a broader multi-file runtime change beyond the current `sindresorhus/is` type-guard slice
+2. another external Python code-heavy repository beyond the currently cataloged Python corpus, now that `pydantic/pydantic` has been promoted
 3. at least one larger repository with more complex committed ranges
 
 That is a better next step than adding another major architecture layer.

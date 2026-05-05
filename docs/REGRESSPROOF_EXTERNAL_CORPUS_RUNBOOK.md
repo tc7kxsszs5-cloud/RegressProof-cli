@@ -97,30 +97,32 @@ Negative-proof evidence should usually be recorded in:
 
 Only add it to `runs[]` when the negative run itself is meant to be part of the durable catalog surface.
 
-## Prepared Next Path: `pydantic/pydantic`
+## Recently Promoted Path: `pydantic/pydantic`
 
 Current status:
 
-- repository-specific config exists:
+- repository-specific config:
   - `examples/external-pydantic-extra-equality.config.json`
-- historical session memory says the slice once produced `successful_change / high`
-- the canonical catalog does **not** yet contain the completed pinned run record
+- completed catalog record:
+  - `pydantic-extra-equality-2026-05-05`
+- result:
+  - `successful_change / high`
+- artifact:
+  - `/tmp/regressproof-pydantic-extra-equality-artifacts/regressproof-report.json`
 
-That means `pydantic/pydantic` is a prepared candidate, not current proof.
+That means `pydantic/pydantic` is now completed proof, not a prepared candidate.
 
-What the next agent should verify before promotion:
+What was captured during promotion:
 
-1. Confirm the exact pinned head commit from the historical `b1bf194~1..b1bf194` note.
-2. Re-run the prepared config from the standalone repository boundary.
-3. Capture:
-   - full pinned `headRef`
-   - exact `baselineCommit`
-   - exact `headCommit`
-   - `changedFiles`
-   - `artifactPath`
-   - `verdict`
-   - `confidence`
-4. Promote the run into `examples/external-runs.json` only after those values are preserved.
+1. Exact pinned head commit:
+   - `b1bf19445d8ac144a7a0e82674d2d87eebab6c18`
+2. Exact baseline commit:
+   - `17a35e371bdff348c0690651d324c91fc7c9ff9e`
+3. Changed files:
+   - `pydantic/main.py`
+   - `tests/test_main.py`
+4. Verdict and confidence:
+   - `successful_change / high`
 
 ## Fast Sanity Rule
 

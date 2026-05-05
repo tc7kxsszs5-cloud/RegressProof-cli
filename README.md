@@ -3,8 +3,8 @@
 `Proof, not guesses, for agent-caused regressions.`
 
 [![RegressProof](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml/badge.svg)](https://github.com/tc7kxsszs5-cloud/RegressProof-cli/actions/workflows/regressproof.yml)
-![External runs](https://img.shields.io/badge/external_runs-8-success)
-![Public repos](https://img.shields.io/badge/public_repos-7-blue)
+![External runs](https://img.shields.io/badge/external_runs-10-success)
+![Public repos](https://img.shields.io/badge/public_repos-9-blue)
 ![Fixtures](https://img.shields.io/badge/fixtures-11%2F11-success)
 ![License](https://img.shields.io/badge/license-proprietary_source_available-lightgrey)
 
@@ -26,7 +26,7 @@ That path shows the current self-proof surface first, then the pinned outside-re
 
 Current verified surface:
 
-- `8` curated external validation runs across `7` public repositories
+- `10` curated external validation runs across `9` public repositories
 - `11/11` tracked fixtures passing
 - standalone committed trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -58,15 +58,16 @@ For an external reviewer, the strongest compact demo today is:
 
 One current reviewer-facing example:
 
-- catalog record: `examples/external-runs.json` -> `zustand-persist-2026-05-01`
-- repository: `pmndrs/zustand`
-- committed range: `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
+- catalog record: `examples/external-runs.json` -> `sindresorhus-is-type-guards-2026-05-05`
+- repository: `sindresorhus/is`
+- committed range: `13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e`
 - verdict: `successful_change / high`
 - changed files:
-  - `src/middleware/persist.ts`
-  - `tests/persistAsync.test.tsx`
+  - `source/index.ts`
+  - `source/types.ts`
+  - `test/type-tests.ts`
 - artifact path recorded in catalog:
-  - `/tmp/regressproof-zustand-persist-artifacts/regressproof-report.json`
+  - `/tmp/regressproof-sindresorhus-is-type-guards-artifacts/regressproof-report.json`
 
 This is the proof surface to optimize for: a reviewer can see the diff range, the touched files, the verdict, and where the full artifact lives.
 
@@ -151,10 +152,10 @@ What is already confirmed:
 
 Most recent external run:
 
-- repository: `pmndrs/zustand`
-- pinned range: `6213fc11bdf096301a82ae5c236b5a666a4ee3ca~1..6213fc11bdf096301a82ae5c236b5a666a4ee3ca`
-- repo-specific result: `successful_change / high` on a persist rehydration latest-state callback slice
-- changed-file evidence includes `src/middleware/persist.ts` and `tests/persistAsync.test.tsx`
+- repository: `sindresorhus/is`
+- pinned range: `13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e`
+- repo-specific result: `successful_change / high` on a type-guard narrowing slice
+- changed-file evidence includes `source/index.ts`, `source/types.ts`, `test/test.ts`, and `test/type-tests.ts`
 
 Further reading:
 

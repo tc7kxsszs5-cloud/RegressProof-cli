@@ -1,0 +1,41 @@
+{
+  "projectName": "Sindre Sorhus Is Type Guards Validation",
+  "baseline": {
+    "mode": "path_snapshot"
+  },
+  "targetPaths": [
+    "package.json",
+    "source/index.ts",
+    "source/types.ts",
+    "test/test.ts",
+    "test/type-tests.ts"
+  ],
+  "checks": {
+    "commandTimeoutMs": 45000,
+    "quick": [
+      "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(pkg.name !== '@sindresorhus/is') throw new Error('unexpected package name'); if(!pkg.scripts || !pkg.scripts.test) throw new Error('missing test script');\"",
+      "node -e \"const fs=require('fs'); const source=fs.readFileSync('source/index.ts','utf8'); if(!source.includes('type NumericGuardResult')) throw new Error('missing numeric guard result type'); if(!source.includes('isBoxedPrimitiveObject')) throw new Error('missing boxed primitive brand check');\""
+    ],
+    "full": [
+      "node -e \"const fs=require('fs'); const types=fs.readFileSync('source/types.ts','utf8'); if(!types.includes('export type NaN = number')) throw new Error('missing branded NaN type'); if(!types.includes('export type ValidLength')) throw new Error('missing valid length brand');\"",
+      "node -e \"const fs=require('fs'); const tests=fs.readFileSync('test/type-tests.ts','utf8'); if(!tests.includes('false branch on a `number` input stays `number`')) throw new Error('missing false-branch type test'); if(!tests.includes('distinctNumericBrandsStayDistinct')) throw new Error('missing distinct brand type test');\""
+    ]
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.02
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

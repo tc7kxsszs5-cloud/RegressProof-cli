@@ -1,7 +1,7 @@
 # RegressProof Case Studies
 
 **Purpose:** Preserve concise proof-oriented examples from real validation runs  
-**Last updated:** 1 May 2026
+**Last updated:** 5 May 2026
 
 ## Why This Exists
 
@@ -250,3 +250,52 @@ Why it matters:
 - adds a new pinned TypeScript code-and-test repository centered on state hydration behavior rather than hooks or fetch
 - strengthens the standalone corpus with another narrow but meaningful source-plus-test slice
 - shows RegressProof can promote a prepared external config into a fresh canonical run record instead of relying on old workspace notes
+
+## Case Study 12: `pydantic/pydantic`
+
+- category: Python runtime extra equality repository
+- committed range: `b1bf19445d8ac144a7a0e82674d2d87eebab6c18~1..b1bf19445d8ac144a7a0e82674d2d87eebab6c18`
+- changed files inside validation boundary:
+  - `pydantic/main.py`
+  - `tests/test_main.py`
+- validation style: sparse public-repository clone with a pinned runtime equality slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot had the project/test configuration but failed the targeted runtime extra equality assertion
+- current snapshot contained the `self_type is other_type` guard and extra-field equality check
+- current snapshot also contained the targeted runtime override test using `extra='allow'` and `extra='forbid'`
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- promotes the strongest prepared Python candidate into canonical completed proof
+- adds a widely used Python validation library beyond CLI/plugin-system examples
+- shows RegressProof can recognize a fix that resolves a baseline-side failure instead of only validating already-green current snapshots
+
+## Case Study 13: `sindresorhus/is`
+
+- category: TypeScript type-guard narrowing repository
+- committed range: `13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e`
+- changed files inside validation boundary:
+  - `package.json`
+  - `source/index.ts`
+  - `source/types.ts`
+  - `test/test.ts`
+  - `test/type-tests.ts`
+- validation style: sparse public-repository clone with a pinned source-plus-type-test slice
+- result: `successful_change / high`
+
+What was validated:
+
+- baseline snapshot kept the package/test surface but lacked the new `NumericGuardResult` and boxed primitive brand checks
+- current snapshot added branded numeric guard types and targeted type tests for false-branch narrowing
+- current snapshot added runtime/type-test evidence for the fixed guard behavior
+- RegressProof classified the run as a successful change with high confidence
+
+Why it matters:
+
+- adds a second 5 May corpus promotion alongside `pydantic/pydantic`
+- broadens TypeScript evidence beyond HTTP, state, and fetch utilities into type-guard behavior
+- demonstrates a successful-change verdict where the baseline fails a targeted source assertion and the current commit resolves it

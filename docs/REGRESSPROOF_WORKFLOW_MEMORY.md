@@ -58,7 +58,7 @@ npm run external:check
 npm run external:run-corpus
 ```
 
-As of 3 May 2026, the catalog contains eight run records across seven public repositories:
+As of 5 May 2026, the catalog contains ten run records across nine public repositories:
 
 - `openclaw/openclaw`
 - `sindresorhus/ky`
@@ -67,10 +67,12 @@ As of 3 May 2026, the catalog contains eight run records across seven public rep
 - `pytest-dev/pluggy`
 - `pallets/click`
 - `pmndrs/zustand`
+- `pydantic/pydantic`
+- `sindresorhus/is`
 
-Those eight records currently mean:
+Those ten records currently mean:
 
-- seven pinned completed proof runs
+- nine pinned completed proof runs
 - one public-runner smoke run
 
 Prepared candidates belong in `candidateQueue[]`; they are not durable proof until promoted into `runs[]`.
@@ -104,14 +106,36 @@ It has also been exercised successfully on earlier external public repositories 
      - `external-zustand-persist.config.json`
    - result: `successful_change / high`
 
-Prepared next candidate:
+Most recent completed promotions:
+
+- `sindresorhus/is`
+  - validation config:
+    - `external-sindresorhus-is-type-guards.config.json`
+  - committed range:
+    - `13febb6b01e24863ced3847a7ee112a48c154e0e~1..13febb6b01e24863ced3847a7ee112a48c154e0e`
+  - changed files:
+    - `package.json`
+    - `source/index.ts`
+    - `source/types.ts`
+    - `test/test.ts`
+    - `test/type-tests.ts`
+  - result:
+    - `successful_change / high`
+  - artifact:
+    - `/tmp/regressproof-sindresorhus-is-type-guards-artifacts/regressproof-report.json`
 
 - `pydantic/pydantic`
   - validation config:
     - `external-pydantic-extra-equality.config.json`
-  - historical notes mention `b1bf194~1..b1bf194`
-  - not yet canonical because the pinned completed run is still missing from `examples/external-runs.json`
-  - use `docs/REGRESSPROOF_EXTERNAL_CORPUS_RUNBOOK.md` before promoting it
+  - committed range:
+    - `b1bf19445d8ac144a7a0e82674d2d87eebab6c18~1..b1bf19445d8ac144a7a0e82674d2d87eebab6c18`
+  - changed files:
+    - `pydantic/main.py`
+    - `tests/test_main.py`
+  - result:
+    - `successful_change / high`
+  - artifact:
+    - `/tmp/regressproof-pydantic-extra-equality-artifacts/regressproof-report.json`
 
 This means the project now has evidence across:
 
@@ -122,7 +146,7 @@ This means the project now has evidence across:
 - external code-plus-test repositories
 - pinned TypeScript corpus slices
 - pinned Python corpus slices
-- prepared next-step Python corpus work that is separated from completed proof
+- promoted Python runtime equality proof from the earlier prepared-candidate queue
 
 ## Repository Memory Rule
 

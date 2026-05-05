@@ -40,8 +40,9 @@ That is the canonical external proof surface. It keeps the claim tied to one pin
 - `external-pluggy-pluginmanager.config.json`
   - pinned Python plugin-manager example for `pytest-dev/pluggy`
 - `external-pydantic-extra-equality.config.json`
-  - prepared code-plus-test example for a Python-heavy repository
-  - do not treat as canonical proof until a pinned run is recorded in `external-runs.json`
+  - pinned Python runtime equality example for `pydantic/pydantic`
+- `external-sindresorhus-is-type-guards.config.json`
+  - pinned TypeScript type-guard narrowing example for `sindresorhus/is`
 - `external-zustand-persist.config.json`
   - pinned TypeScript persist/rehydration example for `pmndrs/zustand`
 - `external-oh-my-codex-stable-slice.config.json`

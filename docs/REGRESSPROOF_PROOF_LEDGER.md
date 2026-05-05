@@ -1,13 +1,13 @@
 # RegressProof Proof Ledger
 
 **Purpose:** One-page public proof summary for the repository surface
-**Last updated:** 3 May 2026
+**Last updated:** 5 May 2026
 
 ## Current Metrics
 
-- external validation run records: `8`
-- pinned completed proof runs: `7`
-- public repositories in catalog: `7`
+- external validation run records: `10`
+- pinned completed proof runs: `9`
+- public repositories in catalog: `9`
 - tracked fixtures: `11/11`
 - standalone trust scenario: `successful_change / high`
 - standalone deep trust scenario: `successful_change / high`
@@ -17,6 +17,8 @@
 
 | Repository | Category | Range | Verdict | Evidence |
 | --- | --- | --- | --- | --- |
+| `sindresorhus/is` | TypeScript type guard narrowing | `cb4ee0e..13febb6` | `successful_change / high` | source, runtime tests, type tests |
+| `pydantic/pydantic` | Python runtime extra equality | `17a35e3..b1bf194` | `successful_change / high` | source, tests |
 | `pallets/click` | Python CLI flag behavior | `7f7bbe4..91de59c` | `successful_change / high` | changelog, source, tests |
 | `pytest-dev/pluggy` | Python plugin manager | `6e1d0f1..20d8143` | `successful_change / high` | source, tests, changelog |
 | `nanostores/nanostores` | TypeScript state library | `8ad031d..3206678` | `successful_change / high` | runtime source, package limits |
@@ -36,9 +38,9 @@ Examples:
 - `pytest-dev/pluggy`: an initial `python` command produced `preexisting_failure / low` because the shell lacked `python`; after switching to `python3`, the pinned run produced `successful_change / high`.
 - `Yeachan-Heo/oh-my-codex`: a broader check surfaced environment-sensitive path behavior, reinforcing the need for repository-specific verification slices.
 
-Prepared next proof path:
+Recent promotion:
 
-- `pydantic/pydantic`: a repository-specific config exists, but it remains a prepared candidate until a fresh standalone-side pinned run is recorded in `examples/external-runs.json`.
+- `pydantic/pydantic`: the prepared extra-equality config was revalidated from the standalone repository boundary and promoted into `examples/external-runs.json` with full pinned metadata.
 
 ## What This Proves
 
