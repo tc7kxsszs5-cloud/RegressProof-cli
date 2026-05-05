@@ -444,6 +444,7 @@ Example configs for validating external repositories live at:
 - `examples/external-ofetch-timeout-signal.config.json`
 - `examples/external-openclaw-code.config.json`
 - `examples/external-pluggy-pluginmanager.config.json`
+- `examples/external-scqos-python.config.json`
 - `examples/external-oh-my-codex-stable-slice.config.json`
 - `examples/README.md`
 
@@ -466,6 +467,18 @@ npm run real:public -- \
   --head-ref 97534372f858b5f67a98619a3fed8790edb00cc7 \
   --artifact-dir /tmp/regressproof-openclaw-pinned-artifacts
 ```
+
+For compact self-checking Python repositories, the SCQOS example is useful as an exploratory config and synthetic regression target:
+
+```bash
+npm run real:public -- \
+  --url https://github.com/KnowledgeeKZA3224/scqos-reference-implementation.git \
+  --config ./examples/external-scqos-python.config.json \
+  --head-ref 4a384ad08139c4311aaefc84bfc6d05f0ae1fa41 \
+  --artifact-dir /tmp/regressproof-scqos-artifacts
+```
+
+Treat that SCQOS target conservatively: the upstream repository currently exposes a single public commit, so it is not completed corpus proof until a real pinned baseline/head range exists.
 
 ## Embedded Workspace Mode
 

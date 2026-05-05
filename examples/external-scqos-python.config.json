@@ -1,0 +1,48 @@
+{
+  "projectName": "SCQOS external validation",
+  "baselineRef": "HEAD~1",
+  "baseline": {
+    "mode": "path_snapshot",
+    "supportPaths": [
+      "LICENSE"
+    ]
+  },
+  "current": {
+    "mode": "snapshot"
+  },
+  "git": {
+    "compareRef": "HEAD",
+    "diffMode": "baseline_to_head"
+  },
+  "targetPaths": [
+    "README.md",
+    "scqos_supreme_stack.py"
+  ],
+  "checks": {
+    "commandTimeoutMs": 15000,
+    "quick": [
+      "python3 -c \"from pathlib import Path; required=['README.md','scqos_supreme_stack.py','LICENSE']; missing=[item for item in required if not Path(item).exists()]; assert not missing, 'Missing required validation files: ' + ', '.join(missing)\"",
+      "python3 -c \"from pathlib import Path; readme=Path('README.md').read_text(encoding='utf-8'); stack=Path('scqos_supreme_stack.py').read_text(encoding='utf-8'); assert 'Nine-gate deterministic pre-execution governance' in readme, 'README summary missing'; assert 'class SCQOSSupremeCoherenceStack' in stack, 'Supreme stack class missing'; assert 'def main() -> int:' in stack, 'CLI entrypoint missing'; assert 'MODULES: List[str]' in stack, 'Module registry missing'\"",
+      "python3 -m py_compile scqos_supreme_stack.py",
+      "SCQOS_SECRET_KEY=regressproof_scqos_validation python3 scqos_supreme_stack.py"
+    ],
+    "full": []
+  },
+  "reports": {
+    "defaultFormat": "json",
+    "ciFailOn": [
+      "confirmed_agent_fault"
+    ]
+  },
+  "usage": {
+    "mode": "estimated",
+    "estimatedCostUsd": 0.01
+  },
+  "credits": {
+    "enabled": true,
+    "policy": "refund_estimated_cost_on_confirmed_agent_fault"
+  },
+  "ledger": {
+    "enabled": true
+  }
+}

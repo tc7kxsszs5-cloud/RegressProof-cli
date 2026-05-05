@@ -29,6 +29,7 @@ function extractFilePath(evidence) {
   }
 
   const patterns = [
+    /File\s+"([^"]+\.[A-Za-z0-9_\-.]+)",\s+line\s+\d+/,
     /((?:[A-Za-z0-9@_\-.]+\/)+[A-Za-z0-9_\-.]+\.[A-Za-z0-9_\-.]+):\d+(?::\d+)?/,
     /((?:[A-Za-z0-9_\-.]+\/)+[A-Za-z0-9_\-.]+\.[A-Za-z0-9_\-.]+)/,
     /in\s+((?:[A-Za-z0-9_\-.]+\/)+[A-Za-z0-9_\-.]+\.[A-Za-z0-9_\-.]+)/,
@@ -55,6 +56,10 @@ function inferCheckType(command) {
   }
 
   if (normalized.includes("type")) {
+    return "typecheck";
+  }
+
+  if (normalized.includes("py_compile")) {
     return "typecheck";
   }
 
@@ -177,6 +182,7 @@ function normalizeEvidence(evidence) {
   return evidence
     .trim()
     .toLowerCase()
+    .replace(/\/[^"\s]*regressproof-(?:baseline|current)-[^/\s"]+\//g, "")
     .replace(/\s+/g, " ")
     .replace(/:\d+:\d+/g, ":line:col")
     .replace(/:\d+/g, ":line")
@@ -204,7 +210,11 @@ function normalizePath(value) {
     return "";
   }
 
-  return value.replace(/\\/g, "/").replace(/^\.\//, "").trim();
+  return value
+    .replace(/\\/g, "/")
+    .replace(/^.*\/regressproof-(?:baseline|current)-[^/]+\//, "")
+    .replace(/^\.\//, "")
+    .trim();
 }
 
 module.exports = {

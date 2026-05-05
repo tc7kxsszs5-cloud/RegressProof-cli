@@ -39,6 +39,9 @@ That is the canonical external proof surface. It keeps the claim tied to one pin
   - pinned larger provider-code example for `openclaw/openclaw`
 - `external-pluggy-pluginmanager.config.json`
   - pinned Python plugin-manager example for `pytest-dev/pluggy`
+- `external-scqos-python.config.json`
+  - exploratory Python self-check example for `KnowledgeeKZA3224/scqos-reference-implementation`
+  - do not treat as canonical proof until a pinned baseline/head run is possible
 - `external-pydantic-extra-equality.config.json`
   - pinned Python runtime equality example for `pydantic/pydantic`
 - `external-sindresorhus-is-type-guards.config.json`

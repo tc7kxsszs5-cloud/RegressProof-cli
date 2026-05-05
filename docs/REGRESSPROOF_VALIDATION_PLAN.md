@@ -234,6 +234,11 @@ OpenClaw public-repository evidence currently includes:
 - verdict `successful_change / high`
 - changed files in `extensions/openai/openai-codex-provider.ts` and `extensions/openai/openai-codex-provider.test.ts`
 
+Exploratory Python reference note:
+
+- compact single-commit Python reference repositories such as `KnowledgeeKZA3224/scqos-reference-implementation` can be useful for drafting repository-specific configs and running synthetic local regression demos
+- do not promote those runs into the completed external corpus until the repository exposes a real committed diff range with a pinned baseline and head commit
+
 Ky public-repository evidence currently includes:
 
 - pinned hook-regression run on `sindresorhus/ky`

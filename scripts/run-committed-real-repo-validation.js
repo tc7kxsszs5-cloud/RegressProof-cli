@@ -26,7 +26,8 @@ function main() {
   const compareCommit = git(repo, ["rev-parse", compareRef]);
   const baselineRef = baselineOverride || resolveBaselineRef(repo, baseBranch, compareRef, compareCommit);
 
-  const tempConfigPath = path.join(os.tmpdir(), `regressproof-real-${Date.now()}.json`);
+  const tempConfigDir = fs.mkdtempSync(path.join(os.tmpdir(), "regressproof-real-"));
+  const tempConfigPath = path.join(tempConfigDir, "regressproof.real-repo.config.json");
   const tempConfig = {
     ...baseConfig,
     baselineRef,
@@ -69,7 +70,7 @@ function main() {
       stdio: "inherit",
     });
   } finally {
-    fs.rmSync(tempConfigPath, { force: true });
+    fs.rmSync(tempConfigDir, { recursive: true, force: true });
   }
 }
 
