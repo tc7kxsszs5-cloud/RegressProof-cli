@@ -185,6 +185,12 @@ Run the main MVP verification flow:
 npm run verify:mvp
 ```
 
+If the default system temp directory is low on space, use an explicit output directory:
+
+```bash
+npm run verify:mvp -- --out-dir /private/tmp/regressproof-verify
+```
+
 This runs:
 
 - the tracked fixture suite
@@ -254,6 +260,54 @@ Good first targets are:
 - one fast build command
 - one targeted test command
 - changed files that stay inside that verification boundary
+
+## GitHub Action Usage
+
+RegressProof can also run as a composite GitHub Action from this repository.
+
+Minimal PR workflow:
+
+```yaml
+name: RegressProof
+
+on:
+  pull_request:
+
+jobs:
+  regressproof:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: tc7kxsszs5-cloud/RegressProof-cli@main
+        with:
+          repo: ${{ github.workspace }}
+          config: regressproof.config.json
+          head-ref: HEAD
+          artifact-dir: regressproof-artifacts
+          ci: "true"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: regressproof-artifacts
+          path: regressproof-artifacts/
+```
+
+The action emits these outputs for later workflow steps:
+
+- `verdict`
+- `confidence`
+- `changed_file_match`
+- `ci_should_fail`
+- `report_json`
+- `report_markdown`
+- `report_pr_markdown`
+- `report_pr_comment`
 
 ## Core Commands
 

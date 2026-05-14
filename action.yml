@@ -1,0 +1,123 @@
+name: RegressProof
+description: Proof, not guesses, for agent-caused regressions.
+
+inputs:
+  repo:
+    description: Repository path to validate.
+    required: false
+    default: "."
+  config:
+    description: RegressProof config path. Relative paths are resolved from the target repository.
+    required: false
+    default: regressproof.config.json
+  head-ref:
+    description: Commit/ref to validate as the changed state.
+    required: false
+    default: HEAD
+  baseline-ref:
+    description: Optional explicit baseline ref. Defaults to head-ref parent when available.
+    required: false
+    default: ""
+  artifact-dir:
+    description: Directory where RegressProof artifacts should be written.
+    required: false
+    default: regressproof-artifacts
+  format:
+    description: Output format for the report.
+    required: false
+    default: json
+  ci:
+    description: Whether RegressProof should return a failing exit code for configured CI-fail verdicts.
+    required: false
+    default: "true"
+  install-command:
+    description: Command used to install RegressProof dependencies before running.
+    required: false
+    default: npm install
+  build-command:
+    description: Command used to build RegressProof before running.
+    required: false
+    default: npm run build
+
+outputs:
+  verdict:
+    description: RegressProof verdict classification.
+    value: ${{ steps.regressproof.outputs.verdict }}
+  confidence:
+    description: RegressProof verdict confidence.
+    value: ${{ steps.regressproof.outputs.confidence }}
+  changed_file_match:
+    description: Whether failure evidence matched changed files.
+    value: ${{ steps.regressproof.outputs.changed_file_match }}
+  ci_should_fail:
+    description: Whether the verdict matches the configured CI-fail policy.
+    value: ${{ steps.regressproof.outputs.ci_should_fail }}
+  report_json:
+    description: Path to the JSON report artifact.
+    value: ${{ steps.regressproof.outputs.report_json }}
+  report_markdown:
+    description: Path to the Markdown report artifact.
+    value: ${{ steps.regressproof.outputs.report_markdown }}
+  report_pr_markdown:
+    description: Path to the PR summary artifact.
+    value: ${{ steps.regressproof.outputs.report_pr_markdown }}
+  report_pr_comment:
+    description: Path to the PR comment artifact.
+    value: ${{ steps.regressproof.outputs.report_pr_comment }}
+  ledger_path:
+    description: Path to the JSONL ledger artifact when ledger output is enabled.
+    value: ${{ steps.regressproof.outputs.ledger_path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Install RegressProof dependencies
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: ${{ inputs.install-command }}
+
+    - name: Build RegressProof
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: ${{ inputs.build-command }}
+
+    - name: Run RegressProof
+      id: regressproof
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+
+        repo="${{ inputs.repo }}"
+        if [ "$repo" = "." ]; then
+          repo="$GITHUB_WORKSPACE"
+        fi
+
+        artifact_dir="${{ inputs.artifact-dir }}"
+        if [[ "$artifact_dir" != /* ]]; then
+          artifact_dir="$GITHUB_WORKSPACE/$artifact_dir"
+        fi
+
+        args=(
+          "scripts/run-committed-real-repo-validation.js"
+          "--repo" "$repo"
+          "--config" "${{ inputs.config }}"
+          "--head-ref" "${{ inputs.head-ref }}"
+          "--format" "${{ inputs.format }}"
+          "--artifact-dir" "$artifact_dir"
+        )
+
+        if [ -n "${{ inputs.baseline-ref }}" ]; then
+          args+=("--baseline-ref" "${{ inputs.baseline-ref }}")
+        fi
+
+        if [ "${{ inputs.ci }}" = "true" ]; then
+          args+=("--ci")
+        fi
+
+        node "${args[@]}"

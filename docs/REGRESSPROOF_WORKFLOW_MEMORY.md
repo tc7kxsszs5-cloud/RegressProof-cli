@@ -58,6 +58,14 @@ npm run external:check
 npm run external:run-corpus
 ```
 
+For low-space local environments, prefer an explicit MVP output directory:
+
+```bash
+npm run verify:mvp -- --out-dir /private/tmp/regressproof-verify
+```
+
+The root `action.yml` is the canonical reusable GitHub Action surface. The repository workflow in `.github/workflows/regressproof.yml` remains the self-check workflow for this repository.
+
 As of 5 May 2026, the catalog contains ten run records across nine public repositories:
 
 - `openclaw/openclaw`

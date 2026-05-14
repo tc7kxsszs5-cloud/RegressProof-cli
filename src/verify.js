@@ -124,9 +124,21 @@ async function runCheckList(commands, cwd, timeoutMs) {
 async function execCommand(command, cwd, timeoutMs) {
   return execFileAsync("/bin/zsh", ["-lc", command], {
     cwd,
+    env: createCheckEnvironment(),
     timeout: timeoutMs,
     maxBuffer: 1024 * 1024 * 10,
   });
+}
+
+function createCheckEnvironment() {
+  const env = { ...process.env };
+
+  delete env.GITHUB_OUTPUT;
+  delete env.GITHUB_STEP_SUMMARY;
+  delete env.GITHUB_ENV;
+  delete env.GITHUB_PATH;
+
+  return env;
 }
 
 async function createSnapshot(
