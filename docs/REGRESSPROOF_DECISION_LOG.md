@@ -155,7 +155,7 @@
 
 ## Decision 26
 
-**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node regressproof/scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
+**Decision:** The usable MVP verification surface should be anchored on one repository-level entrypoint, `node scripts/verify-mvp.js`, and the GitHub Action should execute that flow instead of an older single-fixture path.
 
 **Reason:** The project had already accumulated strong pieces of validation, but usability was still fragmented across many helper commands and a stale workflow. A single MVP verification entrypoint makes local checks, CI, and future handoff much clearer without changing the core proof model.
 

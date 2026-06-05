@@ -114,11 +114,11 @@ What already works:
   - standalone repo root
   - embedded `regressproof/` project root inside a larger workspace
 - a single MVP verification entrypoint now exists:
-  - `node regressproof/scripts/verify-mvp.js`
+  - `node scripts/verify-mvp.js`
 - the GitHub Action now validates the current RegressProof MVP flow instead of the older single-fixture path
-- subproject packaging boundary now includes:
-  - [regressproof/AGENTS.md](/Users/mac/Desktop/rork-kiku/regressproof/AGENTS.md)
-  - [regressproof/.gitignore](/Users/mac/Desktop/rork-kiku/regressproof/.gitignore)
+- standalone repository packaging boundary now includes:
+  - [AGENTS.md](../AGENTS.md)
+  - [.gitignore](../.gitignore)
   - `npm run export:standalone` for near-standalone repository export
 - committed attribution now supports:
   - explicit `baselineRef..compareRef` ranges
